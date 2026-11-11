@@ -277,6 +277,76 @@ step("subida automática", function () {
 });
 
 /* ------------------------------------------ 6. lo guardado en el teléfono */
+step("sincronización sola: qué hacer sin preguntar", function () {
+  var save = { xp: 120, totals: { attempts: 30 }, cards: { a: {}, b: {} }, log: [[1], [2]], read: { 1: 5 }, unlocked: 2, savedAt: 1000 };
+  var fp = Nube.huella(save), r = { id: "g1", updated: "2026-09-28T10:00:00Z" };
+  var enPaso = { gistAt: r.updated, mark: 1000, fp: fp };
+  eq(Nube.plan(r, enPaso, save), "nada", "nadie cambió: nada");
+  // abrir la app un día nuevo guarda (la racha) sin que haya progreso
+  eq(Nube.plan(r, enPaso, Object.assign({}, save, { savedAt: 9999, streak: 0, theme: "dark" })), "nada", "un guardado sin progreso no es un cambio");
+  var jugo = Object.assign({}, save, { xp: 150, totals: { attempts: 36 }, savedAt: 2000 });
+  eq(Nube.plan(r, enPaso, jugo), "subir", "se jugó acá: subir");
+  var otro = { id: "g1", updated: "2026-09-28T12:00:00Z" };
+  eq(Nube.plan(otro, enPaso, save), "bajar", "subió el otro dispositivo y acá no cambió nada: bajar sin preguntar");
+  eq(Nube.plan(otro, enPaso, jugo), "conflicto", "se jugó en los dos lados: no se pisa nada");
+  ok(Nube.huella(Object.assign({}, save, { cards: { a: {}, b: {}, c: {} } })) !== fp, "una ficha nueva cambia la huella");
+  ok(Nube.huella(Object.assign({}, save, { read: { 1: 5, 2: 6 } })) !== fp, "una lección leída cambia la huella");
+  // un dispositivo que nunca sincronizó
+  var vacio = { xp: 0, cards: {}, totals: { attempts: 0 } };
+  eq(Nube.plan(r, {}, vacio), "bajar", "recién instalada y hay copia arriba: bajar");
+  eq(Nube.plan(null, {}, vacio), "nada", "recién instalada y sin copia: nada");
+  eq(Nube.plan(null, {}, save), "subir", "con progreso y sin copia arriba: subir (crea el gist)");
+  eq(Nube.plan(r, {}, save), "conflicto", "con progreso y una copia que nunca trajo: elige el alumno");
+  return Promise.resolve();
+});
+
+step("mezclar: las dos copias en una", function () {
+  var Engine = require("../../docs/js/engine.js");
+  function save(over) { return Engine.fromRaw(Object.assign(Engine.blankSave(), over)); }
+  var A = save({ xp: 300, savedAt: 100, unlocked: 3, streak: 4, lastPlayed: "2026-11-10", goal: 350,
+    cards: { x: { last: 50, seen: 3, s: 2, d: 5 }, y: { last: 10, seen: 1, s: 1, d: 5 } },
+    days: { "2026-11-9": 100, "2026-11-10": 200 }, badges: ["primo"], read: { 1: 5 },
+    log: [["x", 1, 3, 1, 2, "v"], ["y", 2, 3, 1, 1, "v"]], weekStats: { 1: { attempts: 20, right: 15, bossPassed: true } },
+    totals: { attempts: 30, right: 20, close: 5, wrong: 5 }, keywords: { casa: "una casa" }, dos: { "2026-11-10": 1 } });
+  var B = save({ xp: 250, savedAt: 200, unlocked: 2, streak: 5, lastPlayed: "2026-11-11", goal: 100,
+    cards: { x: { last: 40, seen: 2, s: 1, d: 5 }, z: { last: 60, seen: 1, s: 1, d: 5 } },
+    days: { "2026-11-10": 120, "2026-11-11": 80 }, badges: ["serie7"], read: { 2: 9 },
+    log: [["x", 1, 3, 1, 2, "v"], ["z", 3, 3, 1, 1, "v"]], weekStats: { 1: { attempts: 25, right: 18 } },
+    totals: { attempts: 28, right: 22, close: 2, wrong: 4 }, keywords: { cane: "un perro" }, dos: { "2026-11-11": 1 } });
+  var m = Nube.mezclar(A, B, 200);
+  eq(m.cards.x.last, 50, "cada ficha conserva su repaso más reciente");
+  ok(m.cards.y && m.cards.z, "y están las fichas de los dos lados");
+  eq([m.days["2026-11-9"], m.days["2026-11-10"], m.days["2026-11-11"], Object.keys(m.days).length], [100, 200, 80, 3], "los días se unen (el mayor de cada uno)");
+  eq(m.badges, ["primo", "serie7"], "las medallas se unen");
+  eq(m.read, { 1: 5, 2: 9 }, "las lecciones leídas se unen");
+  eq(m.log.length, 3, "el registro de repasos se une sin repetir");
+  eq(m.xp, 350, "los xp ganados en cada lado se suman sobre la base (200 + 100 + 50)");
+  eq(Nube.mezclar(A, B).xp, 300, "sin base, el mayor");
+  eq(m.unlocked, 3, "la semana abierta más alta");
+  eq(m.goal, 100, "los ajustes, de la copia guardada última");
+  eq(m.streak, 5, "la racha, de quien jugó último");
+  eq(m.weekStats[1].attempts, 25, "las estadísticas de la semana más jugada");
+  eq(m.weekStats[1].bossPassed, true, "sin perder el jefe ya pasado");
+  eq(Object.keys(m.keywords).sort(), ["cane", "casa"], "lo que escribió en cada lado");
+  eq(Object.keys(m.dos).sort(), ["2026-11-10", "2026-11-11"], "y lo que guarda un módulo que nube.js no conoce");
+  eq(m.savedAt, 200, "con la fecha del guardado último");
+  var n = Nube.mezclar(B, A, 200);
+  eq(JSON.stringify(Object.keys(n).sort().map(function (k) { return [k, n[k]]; })).length, JSON.stringify(Object.keys(m).sort().map(function (k) { return [k, m[k]]; })).length, "el orden no importa");
+  eq(n.cards.x.last + "|" + n.xp + "|" + n.streak + "|" + n.goal, "50|350|5|100", "el orden no importa (lo que decide)");
+  var again = Nube.mezclar(m, B, 250);
+  eq(again.xp, 350, "mezclar otra vez con la misma copia no vuelve a sumar");
+  eq(Object.keys(again.cards).sort(), ["x", "y", "z"], "ni cambia las fichas");
+  var fr = Engine.fromRaw(JSON.parse(JSON.stringify(m)));
+  eq(Object.keys(fr.cards).sort(), ["x", "y", "z"], "el resultado pasa por Engine.fromRaw sin perder fichas");
+  eq(fr.xp, 350, "ni xp");
+  var fresh = Engine.blankSave();
+  fresh.savedAt = 999; fresh.theme = "dark";
+  eq(Nube.mezclar(fresh, A).goal, 350, "un dispositivo recién instalado no impone sus ajustes");
+  eq(Nube.huellaXp(Nube.huella(A)), 300, "la base sale de la huella");
+  eq(Nube.huellaXp(""), null, "sin huella, sin base");
+  return Promise.resolve();
+});
+
 step("lo guardado en el teléfono", function () {
   var ls = memStorage(), S = Nube.store(ls);
   S.setToken("  " + TOKEN + "  ");
@@ -310,6 +380,9 @@ step("en el orden de carga y en la app", function () {
   ok(/function restoreEnvelope[\s\S]{0,700}Engine\.fromRaw\(s\)/.test(app), "restoreEnvelope pasa por Engine.fromRaw");
   ok(/function restoreEnvelope[\s\S]{0,500}j\.lang !== LG\.code/.test(app), "y controla el idioma");
   ok(/document\.hidden && course\)[^\n]*nubeAuto\(\)/.test(app), "la subida automática corre al ocultar la app");
+  ok(/function nubeTick[\s\S]{0,1400}Nube\.plan\(r, sy, state\)/.test(app), "la sincronización sola decide con Nube.plan");
+  ok(/what === "conflicto"[\s\S]{0,500}Nube\.mezclar\(state, got\.env\.save/.test(app), "si se avanzó en los dos lados, junta las dos copias");
+  ok(/what === "bajar"[\s\S]{0,120}safeToReload\(\)/.test(app), "y solo trae la copia en una pantalla tranquila");
   return Promise.resolve();
 });
 

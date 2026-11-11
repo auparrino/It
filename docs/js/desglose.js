@@ -959,6 +959,7 @@
   }
 
   var api = { of: of, lines: lines, label: label, transparent: transparent,
+    forms: index, arts: articles, contrs: contractions, learn: learn,   // for rol.js: the class of each word
     _reset: function () { FORMS = null; CONTR = null; NOMINAL = null; ARTS = null; } };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Desglose = api;

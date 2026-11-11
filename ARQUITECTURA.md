@@ -94,10 +94,18 @@ la misma lógica de «clave propia» que la IA.
 - **Conflictos**: cada teléfono anota la fecha del gist (la del servidor)
   cuando sube o trae; antes de subir, si cambió (`Nube.conflict`: otro
   teléfono subió), pregunta antes de pisarla.
-- **Subida automática**: si el alumno la activa, al ocultar la app
-  (`visibilitychange`), una vez por día como mucho y solo si el progreso
-  cambió desde la última sincronización (`Nube.autoDue`); con conflicto no
-  sube y lo avisa en Io.
+- **Sincronización sola** (celular ↔ computadora; con token, salvo que el
+  alumno la apague): `nubeTick` en `app.js` mira la fecha del gist al abrir
+  la app, al volver a ella, al terminar una ronda y al ocultarla, y hace lo
+  que dice `Nube.plan`: `subir` (solo cambió este dispositivo), `bajar`
+  (solo cambió la nube: se trae sin preguntar, y solo en una pantalla
+  tranquila, `safeToReload`) o `conflicto` (se avanzó en los dos lados:
+  `Nube.mezclar` junta las dos copias, cada ficha con su repaso más
+  reciente y lo acumulado unido, y la sube; si no se puede, lo avisa en Io).
+  El token pasa al otro dispositivo con un QR (`docs/js/qr.js`) que abre la
+  app con `#gist=…`; `nubeFromLink` pregunta antes de guardarlo. «Cambió» se mide con `Nube.huella` (xp,
+  respuestas, fichas, lecciones…), no con `savedAt`: abrir la app un día
+  nuevo guarda la racha y eso no es progreso.
 - **Lo que no entra en la copia**: el token (`c1.gist.token`, uno para los
   dos idiomas) y lo que el teléfono sabe del gist (`<prefijo>.gist`: id,
   fechas, subida automática) viven en `localStorage`, fuera del guardado,

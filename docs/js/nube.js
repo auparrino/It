@@ -243,6 +243,140 @@
     return !sync.mark || (+savedAt || 0) > sync.mark;
   }
 
+  /* La sincronización sola (celular ↔ computadora): qué hacer con la copia
+     de la nube sin preguntar.  huella() resume el progreso (no los
+     ajustes ni la fecha del guardado: abrir la app un día nuevo toca la
+     racha y guarda, y eso no es «jugar»); sync.fp es la huella de cuando
+     este dispositivo quedó igual que la nube.
+       "nada"       nadie cambió
+       "subir"      solo cambió este dispositivo (o no hay copia arriba)
+       "bajar"      solo cambió la nube: se trae sin preguntar
+       "conflicto"  cambiaron los dos (se jugó sin conexión en los dos
+                    lados): no se pisa nada, elige el alumno en Io
+     r: lo que devuelve remote(); sync: lo guardado en este dispositivo. */
+  function count(o) { return o && typeof o === "object" ? Object.keys(o).length : 0; }
+  function huella(save) {
+    var s = save || {}, t = s.totals || {};
+    return [+s.xp || 0, +t.attempts || 0, count(s.cards), Array.isArray(s.log) ? s.log.length : 0,
+            +s.written || 0, +s.spoken || 0, count(s.read), count(s.lessonScore), count(s.letture), +s.unlocked || 0].join(".");
+  }
+  function vacio(save) { return !save || (!(+save.xp > 0) && !count(save.cards)); }
+  function plan(r, sync, save) {
+    sync = sync || {};
+    var changed = sync.fp ? huella(save) !== sync.fp : !vacio(save);
+    if (!r) return changed ? "subir" : "nada";
+    if (!conflict(r, sync)) return changed ? "subir" : "nada";
+    return changed ? "conflicto" : "bajar";
+  }
+
+  /* mezclar(): las dos copias en una, cuando se avanzó en los dos
+     dispositivos sin sincronizar.  No es «gana la última»: cada ficha
+     conserva su repaso más reciente, y lo que se acumula (días, lecciones
+     leídas, medallas, registro de repasos, errores) se une.  Los ajustes y
+     todo lo que no se conoce salen de la copia guardada última (la otra
+     completa lo que a esa le falte).  baseXp: los xp de cuando los dos
+     estaban iguales (sync.fp), para sumar lo ganado en cada lado en vez de
+     quedarse con el mayor.  El resultado pasa por Engine.fromRaw como
+     cualquier copia.  Mezclar dos veces da lo mismo. */
+  var LOG_MAX = 2500;
+  function isObj(v) { return !!v && typeof v === "object" && !Array.isArray(v); }
+  function clone(v) { return v === undefined ? v : JSON.parse(JSON.stringify(v)); }
+  function num(v) { v = +v; return isFinite(v) ? v : 0; }
+  // JSON with sorted keys: equal content, equal text
+  function stable(v) {
+    if (Array.isArray(v)) return "[" + v.map(stable).join(",") + "]";
+    if (isObj(v)) {
+      return "{" + Object.keys(v).sort().filter(function (k) { return v[k] !== undefined; })
+        .map(function (k) { return JSON.stringify(k) + ":" + stable(v[k]); }).join(",") + "}";
+    }
+    return JSON.stringify(v === undefined ? null : v);
+  }
+  function dayNum(k) {
+    var p = String(k || "").split("-");
+    return p.length === 3 ? Date.UTC(+p[0], +p[1] - 1, +p[2]) : 0;
+  }
+  // what the other copy has and this one lacks, at any depth
+  function fill(o, x) {
+    Object.keys(x).forEach(function (k) {
+      if (o[k] === undefined || o[k] === null) o[k] = clone(x[k]);
+      else if (isObj(o[k]) && isObj(x[k])) fill(o[k], x[k]);
+    });
+  }
+  function maxMap(out, other, key) {
+    if (!isObj(other[key])) return;
+    if (!isObj(out[key])) out[key] = {};
+    var o = out[key], x = other[key];
+    Object.keys(x).forEach(function (k) {
+      if (typeof x[k] === "number" && typeof o[k] === "number") o[k] = Math.max(o[k], x[k]);
+      else if (o[k] === undefined || o[k] === null) o[k] = clone(x[k]);
+    });
+  }
+  function pickMap(out, other, key, score) {
+    if (!isObj(other[key])) return;
+    if (!isObj(out[key])) out[key] = {};
+    var o = out[key], x = other[key];
+    Object.keys(x).forEach(function (k) {
+      if (!isObj(x[k])) { if (o[k] === undefined) o[k] = clone(x[k]); return; }
+      if (!isObj(o[k]) || score(x[k]) > score(o[k])) o[k] = clone(x[k]);
+    });
+  }
+  function unionList(out, other, key, idOf, order, cut) {
+    if (!Array.isArray(out[key]) && !Array.isArray(other[key])) return;
+    var seen = {}, all = [];
+    (Array.isArray(out[key]) ? out[key] : []).concat(Array.isArray(other[key]) ? other[key] : []).forEach(function (e) {
+      var id = idOf(e);
+      if (seen[id]) return;
+      seen[id] = true;
+      all.push(e);
+    });
+    all.sort(function (p, q) { return order(p) - order(q) || (stable(p) < stable(q) ? -1 : 1); });
+    out[key] = cut(clone(all));
+  }
+  function mezclar(a, b, baseXp) {
+    if (vacio(a)) return clone(b);
+    if (vacio(b)) return clone(a);
+    var bLast = num(b.savedAt) > num(a.savedAt) || (num(b.savedAt) === num(a.savedAt) && stable(b) > stable(a));
+    var w = bLast ? b : a, l = bLast ? a : b;
+    var out = clone(w);
+
+    pickMap(out, l, "cards", function (c) { return num(c.last) * 1000 + num(c.seen); });
+    ["days", "sessions", "lessonScore", "read", "recog", "best", "records", "totals"].forEach(function (k) { maxMap(out, l, k); });
+    pickMap(out, l, "weekStats", function (x) { return num(x.attempts) * 1e4 + num(x.right); });
+    if (isObj(l.weekStats)) {
+      Object.keys(l.weekStats).forEach(function (k) {
+        if (isObj(l.weekStats[k]) && l.weekStats[k].bossPassed && isObj(out.weekStats[k])) out.weekStats[k].bossPassed = l.weekStats[k].bossPassed;
+      });
+    }
+    pickMap(out, l, "letture", function (x) { return num(x.pct) * 1e14 + num(x.at); });
+    pickMap(out, l, "errs", function (x) { return num(x.last) * 1000 + num(x.n); });
+    fill(out, l);   // lessons read, own cards, keywords, anything a module keeps: what is missing here
+
+    if (Array.isArray(out.badges) || Array.isArray(l.badges)) {
+      out.badges = (Array.isArray(out.badges) ? out.badges : []).concat(Array.isArray(l.badges) ? l.badges : [])
+        .filter(function (x, i, arr) { return typeof x === "string" && arr.indexOf(x) === i; }).sort();
+    }
+    unionList(out, l, "log", function (e) { return Array.isArray(e) ? e[0] + "|" + e[1] : stable(e); },
+      function (e) { return num(e && e[1]); }, function (x) { return x.slice(-LOG_MAX); });
+    unionList(out, l, "errLog", stable, function (e) { return -num(e && e.at); }, function (x) { return x.slice(0, 60); });
+    unionList(out, l, "pauses", stable, function (e) { return dayNum(e && e.from); }, function (x) { return x.slice(-30); });
+    unionList(out, l, "predictions", stable, function (e) { return num(e && e.at); }, function (x) { return x.slice(-40); });
+
+    ["unlocked", "written", "spoken"].forEach(function (k) { if (w[k] !== undefined || l[k] !== undefined) out[k] = Math.max(num(w[k]), num(l[k])); });
+    // what each side earned since they were in step, added up
+    var base = num(baseXp), hi = Math.max(num(a.xp), num(b.xp)), lo = Math.min(num(a.xp), num(b.xp));
+    out.xp = baseXp != null && base >= 0 && base <= lo ? hi + lo - base : hi;
+
+    // the streak belongs to whoever played last
+    var dw = dayNum(w.lastPlayed), dl = dayNum(l.lastPlayed);
+    if (dl > dw || (dl === dw && num(l.streak) > num(w.streak))) {
+      ["streak", "lastPlayed", "shields", "shieldUsed", "jokerWeek", "chest"].forEach(function (k) { if (l[k] !== undefined) out[k] = clone(l[k]); });
+    }
+    out.savedAt = Math.max(num(a.savedAt), num(b.savedAt));
+    return out;
+  }
+  // the xp of a fingerprint (sync.fp): what both sides had when in step
+  function huellaXp(fp) { var x = fp ? +String(fp).split(".")[0] : NaN; return isFinite(x) ? x : null; }
+
   /* This phone's storage (localStorage, or another with getItem/setItem
      in the tests).  Nothing of this goes into the save. */
   function store(ls) {
@@ -263,6 +397,7 @@
     API: API, DESC: DESC, TOKEN_KEY: TOKEN_KEY, TOKEN_URL: TOKEN_URL, fileName: fileName,
     call: call, remote: remote, pull: pull, push: push, envelope: envelope, saveOf: saveOf,
     stamp: stamp, compare: compare, conflict: conflict, autoDue: autoDue, dayKey: dayKey,
+    huella: huella, plan: plan, mezclar: mezclar, huellaXp: huellaXp,
     store: store, message: message
   };
   if (typeof module === "object" && module.exports) module.exports = api;

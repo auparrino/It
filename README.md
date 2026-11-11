@@ -48,6 +48,107 @@ from a branch*, carpeta `/docs`), abrí la URL una vez con internet y agregala
 a la pantalla de inicio. `?lang=it`, `?lang=pt` o `?lang=de` en la URL abre
 directo un idioma.
 
+## Qué es cada palabra
+
+En la corrección de cada ejercicio, «🧩 Qué es cada palabra» muestra la oración
+con la **clase** de cada palabra debajo (artículo, sustantivo, verbo,
+preposición…). Sale de los datos del curso, sin internet, en italiano y
+portugués (`docs/js/rol.js`): lo que puede ser dos cosas se dice («verbo o
+sustantivo») y lo que no está en el banco queda sin rótulo, nunca se adivina.
+La **función** de cada parte (sujeto, objeto directo, objeto indirecto,
+complemento…) se pide a la IA con tu clave y va rotulada como generada: con
+reglas simples falla donde más importa (en *Mi piace il caffè* el sujeto es *il
+caffè*).
+
+## Leer es el centro: la lectura del día
+
+Con un libro cargado en la lectura guiada (`docs/js/libro.js`), la pantalla de
+hoy lo muestra con un toque para seguir donde quedaste. La meta del día son
+10 oraciones (unos 10 minutos). Al llegar, «Listo por hoy» dice cuánto leíste,
+qué porcentaje del libro llevás y con qué oración seguís mañana, y ofrece un
+**desafío** de hasta cinco preguntas armadas con lo que leíste: la oración con
+una palabra sacada, su traducción a la vista y cuatro opciones de esas mismas
+páginas. El desafío no crea fichas de repaso.
+
+La pantalla de lectura abre directo en el texto, con una cabecera de un
+renglón (tramo, oración, lo de hoy y una barra). La explicación de una oración
+aparece debajo de ella en el celular y al costado del texto en la computadora,
+sin taparlo; los botones dicen qué hacen («Escuchar», «Tapar ayuda») y las
+flechas ← → pasan de oración. El contexto, la gramática y las preguntas del
+tramo quedan en «Más de este tramo».
+
+Con ese mismo libro, **la gramática de la semana se practica con sus
+oraciones** (`Libro.gramatica`): de lo que ya leíste se eligen oraciones con un
+verbo en un tiempo que el curso ya te enseñó, se saca el verbo y lo escribís.
+La consigna da el infinitivo, el tiempo y la persona, y la traducción está a la
+vista. Solo entran formas sin ambigüedad.
+
+## Una tarea para algo: «Te llegó un mensaje»
+
+Con tu clave de IA, en la pantalla de hoy: llega un mail, un aviso o un mensaje
+escrito para tu nivel y con los tiempos que ya viste; contestás dos preguntas
+de comprensión y lo respondés por escrito (doce palabras o más). Te contesta el
+personaje, y la app dice si lograste lo que se pedía y qué corregir. El mensaje
+y la corrección son de la IA y van rotulados; `docs/js/tarea.js` los valida
+antes de mostrarlos (las correcciones tienen que citar algo que escribiste).
+
+## Los tres idiomas en una pantalla
+
+La pantalla de hoy muestra los otros idiomas que estudiás en ese dispositivo:
+cuántas fichas tienen para repasar y si hoy ya los repasaste, con un toque para
+pasar a ese idioma y arrancar su repaso. Al terminar un repaso, la pantalla de
+resultado ofrece seguir con el del idioma que falta.
+
+## Cortes naturales
+
+Al terminar una lección o una ronda con trece o más pantallas seguidas, lo
+principal pasa a ser «Listo por hoy» y lo que sigue queda como segunda opción.
+Una lección de dieciocho pasos o más ofrece además cortar por la mitad, y queda
+guardada donde estabas.
+
+## El repaso, primero
+
+Si hay fichas vencidas, el botón principal de la pantalla de hoy es el repaso
+del día (una tanda de 20; dos si hay más de 60 atrasadas) y la misión nueva
+queda al lado. Lo que se falla escribiendo vuelve en la misma ronda para
+escribir, con una pista. El tiempo que tardás en contestar no cambia cuándo
+vuelve una ficha.
+
+## En la computadora
+
+La misma app se instala en Windows como aplicación de escritorio (ventana
+propia, ícono en Inicio y en la barra de tareas, sin internet): abrí la URL en
+**Edge** (*⋯ → Aplicaciones → Instalar este sitio como una aplicación*) o en
+**Chrome** (el ícono de instalar de la barra de direcciones).
+
+- **Pantalla ancha:** las pestañas van arriba, en la cabecera, y la corrección
+  sale al costado de la pregunta en vez de taparla.
+- **Teclado:** `1`-`9` eligen la opción, la ficha o la nota de la tarjeta;
+  `Enter` o `Espacio` siguen; `Backspace` saca la última ficha. En una caja de
+  texto `Enter` manda la respuesta y, ya corregida, sigue.
+- **Acentos:** `Alt` + número escribe la letra de la fila de acentos de la
+  caja (`Alt`+`1` = la primera).
+- **Hoy en dos columnas:** el plan a la izquierda; xp, atajos, frase del día y
+  calendario a la derecha, abiertos.
+- **Según el dispositivo:** con las lecciones de la semana hechas, al lado de
+  «Seguir» la app ofrece la misión que mejor le queda a ese dispositivo: en la
+  computadora, la de escribir largo (el texto de la semana, el dictogloss,
+  traducir); en el celular, una corta si la que sigue es de escribir largo. No
+  cambia el orden del percorso.
+- **Lampo escrito:** 90 segundos tipeando entera una frase que ya viste, sin
+  castigo por errar (la correcta queda un momento a la vista).
+- **Sincronizada con el celular:** en *Io → Tu copia → Sincronizar con tu
+  GitHub Gist* se pega el mismo token en los dos; «📱 Pasar al celular» lo
+  muestra como un código QR para no tipearlo (el celular pregunta antes de
+  guardarlo). Con «Sincronizar sola», la app trae lo del otro dispositivo al
+  abrirla y sube lo de este al terminar cada ronda. Si avanzaste en los dos sin
+  conexión, junta las dos copias: cada ficha con su repaso más reciente, y los
+  días, lecciones y medallas de los dos lados (`docs/js/nube.js`: `plan`,
+  `mezclar`).
+
+`npm run smoke:pc` lo prueba en el navegador (teclado, pantalla ancha y la
+sincronización entre dos dispositivos con un GitHub simulado).
+
 ## Cómo está hecha
 
 Un **núcleo** común (`docs/js/`) y un **paquete** por idioma

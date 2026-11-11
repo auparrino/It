@@ -64,6 +64,140 @@
     var pr = (state.libros || {})[pack.id];
     return pr ? Object.keys(pr.done || {}).length : 0;
   }
+  /* ------------------------------------------------ la lectura del día
+     Leer el libro es el centro de la sesión, en ratos cortos y con cierre.
+     Cada oración a la que se avanza cuenta una vez (pr.hi: hasta dónde se
+     llegó en cada tramo); al llegar a la meta del día (META oraciones) la
+     app lo dice, muestra cuánto del libro va leído y dónde se sigue mañana,
+     y ofrece un desafío de cinco preguntas armado con lo leído hoy.  Saltar
+     lejos tocando una oración no cuenta como leer lo del medio. */
+  var META = 10;
+  function dayKey(now) { var d = new Date(now || Date.now()); return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate(); }
+  function wordCount(t) { return (String(t || "").match(/[A-Za-zÀ-ÖØ-öø-ÿ]+/g) || []).length; }
+  function today(pr, now) {
+    var k = dayKey(now);
+    if (!pr.day || pr.day.d !== k) pr.day = { d: k, n: 0, w: 0, ids: [] };
+    return pr.day;
+  }
+  // From sentence `from` to `to` of the tramo: true when today's goal was just reached.
+  function noteRead(pr, p, from, to, now) {
+    var tr = p.tramos[pr.t], all = tr ? ids(tr) : [];
+    if (!(to > from) || to - from > 3) return false;
+    if (!pr.hi) pr.hi = {};
+    var top = pr.hi[pr.t] == null ? -1 : pr.hi[pr.t], day = today(pr, now), before = day.n;
+    for (var k = Math.max(from, top + 1); k < to && k < all.length; k++) {
+      day.n++;
+      day.w += wordCount((p.s[all[k]] || {}).t);
+      if (day.ids.length < 60) day.ids.push(all[k]);
+      pr.total = (pr.total || 0) + 1;
+    }
+    if (to - 1 > top) pr.hi[pr.t] = to - 1;
+    if (before < META && day.n >= META && !day.shown) { day.shown = true; return true; }
+    return false;
+  }
+  // How far into the book the reader is (by sentences), 0-100.
+  function bookPct(p, pr) {
+    var before = 0, total = 0;
+    p.tramos.forEach(function (tr, k) { var n = ids(tr).length; total += n; if (k < pr.t) before += n; });
+    return total ? Math.round((before + Math.min(pr.i, ids(p.tramos[pr.t] || {}).length)) / total * 100) : 0;
+  }
+  function shuffled(a, rnd) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor((rnd || Math.random)() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  /* The challenge: up to five sentences read today, each with one of its
+     glossed words taken out.  The translation is in the question and the
+     options are words of the same pages: it is answered by understanding
+     the sentence, not by remembering the text. */
+  function reto(p, pr, rnd) {
+    var day = pr.day || { ids: [] }, pool = [], cand = [];
+    day.ids.forEach(function (sid) {
+      var s = p.s[sid] || {};
+      (s.g || []).forEach(function (g) {
+        var form = String(g[0] || "").trim();
+        if (!form || /\s/.test(form) || form.length < 3) return;
+        if (pool.indexOf(form.toLowerCase()) < 0) pool.push(form.toLowerCase());
+        var re = new RegExp("(^|[^A-Za-zÀ-ÖØ-öø-ÿ])(" + form.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")(?![A-Za-zÀ-ÖØ-öø-ÿ])", "i");
+        var m = re.exec(s.t || "");
+        if (m && s.es) cand.push({ sid: sid, s: s, form: m[2], at: m.index + m[1].length, es: String(g[1] || "") });
+      });
+    });
+    var seen = {}, out = [];
+    shuffled(cand, rnd).forEach(function (c) {
+      if (out.length >= 5 || seen[c.sid]) return;
+      var others = shuffled(pool.filter(function (f) { return f !== c.form.toLowerCase(); }), rnd).slice(0, 3);
+      if (others.length < 3) return;
+      seen[c.sid] = 1;
+      // a window of the sentence around the gap (the sentences of a novel are long)
+      var t = c.s.t, a = Math.max(0, t.lastIndexOf(" ", Math.max(0, c.at - 90))), b = t.indexOf(" ", Math.min(t.length, c.at + c.form.length + 90));
+      if (b < 0) b = t.length;
+      var stem = (a > 0 ? "… " : "") + t.slice(a, c.at).replace(/^\s+/, "") + "___" + t.slice(c.at + c.form.length, b) + (b < t.length ? " …" : "");
+      out.push({ id: "libro:" + p.id + ":" + c.sid, src: "lettura", nocard: true, type: "choice",
+        prompt: "De tu lectura de hoy: ¿qué palabra va? En castellano: «" + c.s.es + "»",
+        stem: stem, options: shuffled([c.form].concat(others), rnd), answer: c.form, accept: [c.form],
+        note: "*" + c.form + "*: " + c.es });
+    });
+    return out;
+  }
+
+  /* La gramática de la semana, con oraciones del libro.  En vez de frases
+     sueltas: oraciones que el alumno ya leyó (las de hoy primero, después
+     las anteriores del tramo) donde aparece un verbo en un tiempo que el
+     curso ya le enseñó (wk.tenses: los de su semana, primero; wk.taught:
+     todos los vistos).  Se saca el verbo y se pide escribirlo: la consigna
+     da el infinitivo, el tiempo y la persona, y la traducción está a la
+     vista, así que se contesta sabiendo conjugar, no recordando el texto.
+     Solo formas sin duda: un único verbo y un único tiempo posibles, y que
+     la palabra no sea además un nombre (rol.js, donde hay banco). */
+  function gramatica(p, pr, wk, rnd) {
+    var D = root.Desglose, F = D && D.forms ? D.forms() : null, C = root.Conj;
+    if (!F || !wk) return [];
+    var taught = wk.taught || [], first = wk.tenses || [];
+    var tr = p.tramos[pr.t], all = tr ? ids(tr) : [], day = (pr.day && pr.day.ids) || [];
+    var order = day.slice().reverse().concat(all.slice(0, Math.max(pr.i, 0) + 1).reverse());
+    var seen = {}, cand = [], verbs = {};
+    order.forEach(function (sid) {
+      if (seen[sid]) return;
+      seen[sid] = 1;
+      var s = p.s[sid] || {}, text = String(s.t || "");
+      if (!s.es || !text) return;
+      var cls = root.Rol && root.Rol.loaded && root.Rol.loaded() ? root.Rol.clases(text) : null;
+      var re = /[A-Za-zÀ-ÖØ-öø-ÿ]+/g, m;
+      while ((m = re.exec(text))) {
+        var w = m[0], hits = F[w.toLowerCase()];
+        if (!hits || !hits.length || w.length < 3) continue;
+        var inf = hits[0][0], tense = hits[0][1];
+        if (!hits.every(function (h) { return h[0] === inf && h[1] === tense; })) continue;
+        if (taught.indexOf(tense) < 0) continue;
+        if (cls) {
+          var part = cls.filter(function (c) { return !c.sep && c.t === w; })[0];
+          if (!part || part.cls !== "ver") continue;
+        } else if (m.index > 0 && w.charAt(0) !== w.charAt(0).toLowerCase()) continue;   // a capital inside the sentence: a noun
+        var persons = hits.map(function (h) { return h[2]; }).filter(function (x, i, a) { return x >= 0 && a.indexOf(x) === i; });
+        if (!persons.length) continue;
+        cand.push({ sid: sid, s: s, form: w, at: m.index, inf: inf, tense: tense, persons: persons, top: first.indexOf(tense) >= 0 ? 0 : 1 });
+        break;   // one verb per sentence
+      }
+    });
+    cand.sort(function (a, b) { return a.top - b.top; });
+    var out = [];
+    cand.forEach(function (c) {
+      if (out.length >= 6 || (verbs[c.inf] || 0) >= 2) return;
+      verbs[c.inf] = (verbs[c.inf] || 0) + 1;
+      var t = c.s.t, a = Math.max(0, t.lastIndexOf(" ", Math.max(0, c.at - 90))), b = t.indexOf(" ", Math.min(t.length, c.at + c.form.length + 90));
+      if (b < 0) b = t.length;
+      var who = c.persons.map(function (x) { return (C && C.PERSONS && C.PERSONS[x]) || ""; }).filter(Boolean).join(" o ");
+      var name = D.label ? D.label(c.tense, wk.n) : c.tense;
+      out.push({ id: "libro-g:" + p.id + ":" + c.sid, src: "lettura", nocard: true, type: "typed",
+        prompt: "Una oración de tu libro. Escribí el verbo «" + c.inf + "» en " + name + (who ? " (" + who + ")" : "") + ". En castellano: «" + c.s.es + "»",
+        stem: (a > 0 ? "… " : "") + t.slice(a, c.at).replace(/^\s+/, "") + "___" + t.slice(c.at + c.form.length, b) + (b < t.length ? " …" : ""),
+        answer: c.form.toLowerCase(), accept: [c.form.toLowerCase()],
+        note: "*" + c.form + "*: de *" + c.inf + "*, " + name + (who ? ", " + who : "") + "." });
+    });
+    return out.length >= 3 ? (rnd ? shuffled(out, rnd) : out) : [];
+  }
+
   function meta(p) {
     return { id: p.id, lang: p.lang, title: p.title, author: p.author || "", year: p.year || "",
              n: p.tramos.length, sents: Object.keys(p.s).length };
@@ -179,13 +313,19 @@
   function renderTramo(p) {
     var state = H.state(), pr = progress(state, p.id), tr = p.tramos[pr.t], all = ids(tr);
     if (pr.i >= all.length) pr.i = 0;
-    var steps = ["Antes de leer", "Lectura", "Gramática", "Preguntas"];
-    var head = '<button class="btn ghost" id="lbbook">← ' + esc(p.title) + "</button>" +
-      "<h1>Tramo " + (pr.t + 1) + ' <small class="muted">de ' + p.tramos.length + "</small></h1>" +
-      '<p class="muted">' + esc(tr.part) + (chapterOf(tr) ? " · " + esc(chapterOf(tr)) : "") + "</p>" +
+    /* Una cabecera mínima: se abre en el texto.  Dónde estás (tramo,
+       oración, lo de hoy) en un renglón con su barra; lo demás del tramo
+       (contexto y palabras, gramática, preguntas, la otra forma de leer)
+       queda plegado en «Más de este tramo». */
+    var steps = ["Contexto y palabras", "Leer", "Gramática", "Preguntas"];
+    var head = '<div class="lb-top"><button class="btn ghost" id="lbbook" aria-label="Volver al libro">←</button>' +
+      '<div class="lb-where"><b>' + esc(p.title) + '</b><span class="muted small" id="lbwhere">' + esc(whereText(p, pr, all)) + "</span>" +
+      '<span class="lb-prog"><i id="lbbar" style="width:' + wherePct(pr, all) + '%"></i></span></div></div>' +
+      '<details class="lb-menu"' + (ui.step !== 1 ? " open" : "") + "><summary>Más de este tramo</summary>" +
       '<div class="row lb-steps">' + steps.map(function (s, k) {
-        return '<button class="tab' + (ui.step === k ? " on" : "") + '" data-lbstep="' + k + '" aria-pressed="' + (ui.step === k) + '">' + (k + 1) + ". " + s + "</button>";
-      }).join("") + "</div>";
+        return '<button class="tab' + (ui.step === k ? " on" : "") + '" data-lbstep="' + k + '" aria-pressed="' + (ui.step === k) + '">' + s + "</button>";
+      }).join("") + "</div>" + (ui.step === 1 ? modeBar() : "") +
+      (H.week && gramatica(p, pr, H.week()).length ? '<div class="row"><button class="tab" id="lbgram2">🧩 Practicar la gramática de tu semana con oraciones de este tramo</button></div>' : "") + "</details>";
     var body = "";
     if (ui.step === 0) {
       body = '<div class="card">' + (tr.contexto ? "<h2>Contexto</h2><p>" + mk(tr.contexto) + "</p>" : "") +
@@ -218,9 +358,19 @@
     return head + body;
   }
 
+  function whereText(p, pr, all) {
+    var day = pr.day && pr.day.d === dayKey() ? pr.day : { n: 0 };
+    return "Tramo " + (pr.t + 1) + " de " + p.tramos.length + " · oración " + Math.min(pr.i + 1, all.length) + " de " + all.length +
+      " · hoy " + Math.min(day.n, META) + " / " + META + (day.n >= META ? " ✓" : "");
+  }
+  function wherePct(pr, all) { return all.length ? Math.round(Math.min(pr.i + 1, all.length) / all.length * 100) : 0; }
+  // A wide screen: the explanation goes beside the text; else, right under its sentence.
+  function side() { return !!(root.matchMedia && root.matchMedia("(min-width: 1100px)").matches); }
+  var HINT = '<p class="muted small lb-hint">Tocá una oración para ver su traducción y sus palabras. Con el teclado: ← y →.</p>';
+
   // What one sentence says: translation, standard form, word by word, words, note.
   function explain(s, id) {
-    if (!ui.show) return '<p class="muted small">Tratá de entenderla sola. Tocá «💬» para ver la explicación.</p>';
+    if (!ui.show) return '<p class="muted small">Tratá de entenderla sola. «Ver ayuda» muestra la traducción y las palabras.</p>';
     return '<p class="lb-es">' + esc(s.es || "") + "</p>" +
       (s.std ? '<p class="small"><span class="muted">Estándar:</span> <span lang="' + tts() + '">' + esc(s.std) + "</span></p>" : "") +
       (s.lit ? '<p class="small"><span class="muted">Palabra por palabra:</span> ' + esc(s.lit) + "</p>" : "") +
@@ -300,11 +450,10 @@
   function navRow(pr, all) {
     return '<div class="lb-nav">' +
       '<button class="btn ghost" id="lbprev" aria-label="Oración anterior"' + (pr.i ? "" : " disabled") + ">←</button>" +
-      '<button class="tab" id="lbsay" aria-label="Escuchar">🔊</button>' +
-      '<button class="tab" id="lbshow" aria-pressed="' + ui.show + '" aria-label="Explicación">' + (ui.show ? "🙈" : "💬") + "</button>" +
-      '<span class="muted small lb-count">' + (pr.i + 1) + " / " + all.length + "</span>" +
+      '<button class="tab" id="lbsay">🔊 Escuchar</button>' +
+      '<button class="tab" id="lbshow" aria-pressed="' + ui.show + '">' + (ui.show ? "🙈 Tapar ayuda" : "💬 Ver ayuda") + "</button>" +
       (pr.i + 1 < all.length ? '<button class="btn" id="lbnext" aria-label="Oración siguiente">→</button>' :
-        '<button class="btn" data-lbstep="2">Gramática →</button>') + "</div>";
+        '<button class="btn" data-lbstep="3" aria-label="Fin del tramo: preguntas">Fin ✓</button>') + "</div>";
   }
   function sheet(p, pr, all) {
     var s = p.s[all[pr.i]] || {};
@@ -331,7 +480,7 @@
       (tr.p || []).forEach(function (x, k) {
         if (!Array.isArray(x) && Array.isArray(tr.p[k + 1]) && tr.p[k + 1][0] === all[pr.i]) h = '<h3 class="lb-h">' + esc(x.h) + "</h3>";
       });
-      return modeBar() + '<div class="card lb-frase" id="lbswipe">' + h +
+      return '<div class="card lb-frase" id="lbswipe">' + h +
         (prev ? '<p class="lb-ctx" lang="' + tts() + '">' + esc(prev.t) + "</p>" : "") +
         '<p class="lb-cur lb-big" lang="' + tts() + '">' + esc(s.t || "") + "</p>" +
         (next ? '<p class="lb-ctx" lang="' + tts() + '">' + esc(next.t) + "</p>" : "") +
@@ -346,10 +495,9 @@
         return '<span class="lb-s' + (ui.open && id === curId ? " cur" : "") + (k < pr.i ? " read" : "") + '" data-lbs="' + k + '">' + esc(o.t || "") + "</span>";
       }).join(" ") + "</p>";
     }).join("");
-    return modeBar() + '<p class="muted small">Tocá una oración para ver su explicación.' +
-      (pr.i ? ' <button class="tab" id="lbresume">▶ Seguir en la oración ' + (pr.i + 1) + "</button>" : "") + "</p>" +
+    return (pr.i && !ui.open ? '<p class="muted small"><button class="tab" id="lbresume">▶ Seguir en la oración ' + (pr.i + 1) + "</button></p>" : "") +
       '<div class="card lb-texto">' + text + "</div>" +
-      '<div class="lb-sheet" id="lbsheet" aria-live="polite"' + (ui.open ? "" : " hidden") + ">" + (ui.open ? sheet(p, pr, all) : "") + "</div>";
+      '<div class="lb-sheet" id="lbsheet" aria-live="polite"' + (ui.open || side() ? "" : " hidden") + ">" + (ui.open ? sheet(p, pr, all) : side() ? HINT : "") + "</div>";
   }
 
   function owns(s) { return s === "guiada" || s === "guiada-shelf" || s === "guiada-tramo"; }
@@ -369,7 +517,7 @@
   function openTramo(i) {
     var p = packs[ui.book], pr = progress(H.state(), p.id);
     if (pr.t !== i) { pr.t = i; pr.i = 0; }
-    ui.step = pr.i ? 1 : 0;
+    ui.step = 1;   // straight to the text; the context is one touch away («Más de este tramo»)
     ui.open = false;
     H.persist();
     show("guiada-tramo");
@@ -379,9 +527,11 @@
     var p = packs[ui.book], pr = progress(H.state(), p.id), all = ids(p.tramos[pr.t]);
     var to = Math.max(0, Math.min(all.length - 1, k));
     if (to !== pr.i && !ui.busy) { ui.ask = null; ui.iaErr = ""; }
+    var reached = noteRead(pr, p, pr.i, to);
     pr.i = to;
     if (open) ui.open = true;
     H.persist();
+    if (reached) setTimeout(function () { hoyCard(p, pr); }, 0);
     var sh = document.getElementById("lbsheet");
     if (ui.mode === "frase" || !sh) { H.render(); return; }
     document.querySelectorAll(".lb-s").forEach(function (el) {
@@ -389,12 +539,26 @@
       el.classList.toggle("cur", !!ui.open && n === pr.i);
       el.classList.toggle("read", n < pr.i);
     });
-    sh.hidden = !ui.open;
-    sh.innerHTML = ui.open ? sheet(p, pr, all) : "";
-    document.body.classList.toggle("lb-sheet-open", !!ui.open);
+    sh.hidden = !ui.open && !side();
+    sh.innerHTML = ui.open ? sheet(p, pr, all) : side() ? HINT : "";
+    var wh = document.getElementById("lbwhere"), bar = document.getElementById("lbbar");
+    if (wh) wh.textContent = whereText(p, pr, all);
+    if (bar) bar.style.width = wherePct(pr, all) + "%";
+    placeSheet();
     wireSheet(p, pr);
     keepCurrent();
     jumpToAsk();
+  }
+  /* Where the explanation goes: on a wide screen, beside the text (css);
+     on a phone, right under its sentence, inside the text, so it covers
+     nothing and the reading goes on below it. */
+  function placeSheet() {
+    var sh = document.getElementById("lbsheet");
+    if (!sh) return;
+    var cur = document.querySelector(".lb-s.cur"), inline = !side() && !!ui.open && !!cur;
+    sh.classList.toggle("inline", inline);
+    if (inline) { if (cur.nextSibling !== sh) cur.parentNode.insertBefore(sh, cur.nextSibling); }
+    else { var card = document.querySelector(".lb-texto"); if (card && sh.parentNode !== card.parentNode) card.parentNode.insertBefore(sh, card.nextSibling); }
   }
   // The question box or the AI's answer in sight (the sheet scrolls, not the page).
   function jumpToAsk() {
@@ -410,8 +574,10 @@
   function keepCurrent() {
     var el = document.querySelector(".lb-s.cur"), sh = document.getElementById("lbsheet");
     if (!el || !sh || sh.hidden) return;
-    var r = el.getBoundingClientRect(), free = sh.getBoundingClientRect().top;
-    if (r.top < 70 || r.bottom > free - 12) root.scrollTo(0, root.pageYOffset + r.top - Math.max(70, (free - r.height) / 3));
+    // the sentence and what explains it, in sight: the sentence in the upper third
+    var r = el.getBoundingClientRect(), vh = root.innerHeight || 700;
+    var end = sh.classList.contains("inline") ? sh.getBoundingClientRect().bottom : r.bottom;
+    if (r.top < 90 || end > vh - 16) root.scrollTo(0, root.pageYOffset + r.top - Math.max(90, Math.min(vh / 4, vh - (end - r.top) - 24)));
   }
   function wireSheet(p, pr) {
     var on = function (sel, fn) { var el = document.querySelector(sel); if (el) el.onclick = fn; };
@@ -419,6 +585,7 @@
     on("#lbnext", function () { moveTo(pr.i + 1, true); });
     on("#lbshow", function () { ui.show = !ui.show; moveTo(pr.i); });
     on("#lbclose", function () { ui.open = false; moveTo(pr.i); });
+    on("#lbgram2", function () { var g = gramatica(p, pr, H.week()); if (g.length && H.play) H.play(g); });
     on("#lbsay", function () { var s0 = p.s[ids(p.tramos[pr.t])[pr.i]]; if (s0) H.speak(s0.t, true); });
     on("#lbiabtn", function () { ui.ask = ids(p.tramos[pr.t])[pr.i]; ui.iaErr = ""; ui.jump = true; moveTo(pr.i); var q = document.getElementById("lbiaq"); if (q) q.focus(); });
     on("#lbiano", function () { ui.ask = null; ui.iaErr = ""; moveTo(pr.i); });
@@ -449,6 +616,7 @@
     document.querySelectorAll("[data-libro]").forEach(function (b) {
       b.onclick = function () { H.view().tab = "io"; openBook(b.dataset.libro); };
     });
+    document.querySelectorAll("[data-libro-go]").forEach(function (b) { b.onclick = function () { resume(b.getAttribute("data-libro-go")); }; });
   }
   function wire(s) {
     wireCard();
@@ -490,12 +658,19 @@
     var p = packs[ui.book];
     if (!p) return;
     var pr = progress(H.state(), p.id);
-    document.body.classList.toggle("lb-sheet-open", ui.step === 1 && ui.mode === "texto" && !!ui.open);
+    document.body.classList.remove("lb-sheet-open");   // the explanation no longer covers the text (placeSheet)
+    placeSheet();
     document.body.classList.toggle("lb-docked", ui.step === 1 && ui.mode === "frase");
     if (ui.step === 1) wireSheet(p, pr);
     keepCurrent();
     jumpToAsk();
-    document.querySelectorAll("[data-lbs]").forEach(function (sp) { sp.onclick = function () { moveTo(+sp.dataset.lbs, true); }; });
+    document.querySelectorAll("[data-lbs]").forEach(function (sp) {
+      sp.onclick = function () {
+        // a second touch on the open sentence closes its explanation
+        if (ui.open && +sp.dataset.lbs === pr.i) { ui.open = false; moveTo(pr.i); return; }
+        moveTo(+sp.dataset.lbs, true);
+      };
+    });
     on("#lbresume", function () { moveTo(pr.i, true); });
     document.querySelectorAll("[data-lbmode]").forEach(function (b) {
       b.onclick = function () {
@@ -515,10 +690,77 @@
     });
   }
 
-  function init(host) { H = host; }
+  /* «Listo por hoy»: lo leído, cuánto va del libro, dónde se sigue mañana. */
+  function hoyCard(p, pr) {
+    if (typeof document === "undefined" || document.getElementById("lbhoy")) return;
+    var all = ids(p.tramos[pr.t]), next = p.s[all[pr.i]] || {}, day = today(pr);
+    var words = String(next.t || "").split(/\s+/).slice(0, 9).join(" ");
+    var items = reto(p, pr), gram = H.week ? gramatica(p, pr, H.week()) : [];
+    var box = document.createElement("div");
+    box.id = "lbhoy";
+    box.className = "lb-hoy";
+    box.setAttribute("role", "dialog");
+    box.setAttribute("aria-label", "Listo por hoy");
+    box.innerHTML = '<div class="lb-hoy-in"><h2>📕 Listo por hoy</h2>' +
+      "<p>Leíste <b>" + day.n + " oraciones</b> (" + day.w + " palabras) de <i>" + esc(p.title) + "</i>, en el original.</p>" +
+      '<p class="muted">Vas por el ' + bookPct(p, pr) + " % del libro · tramo " + (pr.t + 1) + " de " + p.tramos.length +
+        (pr.total ? " · " + pr.total + " oraciones leídas en total" : "") + ".</p>" +
+      (words ? '<p class="lb-manana">Mañana seguís acá: <span lang="' + tts() + '">«' + esc(words) + "…»</span></p>" : "") +
+      '<div class="row">' + (items.length ? '<button class="btn" id="lbreto">🎯 Desafío: ' + items.length + (items.length === 1 ? " pregunta" : " preguntas") + " con lo que leíste</button>" : "") +
+      (gram.length ? '<button class="btn ghost" id="lbgram">🧩 La gramática de tu semana, con ' + gram.length + " oraciones de este libro</button>" : "") +
+      '<button class="tab" id="lbmas">Seguir leyendo</button><button class="tab" id="lbfin">Terminar por hoy</button></div></div>';
+    document.body.appendChild(box);
+    var close = function () { box.remove(); };
+    var on = function (sel, fn) { var el = box.querySelector(sel); if (el) el.onclick = fn; };
+    on("#lbmas", close);
+    on("#lbfin", function () { close(); H.go("oggi"); });
+    on("#lbreto", function () { close(); if (H.play) H.play(items); });
+    on("#lbgram", function () { close(); if (H.play) H.play(gram); });
+  }
+  // The book in progress, on the home screen: one touch to go on reading.
+  function oggiCard() {
+    if (list === null) { loadList().then(function () { if (H.view().screen === "oggi") H.render(); }).catch(function () { list = []; }); return ""; }
+    var state = H.state(), books = mine().filter(function (m) { return (state.libros || {})[m.id]; });
+    var m = books[0] || mine()[0];
+    if (!m) return "";
+    var pr = progress(state, m.id), day = pr.day && pr.day.d === dayKey() ? pr.day : { n: 0 };
+    return '<div class="card weekcard lb-oggi"><span class="muted">📕 Tu libro, en el original</span><b>' + esc(m.title) + "</b>" +
+      '<span class="muted">Tramo ' + (pr.t + 1) + " de " + m.n + " · hoy: " + Math.min(day.n, META) + " / " + META + " oraciones" +
+        (day.n >= META ? " ✓" : "") + (pr.total ? " · " + pr.total + " leídas en total" : "") + "</span>" +
+      '<span class="row" style="margin-top:10px"><button class="btn' + (day.n >= META ? " ghost" : "") + '" data-libro-go="' + esc(m.id) + '">📖 ' +
+        (day.n >= META ? "Leer un poco más" : "Seguir leyendo · unos 10 minutos") + "</button></span></div>";
+  }
+  function resume(id) {
+    ui.book = id;
+    getPack(id).then(function () {
+      progress(H.state(), id);   // where the reader was (made if it is the first time)
+      ui.step = 1;
+      ui.open = false;
+      show("guiada-tramo");
+    }).catch(function (e) { H.toast("⚠️ " + (e.message || e)); });
+  }
+
+  function init(host) {
+    H = host;
+    // With a keyboard: → and ← go from sentence to sentence, Esc closes the explanation.
+    if (typeof document === "undefined" || init.keys) return;
+    init.keys = true;
+    document.addEventListener("keydown", function (e) {
+      if (e.ctrlKey || e.metaKey || e.altKey || !H || H.view().screen !== "guiada-tramo" || ui.step !== 1) return;
+      var t = e.target, tag = t && t.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || document.getElementById("lbhoy")) return;
+      var p = packs[ui.book];
+      if (!p) return;
+      var pr = progress(H.state(), p.id);
+      if (e.key === "ArrowRight") { e.preventDefault(); moveTo(ui.open ? pr.i + 1 : pr.i, true); }
+      else if (e.key === "ArrowLeft") { e.preventDefault(); moveTo(pr.i - 1, true); }
+      else if (e.key === "Escape" && ui.open) { ui.open = false; moveTo(pr.i); }
+    });
+  }
 
   var api = { init: init, owns: owns, render: render, wire: wire, card: card,
-              validate: validate, ids: ids, progress: progress, doneCount: doneCount, meta: meta };
+              validate: validate, ids: ids, progress: progress, doneCount: doneCount, meta: meta,
+              oggiCard: oggiCard, noteRead: noteRead, reto: reto, gramatica: gramatica, bookPct: bookPct, META: META };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Libro = api;
 })(typeof window !== "undefined" ? window : globalThis);
