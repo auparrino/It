@@ -286,6 +286,43 @@
     return { spans: spans, common: L[0][0], n: n, m: m };
   }
   function diffSpans(a, b) { return align(a, b).spans; }
+  function lev(a, b) {
+    var prev = [], i, j;
+    for (j = 0; j <= b.length; j++) prev.push(j);
+    for (i = 1; i <= a.length; i++) {
+      var cur = [i];
+      for (j = 1; j <= b.length; j++) cur.push(Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1)));
+      prev = cur;
+    }
+    return prev[b.length];
+  }
+  /* The correction can be reached from what is on the screen (the norm:
+     nothing from memory of a text).  Every word the correction adds is
+     either a small word (an article, a preposition, an auxiliary: what a
+     rule supplies) or the right form of a word the learner did write
+     (mangio → mangia, in → nella).  A half-typed answer («qual è il si» for
+     «Qual è il significato dell'amore?», from a dictation) is not a
+     sentence with an error: its missing words cannot be worked out. */
+  function reachable(frase, bien) {
+    var x = words(frase), y = words(bien), left = x.slice();
+    var added = y.filter(function (w) { var k = left.indexOf(w); if (k >= 0) { left.splice(k, 1); return false; } return true; });
+    return added.every(function (w) {
+      if (w.replace(/'/g, "").length <= 4) return true;
+      return left.some(function (v) { return v.length >= 3 && lev(v, w) <= Math.max(2, Math.floor(w.length * 0.4)); });
+    });
+  }
+  // The cards made before this rule that do not meet it: out of the review.
+  function mioClean(state) {
+    var out = 0;
+    mioIds(state).forEach(function (k) {
+      var it = state.own[k] && state.own[k].it;
+      if (it && it.stem && it.answer && reachable(it.stem, it.answer)) return;
+      delete state.own[k];
+      if (state.cards) delete state.cards[k];
+      out++;
+    });
+    return out;
+  }
   function sameWords(a, b) { return words(a).sort().join(" ") === words(b).sort().join(" "); }
   function mioDue(now) {
     var d = new Date(now + 2 * 864e5);
@@ -314,6 +351,7 @@
     // places change and at least half of the words stay
     var al = align(frase, bien), n = o.n || (sameWords(frase, bien) ? 1 : al.spans);   // only the order: one error
     if (!al.spans || al.spans > MIO_MAX_SPANS || al.common * 2 < Math.min(al.n, al.m)) return null;
+    if (!reachable(frase, bien)) return null;
     var now = o.now || Date.now(), id = MIO + hash(normText(frase));
     // a cap: the oldest of the learner's sentences make room
     var ids = mioIds(state).filter(function (k) { return k !== id; });
@@ -520,7 +558,7 @@
     clinicCat: clinicCat, label: label, capa: capa, depth: depth, firstLayer: firstLayer,
     make: make, fromDiag: fromDiag, fromFinding: fromFinding, fromRow: fromRow, guessGood: guessGood,
     record: record, unrecord: unrecord, recordFindings: recordFindings,
-    mioAdd: mioAdd, mioFromText: mioFromText, mioIds: mioIds, isMio: isMio, mioDue: mioDue,
+    mioAdd: mioAdd, mioClean: mioClean, reachable: reachable, mioFromText: mioFromText, mioIds: mioIds, isMio: isMio, mioDue: mioDue,
     diffSpans: diffSpans, splice: splice, MIO: MIO, MIO_MAX: MIO_MAX,
     hash: hash, normText: normText, cacheGet: cacheGet, cacheSet: cacheSet, cacheAll: cacheAll, cacheClear: cacheClear,
     cacheReset: cacheReset, CACHE_MAX: CACHE_MAX, sentences: sentences,
