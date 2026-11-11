@@ -166,4 +166,27 @@ pack.ALL.forEach(function (code) {
   ok(!s6.own["own:mio:" + Er.hash("uno due tre 0")] && !s6.cards["own:mio:" + Er.hash("uno due tre 0")], L + "se van las más viejas, con su ficha");
 });
 
+/* Nada de memoria de un texto: la corrección tiene que poder sacarse de lo
+   que está en pantalla.  Una respuesta a medio escribir de un dictado no es
+   «tu frase con un error» (lo que le pasó al alumno: «qual è il si»). */
+(function () {
+  var ctx = pack("it"), Er = ctx.Errores, E = ctx.Engine;
+  ok(!Er.reachable("qual è il si", "Qual è il significato dell'amore?"), "una respuesta cortada no se puede completar: no es corregible");
+  ok(!Er.reachable("podem ficar com o troco", "Vocês podem ficar com o troco."), "ni una a la que le falta una palabra de contenido");
+  ok(Er.reachable("figlio mio va a scuola", "Mio figlio va a scuola."), "el orden: sí");
+  ok(Er.reachable("lunedì a venerdì lavoro al ufficio.", "lunedì a venerdì lavoro all'ufficio."), "la forma correcta de una palabra escrita: sí");
+  ok(Er.reachable("Esco con i miei amici e ritorno e mezzanotte.", "Esco con i miei amici e ritorno a mezzanotte."), "una palabra chica que da la regla: sí");
+  ok(Er.reachable("sei dov'è la fermata", "Sai dov'è la fermata?"), "una letra de más o de menos: sí");
+  var st = E.blankSave();
+  eq(Er.mioAdd(st, { frase: "qual è il si", bien: "Qual è il significato dell'amore?", cat: "preposizione", now: 1e12 }), null, "mioAdd no hace ficha de una respuesta cortada");
+  ok(!!Er.mioAdd(st, { frase: "figlio mio va a scuola", bien: "Mio figlio va a scuola.", cat: "ordine", now: 1e12 }), "y sí de una frase con un error");
+  // las fichas hechas antes de la regla se van al abrir la app
+  var bad = "own:mio:vieja";
+  st.own[bad] = { it: { src: "mio", stem: "qual è il si", answer: "Qual è il significato dell'amore?" }, at: 1, src: "mio" };
+  st.cards[bad] = { due: 1, s: 1, d: 5 };
+  eq(Er.mioClean(st), 1, "mioClean saca la ficha imposible");
+  ok(!st.own[bad] && !st.cards[bad] && Er.mioIds(st).length === 1, "con su ficha de repaso, y deja la buena");
+  ok(/Errores\.mioClean\(state\)/.test(APP), "app.js limpia las fichas viejas al arrancar");
+})();
+
 T.done();
