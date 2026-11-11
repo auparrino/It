@@ -618,6 +618,7 @@
     stopLampo();
     if (karaoke) { stopKaraoke(); document.body.classList.remove("kar-partial", "kar-audio"); }
     view.tab = view.screen = tab;
+    if (tab === "oggi") runScreens = 0;
     render();
     window.scrollTo(0, 0);
     // The path opens at the week you are in, not at week 1 (52 nodes).
@@ -652,6 +653,147 @@
      principal de Oggi es el repaso del día (una tanda de 20; dos si hay más
      de 60 atrasadas) y la misión nueva queda al lado: nunca bloqueada, pero
      segunda.  Hecho el repaso de hoy, «Seguir» vuelve a ser lo principal. */
+  /* «📬 Te llegó un mensaje» (tarea.js): leerlo, entenderlo y contestarlo
+     por escrito; del otro lado contesta el personaje.  Con la clave de IA
+     del alumno; lo generado va rotulado. */
+  var tarea = null;
+  function tareaCtx() {
+    var n = Math.min(state.unlocked || 1, NW()), w = course.weeks[n - 1] || {};
+    var W = (window.LANG && LANG.rules && LANG.rules.desglose && LANG.rules.desglose.weeks) || {};
+    var day = Engine.dayKey(), done = (state.tareas || {})[day];
+    return { lang: UI.langEs || LG.name, level: w.level || "A2", week: n, day: day, n: done ? done.n : 0, why: (state.ideal || {}).why || "",
+      temas: course.weeks.slice(Math.max(0, n - 8), n).map(function (x) { return x.title; }),
+      tiempos: Object.keys(W).filter(function (t) { return W[t] <= n; }).map(function (t) { return window.Desglose && Desglose.label ? Desglose.label(t, n) : t; }) };
+  }
+  function tareaCard() {
+    if (!window.Tarea || !window.IA) return "";
+    var done = (state.tareas || {})[Engine.dayKey()];
+    if (!aiKey()) return "";
+    return '<div class="card weekcard tarea-oggi"><span class="muted">📬 Una tarea para algo</span>' +
+      "<b>" + (done ? "Contestaste el mensaje de hoy" + (done.ok ? " ✓" : "") : "Te llegó un mensaje") + "</b>" +
+      '<span class="muted">' + (done ? "Si querés, hay otro." : "Leelo, fijate si lo entendiste y contestalo por escrito. Unos 8 minutos.") + "</span>" +
+      '<span class="row" style="margin-top:10px"><button class="btn' + (done ? " ghost" : "") + '" id="tareago">' + (done ? "Otro mensaje" : "Abrir el mensaje") + "</button></span></div>";
+  }
+  function tareaStart() {
+    tarea = { step: "loading", ctx: tareaCtx(), picks: {}, reply: "" };
+    view.tab = "oggi";
+    view.screen = "tarea";
+    render();
+    window.scrollTo(0, 0);
+    IA.llm(Tarea.prompt(tarea.ctx), aiKeys(), function (err, data) {
+      if (!tarea || tarea.step !== "loading") return;
+      var t = !err && data ? Tarea.valid(data) : null;
+      if (!t) { tarea.step = "error"; tarea.err = err ? String(err.message || err) : "la respuesta no servía"; }
+      else { tarea.task = t; tarea.step = "read"; }
+      if (view.screen === "tarea") render();
+    });
+  }
+  function renderTarea() {
+    var back = '<button class="btn ghost" data-tareaback="1">← Inicio</button>';
+    if (!tarea) return back;
+    if (tarea.step === "loading") return back + '<div class="card"><p>📬 Está llegando un mensaje…</p></div>';
+    if (tarea.step === "error") return back + '<div class="card"><p>No pude traer el mensaje (' + esc(tarea.err) + ').</p><div class="row"><button class="btn" id="tareago">Probar de nuevo</button></div></div>';
+    var t = tarea.task, r = tarea.result;
+    var msg = '<div class="card tarea-msg"><span class="muted small">' + (t.tipo === "mail" ? "✉️ Mail" : t.tipo === "aviso" ? "📌 Aviso" : "💬 Mensaje") +
+      (t.de ? " de <b>" + esc(t.de) + "</b>" : "") + "</span>" + (t.asunto ? '<h2 lang="' + esc(LG.tts || "") + '">' + esc(t.asunto) + "</h2>" : "") +
+      '<p class="tarea-texto" lang="' + esc(LG.tts || "") + '">' + esc(t.texto).replace(/\n+/g, "<br>") + "</p>" +
+      (t.glosas.length ? '<details class="tarea-gl"><summary>Palabras que te pueden faltar</summary><ul>' + t.glosas.map(function (g) {
+        return "<li><b>" + esc(g[0]) + "</b> — " + esc(g[1]) + "</li>"; }).join("") + "</ul></details>" : "") +
+      '<p class="muted small">Mensaje escrito por la IA para tu nivel: puede tener algún error.</p></div>';
+    var qs = '<div class="card"><h3 style="margin-top:0">¿Lo entendiste?</h3>' + t.preguntas.map(function (q, k) {
+      var pick = tarea.picks[k];
+      return '<p class="tarea-q"><b>' + esc(q.q) + '</b></p><div class="options">' + q.opciones.map(function (o, j) {
+        var cls = pick == null ? "" : j === q.correcta ? " right" : j === pick ? " wrong" : "";
+        return '<button class="opt' + cls + '" data-tq="' + k + '" data-to="' + j + '"' + (pick != null ? " disabled" : "") + ">" + esc(o) + "</button>";
+      }).join("") + "</div>";
+    }).join("") + "</div>";
+    var answered = t.preguntas.every(function (q, k) { return tarea.picks[k] != null; });
+    var write = !answered ? "" : '<div class="card"><h3 style="margin-top:0">Contestá</h3><p>' + esc(t.pedido) + "</p>" +
+      (r ? '<p class="tarea-mio" lang="' + esc(LG.tts || "") + '">' + esc(tarea.reply) + "</p>"
+         : '<div class="typed"><textarea id="tareatxt" class="grow" rows="4" lang="' + esc(LG.tts || "") + '" placeholder="' + esc(UI.inLang || "") + '">' + esc(tarea.reply) + "</textarea></div>" +
+           '<div class="row" style="margin-top:10px"><button class="btn" id="tareasend"' + (tarea.step === "checking" ? " disabled" : "") + ">" +
+           (tarea.step === "checking" ? "Enviando…" : "Enviar") + '</button><span class="muted small" id="tareamsg">' + esc(tarea.msg || "Doce palabras o más.") + "</span></div>") + "</div>";
+    var res = !r ? "" : '<div class="card tarea-res"><span class="muted small">' + (t.de ? esc(t.de) + " te contestó" : "Te contestaron") + "</span>" +
+      '<p class="tarea-texto" lang="' + esc(LG.tts || "") + '">' + esc(r.respuesta) + "</p>" +
+      "<p><b>" + (r.logrado ? "✓ Lograste lo que te pedían." : "Casi: " + esc(r.falta || "faltó algo de lo pedido.")) + "</b></p>" +
+      (r.correcciones.length ? "<h3>Para corregir</h3><ul class=\"tarea-fix\">" + r.correcciones.map(function (c) {
+        return "<li><s>" + esc(c.mal) + "</s> → <b>" + esc(c.bien) + "</b>" + (c.porque ? ' <span class="muted small">' + esc(c.porque) + "</span>" : "") + "</li>"; }).join("") + "</ul>"
+        : '<p class="muted">Sin errores para marcar.</p>') +
+      (r.version ? '<details class="tarea-gl"><summary>Tu respuesta, corregida</summary><p lang="' + esc(LG.tts || "") + '">' + esc(r.version) + "</p></details>" : "") +
+      '<p class="muted small">Corrección de la IA: puede equivocarse.</p>' +
+      '<div class="row" style="margin-top:12px"><button class="btn" data-tareaback="1">Listo</button><button class="tab" id="tareago">Otro mensaje</button></div></div>';
+    return back + msg + qs + write + res;
+  }
+  function tareaSend() {
+    var box = $("#tareatxt");
+    if (!box || tarea.step === "checking") return;
+    tarea.reply = box.value.trim();
+    if (!Tarea.enough(tarea.reply)) { tarea.msg = "Escribí un poco más: doce palabras o más."; render(); return; }
+    tarea.step = "checking";
+    tarea.msg = "";
+    render();
+    IA.llm(Tarea.evalPrompt(tarea.task, tarea.reply, tarea.ctx), aiKeys(), function (err, data) {
+      if (!tarea || tarea.step !== "checking") return;
+      var r = !err && data ? Tarea.validEval(data, tarea.reply) : null;
+      tarea.step = "read";
+      if (!r) { tarea.msg = "No pude corregirla (" + (err ? String(err.message || err) : "respuesta rara") + "). Probá de nuevo."; }
+      else {
+        tarea.result = r;
+        if (!state.tareas) state.tareas = {};
+        var day = Engine.dayKey(), d = state.tareas[day] || { n: 0, ok: false };
+        d.n++; d.ok = d.ok || r.logrado;
+        state.tareas[day] = d;
+        // only the last days are kept
+        Object.keys(state.tareas).sort().slice(0, -30).forEach(function (k) { delete state.tareas[k]; });
+        state.written = (state.written || 0) + 1;
+        Engine.touchStreak(state);
+        gain(r.logrado ? 30 : 20);
+        Engine.addStrand(state, "output", 30);
+        persist();
+        renderHeader();
+      }
+      if (view.screen === "tarea") render();
+    });
+  }
+
+  /* Los otros idiomas, en la misma pantalla de hoy.  El alumno estudia
+     tres a la vez y cada curso guarda lo suyo por separado: acá se lee el
+     guardado de los otros (mismo dispositivo) para decir cuánto hay para
+     repasar en cada uno y si hoy ya se repasó, con un toque para pasar a
+     ese idioma y arrancar su repaso.  La cuenta es de fichas vencidas tal
+     como están guardadas (sin los topes del día de cada curso): por eso
+     «unas». */
+  function otherLangs() {
+    var L = (window.Boot && Boot.LANGS) || {}, now = Date.now(), today = Engine.dayKey(), out = [];
+    Object.keys(L).forEach(function (code) {
+      if (code === LG.code) return;
+      var s = null;
+      try { s = JSON.parse(localStorage.getItem(L[code].storage + ".save.v1") || "null"); } catch (e) { s = null; }
+      if (!s || !s.cards) return;
+      var due = 0, n = 0;
+      Object.keys(s.cards).forEach(function (id) { var c = s.cards[id]; if (c && c.due) { n++; if (c.due <= now) due++; } });
+      if (!n) return;
+      var did = s.revDay && s.revDay.d === today ? s.revDay.n : 0;
+      out.push({ code: code, name: L[code].name, flag: L[code].flag, due: due, did: did,
+                 away: s.lastPlayed ? Math.max(0, Engine.daysBetween ? Engine.daysBetween(s.lastPlayed, today) : 0) : null });
+    });
+    return out;
+  }
+  function goLang(code, review) {
+    flushPersist();
+    try { if (review) sessionStorage.setItem("c1.auto", "review"); } catch (e) { /* */ }
+    Boot.switchTo(code);
+  }
+  function otherLangsHtml() {
+    var ls = otherLangs();
+    if (!ls.length) return "";
+    return '<div class="card otros"><span class="muted">🌍 Tus otros idiomas, hoy</span>' + ls.map(function (l) {
+      var what = l.did ? "hoy ya repasaste " + l.did + (l.due ? " · quedan unas " + l.due : " ✓")
+        : l.due ? "unas " + l.due + " para repasar" + (l.away > 1 ? " · hace " + l.away + " días que no lo abrís" : "") : "al día ✓";
+      return '<div class="otros-row"><span><b>' + l.flag + " " + esc(l.name) + '</b> <span class="muted small">' + what + "</span></span>" +
+        (l.due ? '<button class="tab" data-golang="' + l.code + '" data-rev="1">🔁 Repasar 20</button>' : '<button class="tab" data-golang="' + l.code + '">Abrir</button>') + "</div>";
+    }).join("") + "</div>";
+  }
   var REV_BACKLOG = 60;
   function reviewFirst() {
     var due = Drills.dueCount(course, state, itemMap);
@@ -757,6 +899,7 @@
     if (!maint && !gentle) html += weekTopHtml(w, plan, doneN, nm);
     // the book in progress (libro.js): reading is a way into the session, not a corner of the profile
     if (window.Libro && Libro.oggiCard) html += Libro.oggiCard();
+    if (!gentle) html += tareaCard() + otherLangsHtml();
     // One habit card a day at most, that can be put off (the return first).
     if (!gentle) html += window.Inicio ? Inicio.habit(oggiHabitCards()) : oggiHabitCards().map(function (c) { return c.html; }).join("");
 
@@ -1055,7 +1198,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.28";
+  var APP_VERSION = "v3.29";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -1977,12 +2120,19 @@
       Math.round(Math.max(0, les.i - 1) / n * 100) + '%" data-to="' + Math.round(les.i / n * 100) + '"></i></span>' +
       '<span class="muted">' + (les.i + 1) + UI.of + n + "</span>" + dai(les.i, n) +
       '<button class="btn ghost" id="lesquit">✕</button></div>';
+    if (les.pause && st) {
+      return hudH + '<div class="card lescard center"><div class="badge-new">☕ Buen punto para cortar</div>' +
+        "<h2>Llevás " + les.i + " de " + n + " pasos</h2>" +
+        '<p class="muted">Podés seguir ahora o cortar acá: queda guardado dónde estás y la retomás desde la pantalla de inicio, hoy o mañana.</p>' +
+        '<div class="row centerrow" style="margin-top:14px"><button class="btn" id="lesgo">Seguir →</button>' +
+        '<button class="btn ghost" id="lescut">Cortar acá</button></div></div>';
+    }
     if (!st) {
       var pct = les.asked ? Math.round(les.right / les.asked * 100) : 100;
       var psd = partsOf(w), ssd = sessionsOf(w), nextS = nextSession(w);
       // training when the part (or the lesson) is complete; else, the next session
       var partDone = les.part != null ? partRead(w.week, les.part) : lessonRead(w.week);
-      return '<div class="card lesdone center"><div class="bigstar">★</div>' +
+      return cutButtons('<div class="card lesdone center"><div class="bigstar">★</div>' +
         "<h1>" + (nextS == null ? "¡Lección completa!" : "¡Lección " + (les.sess + 1) + " de " + ssd.length + " lista!") + "</h1>" +
         '<p class="lead">Semana ' + w.week + " · " + esc(ssd[les.sess] ? ssd[les.sess].h : w.title) + "</p>" +
         '<div class="scorebig"><b>' + les.right + "/" + les.asked + '</b><span>+' + les.xp + " xp</span></div>" +
@@ -1996,7 +2146,7 @@
         (nextS != null && !partDone ? '<button class="btn" id="lesnextpart" data-part="' + nextS + '">📘 Lección ' + (nextS + 1) + " →</button>" :
           '<button class="btn" id="lesplay">🎯 A entrenar' + (psd ? " esta parte" : "") + "</button>" +
           (nextS != null ? '<button class="btn ghost" id="lesnextpart" data-part="' + nextS + '">📘 Lección ' + (nextS + 1) + " →</button>" : "")) +
-        '<button class="btn ghost" id="lesback">Volver a la semana</button></div></div>';
+        '<button class="btn ghost" id="lesback">Volver a la semana</button></div></div>');
     }
     var partLabel = les.sess != null && sessionsOf(w).length > 1 ? " · lección " + (les.sess + 1) + " de " + sessionsOf(w).length
                   : les.part != null ? " · parte " + (les.part + 1) + " de " + partsOf(w).length : "";
@@ -2069,9 +2219,33 @@
     return r ? '<div class="note">📐 ' + mk(r) + "</div>" : "";
   }
 
+  /* Un corte natural en una lección larga: cada trece pantallas, si todavía
+     faltan cinco o más, la lección ofrece parar ahí.  Lo hecho queda
+     guardado (la tarjeta «Dejaste algo a medias» de la pantalla de hoy la
+     retoma donde estaba).  El alumno dijo que las sesiones largas son una de
+     las razones por las que no abre la app. */
+  var LES_CUT = 13;
+  /* Y entre una cosa y otra: las lecciones son cortas, lo largo es
+     encadenar lección, entrenamiento y la lección siguiente.  runScreens
+     cuenta las pantallas seguidas desde que se salió de la pantalla de hoy;
+     al terminar una lección o una ronda con trece o más, lo principal pasa
+     a ser cortar, y lo que sigue queda como segunda opción. */
+  var runScreens = 0;
+  function cutNote() {
+    return runScreens >= LES_CUT ? '<p class="note cutnote">☕ Llevás ' + runScreens + " pantallas seguidas: buen punto para cortar. Lo que sigue te espera en la pantalla de inicio.</p>" : "";
+  }
+  function cutButtons(html) {
+    if (runScreens < LES_CUT) return html;
+    // what goes on becomes the second choice
+    return html.replace(/class="btn" id="(lesnextpart|lesplay|again)"/g, 'class="btn ghost" id="$1"')
+      .replace('<div class="row centerrow" style="margin-top:14px">', cutNote() + '<div class="row centerrow" style="margin-top:14px"><button class="btn" id="cutstop">Listo por hoy</button>');
+  }
   function lesNext() {
+    runScreens++;
     les.i++;
     les.answered = false;
+    les.since = (les.since || 0) + 1;
+    if (les.since >= LES_CUT && les.steps.length - les.i >= 5) { les.pause = true; les.since = 0; }
     savePending();
     if (les.i >= les.steps.length) {
       clearPending();
@@ -4287,6 +4461,7 @@
     var w = course.weeks[view.week - 1];
 
     clearPending();
+    runScreens += total;
     Engine.touchStreak(state);
     Engine.noteSession(state);
     if (round.kind === "dos" && total >= 1) { if (!state.dos) state.dos = {}; state.dos[Engine.dayKey()] = true; }
@@ -4596,9 +4771,13 @@
         (wrong.length > 10 ? '<p class="muted">y ' + (wrong.length - 10) + " más en " + UI.reviewEl + ".</p>" : "");
     }
 
-    html += '<div class="row" style="margin-top:16px">' +
+    html += cutNote() + '<div class="row" style="margin-top:16px">' +
+      (runScreens >= LES_CUT ? '<button class="btn" id="cutstop">Listo por hoy</button>' : "") +
       (round.from === "hoy" && window.Inicio ? Inicio.resultButton() : "") +       // el plan de hoy sigue (inicio.js)
       (round.from === "briefing" ? '<button class="btn" id="backweek">← Seguir ' + UI.pathEl + "</button>" : "") +
+      (round.kind === "review" ? otherLangs().filter(function (l) { return l.due && !l.did; }).slice(0, 1).map(function (l) {
+        return '<button class="btn" data-golang="' + l.code + '" data-rev="1">Seguir con el repaso de ' + l.flag + " " + esc(l.name) + " →</button>";
+      }).join("") : "") +
       '<button class="btn' + (round.from === "briefing" ? " ghost" : "") + '" id="again">Otra ronda</button>' +
       (round.kind === "trampas" ? '<button class="btn ghost" id="totrampas">← Trampas</button>' : "") +
       '<button class="btn ghost" id="toggi">Inicio</button>' +
@@ -5518,6 +5697,7 @@
     else if (s === "esame-let") html = renderEsameLettura();
     else if (s === "esame-scr") html = renderEsameScrittura();
     else if (s === "storia") html = renderStoria(course.weeks[view.week - 1]);
+    else if (s === "tarea") html = renderTarea();
     else if (s === "gramatica") html = Referencia.page();
     else if (s === "ubicacion" && window.Ubicacion) html = Ubicacion.html();
     else if (s === "tres" && window.TresLenguas) html = TresLenguas.render(state);
@@ -5755,6 +5935,13 @@
       missionTap(nm.kind, nm.arg, false, w.week, function () { view.tab = "percorso"; });
     });
     on("#herorev", function () { startRound("review"); });
+    on("#tareago", tareaStart);
+    document.querySelectorAll("[data-tareaback]").forEach(function (b) { b.onclick = function () { tarea = null; go("oggi"); }; });
+    on("#tareasend", tareaSend);
+    document.querySelectorAll("[data-tq]").forEach(function (b) {
+      b.onclick = function () { if (!tarea || tarea.picks[b.dataset.tq] != null) return; tarea.picks[b.dataset.tq] = +b.dataset.to; var y = window.scrollY; render(); window.scrollTo(0, y); };
+    });
+    document.querySelectorAll("[data-golang]").forEach(function (b) { b.onclick = function () { goLang(b.dataset.golang, !!b.dataset.rev); }; });
     on("#heroalt", function () {
       var w = course.weeks[Math.min(state.unlocked, 52) - 1];
       var alt = deviceMission(weekPlan(w), nextMission(w), onPc());
@@ -5768,6 +5955,9 @@
       if (nextM && nextM.scrollIntoView) nextM.scrollIntoView({ block: "center" });
     });
     on("#lesnext", lesNext);
+    on("#lesgo", function () { les.pause = false; render(); window.scrollTo(0, 0); });
+    on("#cutstop", function () { go("oggi"); });
+    on("#lescut", function () { les.pause = false; savePending(); go("oggi"); toast("Guardado: la seguís desde «Dejaste algo a medias».", 3000); });
     on("#lesquit", function () { clearPending(); view.screen = "briefing"; render(); });
     on("#resume", resumePending);
     on("#discard", function () { clearPending(); render(); });
@@ -8023,7 +8213,7 @@
   }
   var viaKey = false;   // a key press is never a double tap (the guard below)
   function kbPress(el) { viaKey = true; try { el.click(); } finally { viaKey = false; } }
-  var KB_NEXT = ["#next", "#lesnext2", "#lesnext", "#reveal", "#tcheck"];
+  var KB_NEXT = ["#next", "#lesnext2", "#lesnext", "#lesgo", "#reveal", "#tcheck"];
   var KB_END = [".row .btn:not(.ghost)", "#toggi"];   // the end of a round: what the screen proposes
   var KB_PICK = [".opt", "[data-fq]", "#tbank [data-tile]:not(.used)"];
   document.addEventListener("keydown", function (e) {
@@ -8219,6 +8409,8 @@
         startRound("lista", its);
       },
       screen: function () { return view.screen; },
+      // the stopping point of a long lesson, sooner (the smoke test)
+      lessonCut: function (n) { LES_CUT = n; },
       // the missions of a week, as the percorso shows them (test_misiones)
       plan: function (week) {
         return weekPlan(course.weeks[week - 1]).map(function (x) {
@@ -8426,7 +8618,14 @@
     aiKeys: function () { return aiKey() ? aiKeys() : null; },
     gain: function (n) { gain(n); Engine.addStrand(state, "input", n); renderHeader(); },
     // the challenge with what was read today (libro.js: reto)
-    play: function (items) { view.tab = "oggi"; startRound("lista", items); }
+    play: function (items) { view.tab = "oggi"; startRound("lista", items); },
+    // the learner's week: its tenses and every tense the course already taught (libro.js: gramatica)
+    week: function () {
+      var n = Math.min(state.unlocked || 1, NW()), W = (window.LANG && LANG.rules && LANG.rules.desglose && LANG.rules.desglose.weeks) || {};
+      var cw = course.weeks[n - 1] || {};
+      return { n: n, tenses: [].concat(cw.tenses || cw.tense || []),
+               taught: Object.keys(W).filter(function (t) { return W[t] <= n; }) };
+    }
   });
 
   // La Biblioteca (biblioteca.js): libros enteros, con el lector y el input.
@@ -8509,6 +8708,10 @@
         if (Engine.checkStreak(state).status === "lost") persist();
         // A new learner: the three screens after the language picker (inicio.js).
         if (window.Inicio && Inicio.boot(view)) { renderHeader(); render(); loadExtrasSoon(); return; }
+        // coming from another language to do this one's review (goLang)
+        var auto = "";
+        try { auto = sessionStorage.getItem("c1.auto") || ""; sessionStorage.removeItem("c1.auto"); } catch (e) { /* */ }
+        if (auto === "review" && Drills.dueCount(course, state, itemMap) > 0) { renderHeader(); startRound("review"); loadExtrasSoon(); return; }
         if (location.hash === "#pausa") { renderHeader(); startRound("pausa"); loadExtrasSoon(); return; }
         if (location.hash === "#micro") { renderHeader(); startRound("micro"); loadExtrasSoon(); return; }
         updateBadge();

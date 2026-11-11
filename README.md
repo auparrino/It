@@ -77,6 +77,35 @@ sin taparlo; los botones dicen qué hacen («Escuchar», «Tapar ayuda») y las
 flechas ← → pasan de oración. El contexto, la gramática y las preguntas del
 tramo quedan en «Más de este tramo».
 
+Con ese mismo libro, **la gramática de la semana se practica con sus
+oraciones** (`Libro.gramatica`): de lo que ya leíste se eligen oraciones con un
+verbo en un tiempo que el curso ya te enseñó, se saca el verbo y lo escribís.
+La consigna da el infinitivo, el tiempo y la persona, y la traducción está a la
+vista. Solo entran formas sin ambigüedad.
+
+## Una tarea para algo: «Te llegó un mensaje»
+
+Con tu clave de IA, en la pantalla de hoy: llega un mail, un aviso o un mensaje
+escrito para tu nivel y con los tiempos que ya viste; contestás dos preguntas
+de comprensión y lo respondés por escrito (doce palabras o más). Te contesta el
+personaje, y la app dice si lograste lo que se pedía y qué corregir. El mensaje
+y la corrección son de la IA y van rotulados; `docs/js/tarea.js` los valida
+antes de mostrarlos (las correcciones tienen que citar algo que escribiste).
+
+## Los tres idiomas en una pantalla
+
+La pantalla de hoy muestra los otros idiomas que estudiás en ese dispositivo:
+cuántas fichas tienen para repasar y si hoy ya los repasaste, con un toque para
+pasar a ese idioma y arrancar su repaso. Al terminar un repaso, la pantalla de
+resultado ofrece seguir con el del idioma que falta.
+
+## Cortes naturales
+
+Al terminar una lección o una ronda con trece o más pantallas seguidas, lo
+principal pasa a ser «Listo por hoy» y lo que sigue queda como segunda opción.
+Una lección de dieciocho pasos o más ofrece además cortar por la mitad, y queda
+guardada donde estabas.
+
 ## El repaso, primero
 
 Si hay fichas vencidas, el botón principal de la pantalla de hoy es el repaso

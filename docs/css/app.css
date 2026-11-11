@@ -1209,3 +1209,19 @@ body.lb-docked #app { padding-bottom: 96px; }
 .lb-nav #lbnext, .lb-nav [data-lbstep="3"] { margin-left: auto; }
 .lb-sheet.inline .lb-nav .btn { min-width: 44px; padding: 8px 12px; }
 .lb-sheet.inline .lb-nav { gap: 4px; }
+
+/* Los otros idiomas en la pantalla de hoy */
+.otros-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding: 8px 0; border-top: 1px solid var(--k-line, rgba(0, 0, 0, .08)); }
+.otros > .muted { display: block; margin-bottom: 4px; }
+.otros-row:first-of-type { border-top: 0; }
+
+/* «Te llegó un mensaje» (tarea.js) */
+.tarea-msg h2 { margin: 6px 0 8px; font-size: 1.15rem; }
+.tarea-texto { font-size: 1.08rem; line-height: 1.6; max-width: 68ch; }
+.tarea-gl { margin: 8px 0; font-size: .95em; }
+.tarea-gl summary { cursor: pointer; font-weight: 700; opacity: .8; }
+.tarea-q { margin: 12px 0 6px; }
+.tarea-mio { padding: 10px 12px; border-radius: 12px; background: color-mix(in srgb, currentColor 6%, transparent); }
+.tarea-fix { padding-left: 18px; }
+.tarea-fix li { margin: 6px 0; line-height: 1.4; }
+.tarea-fix s { opacity: .7; }

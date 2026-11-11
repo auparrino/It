@@ -86,14 +86,16 @@ leyendo aparece en la pantalla de hoy; la meta son 10 oraciones (un rato corto
 con cierre); «Listo por hoy» muestra lo leído, el avance en el libro y dónde se
 sigue mañana; y el desafío sale de lo leído, sin sumar fichas al repaso.
 
-Lo que queda en esta línea, sin hacer:
+Las cuatro que quedaban en esta línea se hicieron en la v3.29: la gramática de
+la semana con oraciones del libro, «Te llegó un mensaje» (leer y contestar un
+mensaje real, con la IA del otro lado), los cortes al terminar una lección o una
+ronda después de trece pantallas, y los otros idiomas en la pantalla de hoy.
+Antes (v3.28) se rehízo la pantalla de lectura guiada: directo al texto, la
+explicación debajo de la oración o al costado, botones con nombre.
 
-- Que la gramática de la semana se practique **con oraciones del libro** que
-  está leyendo, en vez de oraciones sueltas (costo medio).
-- Cortes naturales cada 12 a 15 pantallas en las lecciones (C1).
-- Tareas «para algo»: entender un mail o un aviso real y contestarlo, con la IA
-  como interlocutor por escrito (la pendiente 1.6 del plan, sin voz).
-- Los tres idiomas en una sola pantalla de hoy.
+Sin verificar con datos reales: si con esto abre la app más días por semana.
+Se mide con la próxima copia (días con estudio, repasos hechos, oraciones
+leídas, mensajes contestados).
 
 ## Lo que ya se hizo en esta tanda (v3.24 y v3.25)
 

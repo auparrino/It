@@ -141,6 +141,63 @@
     return out;
   }
 
+  /* La gramática de la semana, con oraciones del libro.  En vez de frases
+     sueltas: oraciones que el alumno ya leyó (las de hoy primero, después
+     las anteriores del tramo) donde aparece un verbo en un tiempo que el
+     curso ya le enseñó (wk.tenses: los de su semana, primero; wk.taught:
+     todos los vistos).  Se saca el verbo y se pide escribirlo: la consigna
+     da el infinitivo, el tiempo y la persona, y la traducción está a la
+     vista, así que se contesta sabiendo conjugar, no recordando el texto.
+     Solo formas sin duda: un único verbo y un único tiempo posibles, y que
+     la palabra no sea además un nombre (rol.js, donde hay banco). */
+  function gramatica(p, pr, wk, rnd) {
+    var D = root.Desglose, F = D && D.forms ? D.forms() : null, C = root.Conj;
+    if (!F || !wk) return [];
+    var taught = wk.taught || [], first = wk.tenses || [];
+    var tr = p.tramos[pr.t], all = tr ? ids(tr) : [], day = (pr.day && pr.day.ids) || [];
+    var order = day.slice().reverse().concat(all.slice(0, Math.max(pr.i, 0) + 1).reverse());
+    var seen = {}, cand = [], verbs = {};
+    order.forEach(function (sid) {
+      if (seen[sid]) return;
+      seen[sid] = 1;
+      var s = p.s[sid] || {}, text = String(s.t || "");
+      if (!s.es || !text) return;
+      var cls = root.Rol && root.Rol.loaded && root.Rol.loaded() ? root.Rol.clases(text) : null;
+      var re = /[A-Za-zÀ-ÖØ-öø-ÿ]+/g, m;
+      while ((m = re.exec(text))) {
+        var w = m[0], hits = F[w.toLowerCase()];
+        if (!hits || !hits.length || w.length < 3) continue;
+        var inf = hits[0][0], tense = hits[0][1];
+        if (!hits.every(function (h) { return h[0] === inf && h[1] === tense; })) continue;
+        if (taught.indexOf(tense) < 0) continue;
+        if (cls) {
+          var part = cls.filter(function (c) { return !c.sep && c.t === w; })[0];
+          if (!part || part.cls !== "ver") continue;
+        } else if (m.index > 0 && w.charAt(0) !== w.charAt(0).toLowerCase()) continue;   // a capital inside the sentence: a noun
+        var persons = hits.map(function (h) { return h[2]; }).filter(function (x, i, a) { return x >= 0 && a.indexOf(x) === i; });
+        if (!persons.length) continue;
+        cand.push({ sid: sid, s: s, form: w, at: m.index, inf: inf, tense: tense, persons: persons, top: first.indexOf(tense) >= 0 ? 0 : 1 });
+        break;   // one verb per sentence
+      }
+    });
+    cand.sort(function (a, b) { return a.top - b.top; });
+    var out = [];
+    cand.forEach(function (c) {
+      if (out.length >= 6 || (verbs[c.inf] || 0) >= 2) return;
+      verbs[c.inf] = (verbs[c.inf] || 0) + 1;
+      var t = c.s.t, a = Math.max(0, t.lastIndexOf(" ", Math.max(0, c.at - 90))), b = t.indexOf(" ", Math.min(t.length, c.at + c.form.length + 90));
+      if (b < 0) b = t.length;
+      var who = c.persons.map(function (x) { return (C && C.PERSONS && C.PERSONS[x]) || ""; }).filter(Boolean).join(" o ");
+      var name = D.label ? D.label(c.tense, wk.n) : c.tense;
+      out.push({ id: "libro-g:" + p.id + ":" + c.sid, src: "lettura", nocard: true, type: "typed",
+        prompt: "Una oración de tu libro. Escribí el verbo «" + c.inf + "» en " + name + (who ? " (" + who + ")" : "") + ". En castellano: «" + c.s.es + "»",
+        stem: (a > 0 ? "… " : "") + t.slice(a, c.at).replace(/^\s+/, "") + "___" + t.slice(c.at + c.form.length, b) + (b < t.length ? " …" : ""),
+        answer: c.form.toLowerCase(), accept: [c.form.toLowerCase()],
+        note: "*" + c.form + "*: de *" + c.inf + "*, " + name + (who ? ", " + who : "") + "." });
+    });
+    return out.length >= 3 ? (rnd ? shuffled(out, rnd) : out) : [];
+  }
+
   function meta(p) {
     return { id: p.id, lang: p.lang, title: p.title, author: p.author || "", year: p.year || "",
              n: p.tramos.length, sents: Object.keys(p.s).length };
@@ -267,7 +324,8 @@
       '<details class="lb-menu"' + (ui.step !== 1 ? " open" : "") + "><summary>Más de este tramo</summary>" +
       '<div class="row lb-steps">' + steps.map(function (s, k) {
         return '<button class="tab' + (ui.step === k ? " on" : "") + '" data-lbstep="' + k + '" aria-pressed="' + (ui.step === k) + '">' + s + "</button>";
-      }).join("") + "</div>" + (ui.step === 1 ? modeBar() : "") + "</details>";
+      }).join("") + "</div>" + (ui.step === 1 ? modeBar() : "") +
+      (H.week && gramatica(p, pr, H.week()).length ? '<div class="row"><button class="tab" id="lbgram2">🧩 Practicar la gramática de tu semana con oraciones de este tramo</button></div>' : "") + "</details>";
     var body = "";
     if (ui.step === 0) {
       body = '<div class="card">' + (tr.contexto ? "<h2>Contexto</h2><p>" + mk(tr.contexto) + "</p>" : "") +
@@ -527,6 +585,7 @@
     on("#lbnext", function () { moveTo(pr.i + 1, true); });
     on("#lbshow", function () { ui.show = !ui.show; moveTo(pr.i); });
     on("#lbclose", function () { ui.open = false; moveTo(pr.i); });
+    on("#lbgram2", function () { var g = gramatica(p, pr, H.week()); if (g.length && H.play) H.play(g); });
     on("#lbsay", function () { var s0 = p.s[ids(p.tramos[pr.t])[pr.i]]; if (s0) H.speak(s0.t, true); });
     on("#lbiabtn", function () { ui.ask = ids(p.tramos[pr.t])[pr.i]; ui.iaErr = ""; ui.jump = true; moveTo(pr.i); var q = document.getElementById("lbiaq"); if (q) q.focus(); });
     on("#lbiano", function () { ui.ask = null; ui.iaErr = ""; moveTo(pr.i); });
@@ -636,7 +695,7 @@
     if (typeof document === "undefined" || document.getElementById("lbhoy")) return;
     var all = ids(p.tramos[pr.t]), next = p.s[all[pr.i]] || {}, day = today(pr);
     var words = String(next.t || "").split(/\s+/).slice(0, 9).join(" ");
-    var items = reto(p, pr);
+    var items = reto(p, pr), gram = H.week ? gramatica(p, pr, H.week()) : [];
     var box = document.createElement("div");
     box.id = "lbhoy";
     box.className = "lb-hoy";
@@ -648,6 +707,7 @@
         (pr.total ? " · " + pr.total + " oraciones leídas en total" : "") + ".</p>" +
       (words ? '<p class="lb-manana">Mañana seguís acá: <span lang="' + tts() + '">«' + esc(words) + "…»</span></p>" : "") +
       '<div class="row">' + (items.length ? '<button class="btn" id="lbreto">🎯 Desafío: ' + items.length + (items.length === 1 ? " pregunta" : " preguntas") + " con lo que leíste</button>" : "") +
+      (gram.length ? '<button class="btn ghost" id="lbgram">🧩 La gramática de tu semana, con ' + gram.length + " oraciones de este libro</button>" : "") +
       '<button class="tab" id="lbmas">Seguir leyendo</button><button class="tab" id="lbfin">Terminar por hoy</button></div></div>';
     document.body.appendChild(box);
     var close = function () { box.remove(); };
@@ -655,6 +715,7 @@
     on("#lbmas", close);
     on("#lbfin", function () { close(); H.go("oggi"); });
     on("#lbreto", function () { close(); if (H.play) H.play(items); });
+    on("#lbgram", function () { close(); if (H.play) H.play(gram); });
   }
   // The book in progress, on the home screen: one touch to go on reading.
   function oggiCard() {
@@ -699,7 +760,7 @@
 
   var api = { init: init, owns: owns, render: render, wire: wire, card: card,
               validate: validate, ids: ids, progress: progress, doneCount: doneCount, meta: meta,
-              oggiCard: oggiCard, noteRead: noteRead, reto: reto, bookPct: bookPct, META: META };
+              oggiCard: oggiCard, noteRead: noteRead, reto: reto, gramatica: gramatica, bookPct: bookPct, META: META };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Libro = api;
 })(typeof window !== "undefined" ? window : globalThis);

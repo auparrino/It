@@ -83,6 +83,26 @@ ok(sb.indexOf('type="file"') > 0, "el estante tiene el selector de archivo");
   ok(L.reto(big, pr, rnd).length === 0, "con muy poco leído no hay desafío (faltarían opciones)");
 })();
 
+// la gramática de la semana con oraciones del libro (con el paquete de italiano de verdad)
+(function () {
+  var packIt = require("./pack.js"), ctx = packIt("it");
+  ctx.Rol._reset(); ctx.Rol.load(packIt.data("it", "bank.json"));
+  var S = ["Io non conosco questo monaco, disse Guglielmo.", "Noi cerchiamo la verità ogni giorno.", "Il vecchio guardava la valle in silenzio.", "Vedo una torre sulla collina.",
+    "I monaci mangiano nel refettorio.", "Voi dormite poco in questa abbazia.", "Egli andò verso la biblioteca.", "Il porto è lontano."];
+  var bk = { id: "g", tramos: [{ id: "t", p: [S.map(function (_, i) { return "s" + i; })] }], s: {} };
+  S.forEach(function (t, i) { bk.s["s" + i] = { t: t, es: "(traducción " + i + ")" }; });
+  var prg = { t: 0, i: 7, day: { ids: [] } };
+  var g7 = ctx.Libro.gramatica(bk, prg, { n: 7, tenses: ["presente"], taught: ["presente"] });
+  var ans = g7.map(function (x) { return x.answer; }).sort().join(",");
+  ok(ans === "conosco,dormite,mangiano,vedo", "semana 7: solo verbos en presente, sin duda de tiempo (" + ans + ")");
+  ok(g7.every(function (x) { return x.type === "typed" && x.nocard && x.src === "lettura" && /___/.test(x.stem) && /Escribí el verbo «/.test(x.prompt) && /En castellano: «/.test(x.prompt); }),
+     "se escribe el verbo: la consigna da infinitivo, tiempo y persona, con la oración y su traducción a la vista");
+  ok(!g7.some(function (x) { return /guardava|andò|porto|cerchiamo/.test(x.answer); }), "nada de tiempos no enseñados, de nombres que parecen verbos ni de formas ambiguas");
+  var g16 = ctx.Libro.gramatica(bk, prg, { n: 16, tenses: ["imperfetto"], taught: ["presente", "imperfetto"] });
+  ok(g16.length && g16[0].answer === "guardava", "con el imperfetto enseñado, el tiempo de la semana va primero");
+  ok(ctx.Libro.gramatica(bk, { t: 0, i: 0, day: { ids: [] } }, { n: 7, tenses: ["presente"], taught: ["presente"] }).length === 0, "con menos de tres oraciones que sirvan, no se ofrece");
+})();
+
 // la pantalla de lectura: directo al texto, sin pestañas arriba, botones con nombre
 ok(/ui\.step = 1;\s*\/\/ straight to the text/.test(fs.readFileSync(path.join(ROOT, "docs/js/libro.js"), "utf8")), "abrir un tramo lleva directo al texto");
 ok(/🔊 Escuchar/.test(SRC) && /Tapar ayuda/.test(SRC) && /Ver ayuda/.test(SRC), "los botones de la explicación dicen qué hacen");
