@@ -1088,6 +1088,16 @@ body.lb-docked #app { padding-bottom: 96px; }
   html body.ingame .wrap { max-width: 780px; }
 }
 
+/* Hoy en dos columnas: el plan a la izquierda, lo demás (xp, atajos,
+   cuerdas, frase del día, calendario) a la derecha, abierto. */
+@media (min-width: 1000px) {
+  html body .oggi-cols { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 0 28px; align-items: start; }
+  html body .oggi-side > details.mas > summary { display: none; }
+  html body .oggi-main > :first-child, html body .oggi-side > details.mas, html body .oggi-side > details.mas > .card:first-of-type { margin-top: 0; }
+  html body .devalt { display: block; margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--k-line, rgba(0, 0, 0, .15)); }
+}
+.devalt .tab { margin-left: 6px; }
+
 /* La corrección al costado: la tarjeta de la pregunta se corre a la
    izquierda (no cambia de ancho: nada se reacomoda) y la corrección entra
    por la derecha, las dos a la vista. */
@@ -1103,8 +1113,27 @@ body.lb-docked #app { padding-bottom: 96px; }
     content: "Enter ↵"; margin-left: 12px; padding: 2px 8px; border-radius: 6px; font-size: .72rem; font-weight: 700; letter-spacing: .02em;
     border: 1px solid currentColor; opacity: .6; vertical-align: 2px; }
 }
+/* Con teclado físico: Alt + número escribe la letra de la fila de acentos. */
+@media (pointer: fine) and (min-width: 1000px) {
+  html body .accents { counter-reset: acento; align-items: center; }
+  html body .accents [data-ins], html body .accents [data-escins] { counter-increment: acento; position: relative; }
+  html body .accents [data-ins]::after, html body .accents [data-escins]::after { content: counter(acento); position: absolute; right: 4px; top: 1px;
+    font-size: .6rem; font-weight: 700; opacity: .5; }
+  html body .accents::after { content: "Alt + número"; font-size: .75rem; opacity: .6; margin-left: 6px; }
+}
 @keyframes pc-side { from { opacity: 0; transform: translateX(28px); } }
 @media (prefers-reduced-motion: reduce) {
   html body.ingame .wrap { transition: none; }
   html body.ingame .feedback:not(.prompt) { animation: none; }
 }
+
+/* El QR para pasar el token al celular (Io → Tu copia) */
+.qrbox { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-top: 12px; }
+.qrbox svg { flex: 0 0 auto; border-radius: 8px; border: 1px solid var(--k-line, #ddd); max-width: 100%; height: auto; }
+.qrbox p { flex: 1 1 220px; margin: 0; }
+
+/* Lampo escrito (computadora) */
+.lampocard .typed input { flex: 1 1 260px; min-width: 0; }
+.lampocard #lfb p { margin: 10px 0 0; font-size: 1.05rem; }
+.lampocard .lw-ok { color: var(--k-ok, #1c7c43); font-weight: 800; }
+.lampocard .lw-no b { font-weight: 800; }

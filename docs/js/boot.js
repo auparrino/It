@@ -82,7 +82,7 @@
     { lang: "fuera_data.js" }, { core: "fuera.js" }, { core: "trabajo.js" },
     { core: "trampas.js" },
     { core: "plan.js" }, { core: "progreso.js" }, { core: "inicio.js" },
-    { core: "capas.js" }, { core: "nube.js" }, { core: "teclado.js" },
+    { core: "capas.js" }, { core: "nube.js" }, { core: "qr.js" }, { core: "teclado.js" },
     { lang: "estrategia_data.js" }, { core: "estrategia.js" },
     { core: "libro.js" },
     { core: "app.js" }

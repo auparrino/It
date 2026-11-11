@@ -4,10 +4,12 @@
      Backspace saca la última ficha, Enter o Espacio siguen, y en una caja de
      texto Enter manda y, ya corregida, sigue;
    - la corrección sale al costado de la pregunta, sin taparla;
+   - Alt + número escribe la letra con acento, Oggi queda en dos columnas
+     y hay un Lampo escrito para tipear la frase entera;
    - la sincronización sola, con un GitHub simulado y dos dispositivos: lo
      que se juega en la computadora sube al terminar la ronda, el celular lo
      trae sin preguntar al volver a la app, y si se avanzó en los dos lados
-     sin conexión no se pisa nada (se avisa y elige el alumno).
+     sin conexión las dos copias se juntan en una.
      NODE_PATH=$(npm root -g) node tools/lib/smoke_pc.js
      SHOTS=dir   capturas */
 "use strict";
@@ -193,18 +195,59 @@ function fakeGitHub() {
   check(pc2.xp === tel2.xp && pc2.attempts === tel2.attempts, "la computadora no trajo lo del celular: " + JSON.stringify(pc2) + " ≠ " + JSON.stringify(tel2));
   note("ida y vuelta: celular → computadora (" + pc2.xp + " xp)");
 
-  // both play without the other knowing: nothing is overwritten
+  // both play without the other knowing: the two copies become one
   await pc.context().setOffline(true);
-  await pc.evaluate(() => { const s = window.__test.state(); s.xp += 40; s.totals.attempts += 4; s.savedAt = Date.now(); });
-  await tel.evaluate(() => { const s = window.__test.state(); s.xp += 10; s.totals.attempts += 1; s.savedAt = Date.now(); });
-  await comeBack(tel);
+  await pc.evaluate(() => { const s = window.__test.state(); s.xp += 40; s.totals.attempts += 4; s.cards["solo-pc"] = { s: 1, d: 5, last: Date.now(), seen: 1, reps: 1, interval: 1, due: Date.now() + 864e5 }; s.savedAt = Date.now(); });
+  await tel.click("#toggi").catch(() => {});
+  await tel.waitForTimeout(800);
+  await tel.evaluate(() => { const s = window.__test.state(); s.xp += 10; s.totals.attempts += 1; s.cards["solo-celu"] = { s: 1, d: 5, last: Date.now(), seen: 1, reps: 1, interval: 1, due: Date.now() + 864e5 }; s.savedAt = Date.now(); });
+  await comeBack(tel);                                  // the phone uploads its part
   await pc.context().setOffline(false);
-  await comeBack(pc);
+  await comeBack(pc);                                   // the computer finds both changed: it merges and uploads
+  const has = (page) => page.evaluate(() => { const c = window.__test.state().cards; return [!!c["solo-pc"], !!c["solo-celu"]]; });
   const pc3 = await st(pc), cloud = file();
-  check(pc3.xp === pc2.xp + 40, "el conflicto pisó el progreso de la computadora");
-  check(cloud.xp === tel2.xp + 10, "el conflicto pisó la copia de la nube");
-  check(!!(await sync(pc)).conflict, "el conflicto no quedó anotado para avisar en Io");
-  note("avance en los dos lados sin conexión: no se pisa nada y queda el aviso");
+  check(pc3.xp === pc2.xp + 50, "al juntar las copias no se sumaron los xp de los dos lados: " + pc3.xp + " (esperaba " + (pc2.xp + 50) + ")");
+  check((await has(pc)).every(Boolean), "a la computadora le falta una ficha de algún lado: " + JSON.stringify(await has(pc)));
+  check(!!cloud.cards["solo-pc"] && !!cloud.cards["solo-celu"] && cloud.xp === pc3.xp, "la copia juntada no subió a la nube");
+  check(!(await sync(pc)).conflict, "quedó un conflicto anotado después de juntar");
+  await comeBack(tel);                                  // and the phone brings the merged copy
+  const tel3 = await st(tel);
+  check(tel3.xp === pc3.xp && (await has(tel)).every(Boolean), "el celular no trajo la copia juntada: " + JSON.stringify(tel3));
+  note("avance en los dos lados sin conexión: las copias se juntan (" + pc3.xp + " xp, las fichas de los dos)");
+
+  /* ---- 4. Alt + number, the typed Lampo, Oggi in two columns ---- */
+  await pc.click("#toggi").catch(() => {});
+  await pc.waitForTimeout(400);
+  await pc.evaluate(() => window.__test.play([{ id: "pc-3", type: "translate", prompt: "Traducí.", stem: "es", answer: "è", accept: ["è"] }], 1));
+  await pc.waitForSelector("#ans");
+  await pc.waitForTimeout(400);
+  const first = await pc.evaluate(() => { const b = document.querySelector(".accents [data-ins]"); return b ? b.dataset.ins : ""; });
+  await pc.keyboard.press("Alt+Digit1");
+  check(!!first && (await pc.inputValue("#ans")) === first, "Alt+1 no escribió la primera letra con acento («" + first + "»): " + (await pc.inputValue("#ans")));
+  await pc.click("#quit").catch(() => {});
+  await pc.waitForTimeout(300);
+  await pc.evaluate(() => { const s = window.__test.state(); s.read[1] = Date.now(); window.Frasi.ALL.slice(0, 14).forEach((f) => { s.cards[f.id] = s.cards[f.id] || { s: 3, d: 5, last: Date.now(), seen: 2, ok: 2, reps: 2, interval: 3, due: Date.now() + 3 * 864e5 }; }); });
+  await pc.click('#nav [data-tab="percorso"]');
+  await pc.click('#nav [data-tab="oggi"]');
+  await pc.waitForSelector("#lamposcritto", { timeout: 5000 }).catch(() => errors.push("en la computadora no aparece el Lampo escrito"));
+  const cols = await pc.evaluate(() => { const a = document.querySelector(".oggi-main"), b = document.querySelector(".oggi-side"); if (!a || !b) return null; const ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect(); return { side: rb.left >= ra.right, open: !!document.querySelector("#masoggi").open }; });
+  check(!!cols && cols.side && cols.open, "Oggi no quedó en dos columnas con «Más» abierto: " + JSON.stringify(cols));
+  await snap(pc, "pc-hoy-dos-columnas");
+  await pc.click("#lamposcritto");
+  await pc.waitForSelector("#lwrite");
+  const answerOf = () => pc.evaluate(() => { const es = document.querySelector(".lampocard .stem").textContent; const f = window.Frasi.ALL.filter((x) => x.es === es)[0]; return f ? f.it : ""; });
+  await pc.keyboard.type(await answerOf());
+  await pc.keyboard.press("Enter");
+  await pc.waitForTimeout(700);
+  check(/✓ 1/.test(await pc.textContent(".hud .combo")), "el Lampo escrito no contó la frase bien tipeada");
+  await pc.keyboard.type("zzz");
+  await pc.keyboard.press("Enter");
+  await pc.waitForTimeout(300);
+  check(/Era:/.test(await pc.textContent("#lfb")), "el Lampo escrito no muestra la frase correcta tras un error");
+  await snap(pc, "pc-lampo-escrito");
+  await pc.click("#lquit");
+  await pc.waitForTimeout(400);
+  note("Alt+1 escribe «" + first + "», Oggi en dos columnas, Lampo escrito");
 
   await browser.close();
   srv.kill();

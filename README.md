@@ -60,11 +60,25 @@ propia, ícono en Inicio y en la barra de tareas, sin internet): abrí la URL en
 - **Teclado:** `1`-`9` eligen la opción, la ficha o la nota de la tarjeta;
   `Enter` o `Espacio` siguen; `Backspace` saca la última ficha. En una caja de
   texto `Enter` manda la respuesta y, ya corregida, sigue.
+- **Acentos:** `Alt` + número escribe la letra de la fila de acentos de la
+  caja (`Alt`+`1` = la primera).
+- **Hoy en dos columnas:** el plan a la izquierda; xp, atajos, frase del día y
+  calendario a la derecha, abiertos.
+- **Según el dispositivo:** con las lecciones de la semana hechas, al lado de
+  «Seguir» la app ofrece la misión que mejor le queda a ese dispositivo: en la
+  computadora, la de escribir largo (el texto de la semana, el dictogloss,
+  traducir); en el celular, una corta si la que sigue es de escribir largo. No
+  cambia el orden del percorso.
+- **Lampo escrito:** 90 segundos tipeando entera una frase que ya viste, sin
+  castigo por errar (la correcta queda un momento a la vista).
 - **Sincronizada con el celular:** en *Io → Tu copia → Sincronizar con tu
-  GitHub Gist* se pega el mismo token en los dos. Con «Sincronizar sola», la
-  app trae lo del otro dispositivo al abrirla y sube lo de este al terminar
-  cada ronda. Si avanzaste en los dos sin conexión no pisa nada: avisa y elegís
-  cuál copia queda (`docs/js/nube.js`: `plan`).
+  GitHub Gist* se pega el mismo token en los dos; «📱 Pasar al celular» lo
+  muestra como un código QR para no tipearlo (el celular pregunta antes de
+  guardarlo). Con «Sincronizar sola», la app trae lo del otro dispositivo al
+  abrirla y sube lo de este al terminar cada ronda. Si avanzaste en los dos sin
+  conexión, junta las dos copias: cada ficha con su repaso más reciente, y los
+  días, lecciones y medallas de los dos lados (`docs/js/nube.js`: `plan`,
+  `mezclar`).
 
 `npm run smoke:pc` lo prueba en el navegador (teclado, pantalla ancha y la
 sincronización entre dos dispositivos con un GitHub simulado).

@@ -574,7 +574,23 @@
 
   /* ------------------------------------------------------------------ hoje */
 
+  /* Según el dispositivo.  Las misiones de escribir largo (el texto de la
+     semana, el dictogloss, la charla con la IA, traducir) rinden más con un
+     teclado de verdad; en el teléfono conviene lo corto.  Con las lecciones
+     de la semana hechas (la teoría va primero en cualquier lado), al lado
+     de «Seguir» se ofrece la misión que le queda mejor a este dispositivo.
+     No cambia el orden del percorso: es una segunda puerta. */
+  var PC_KINDS = { scrivi: 1, dictogloss: 1, parla: 1, "b-tr": 1 };
+  function onPc() { return !!(window.matchMedia && matchMedia("(min-width: 1000px) and (pointer: fine)").matches); }
+  function deviceMission(plan, nm, pc) {
+    if (!nm || plan.some(function (x) { return x.kind === "lez" && !x.done && !x.opt; })) return null;
+    var same = function (x) { return x.kind === nm.kind && x.arg === nm.arg; };
+    var open = plan.filter(function (x) { return !x.done && !same(x); });
+    if (pc) return PC_KINDS[nm.kind] ? null : open.filter(function (x) { return PC_KINDS[x.kind]; })[0] || null;
+    return PC_KINDS[nm.kind] ? open.filter(function (x) { return !PC_KINDS[x.kind] && !x.opt; })[0] || null : null;
+  }
   function weekTopHtml(w, plan, doneN, nm) {
+    var pc = onPc(), alt = deviceMission(plan, nm, pc);
     return '<div class="card weekcard hero" id="weektop">' +
       '<span class="muted">🗺️ ' + UI.path + " · semana " + w.week + " · " + esc(w.level) + " · " + doneN + " / " + plan.length + " misiones</span>" +
       "<b>" + esc(w.title) + "</b>" +
@@ -582,7 +598,9 @@
       (nm
         ? '<span class="muted">Siguiente: <b>' + nm.ico + " " + nm.title + "</b>" + (nm.sub ? " · " + nm.sub.split(" · ")[0] : "") + "</span>" +
           '<span class="row" style="margin-top:10px"><button class="btn" id="heronext">▶︎ Seguir</button>' +
-          '<button class="tab" data-week="' + w.week + '">Ver la semana</button></span>'
+          '<button class="tab" data-week="' + w.week + '">Ver la semana</button></span>' +
+          (alt ? '<span class="muted devalt">' + (pc ? "💻 Ya que estás en la compu, con teclado rinde más: " : "📱 Eso es para escribir largo; en el celu queda más cómodo: ") +
+            "<b>" + alt.ico + " " + esc(alt.title) + '</b> <button class="tab" id="heroalt">Hacer esta</button></span>' : "")
         : '<span class="muted">Semana completa. ' + (state.unlocked > w.week ? "Seguí con la siguiente." : "Repasá o entrená para abrir la siguiente.") + "</span>" +
           '<span class="row" style="margin-top:10px"><button class="btn" data-week="' + w.week + '">Ver la semana</button>' +
           '<button class="tab" id="topercorso">' + UI.path + "</button></span>") +
@@ -646,6 +664,10 @@
     // has nothing yet, the top is only the 2-minute button (the return card,
     // after three days away, has its own).
     var gentle = Engine.daysAway(state) >= 2 && Engine.daysAway(state) < 3 && state.totals.attempts > 0 && Engine.todayXp(state) <= 0;
+    // On a wide screen: the plan on the left, everything else on the right
+    // (css: .oggi-cols), open instead of folded under «Más».
+    var wide = !!(window.matchMedia && matchMedia("(min-width: 1000px)").matches);
+    html += '<div class="oggi-cols"><div class="oggi-main">';
     html += top.html + pendHtml + (pend ? "" : dosCard(gentle));
     // The week of the percorso and its next mission, on top (3.2: the
     // percorso organises the day, not a plan by minutes).
@@ -684,6 +706,8 @@
         "<b>" + UI.wordOrNot + "</b><small>reconocer en un segundo · récord: " + ((state.best || {}).lampoParole || 0) + "</small></button>" : "") +
       (known >= 12 ? '<button class="bigbtn lampo" id="lampo"><span class="e">⚡</span>' +
         "<b>" + UI.lampo + " 60″</b><small>récord: " + ((state.best || {}).lampo || 0) + "</small></button>" : "") +
+      (known >= 12 && onPc() ? '<button class="bigbtn lampo" id="lamposcritto"><span class="e">⌨️</span>' +
+        "<b>" + UI.lampo + " escrito 90″</b><small>tipeá la frase entera · récord: " + ((state.best || {}).lampoScritto || 0) + "</small></button>" : "") +
       "</div>" +
       (known < 12 && anyLesson ? '<p class="muted" style="margin:-6px 0 12px">⚡ ' + UI.lampoEl + " 60″ se abre con 12 frases vistas (llevás " + known + ").</p>" : "");
 
@@ -730,20 +754,21 @@
       "Un día perdido por semana no corta la racha (🃏 comodín, " + (Engine.jokerLeft(state) ? "esta semana todavía lo tenés" : "esta semana ya lo usaste") + "). " +
       "Cada 7 días de racha ganás además un 🛡️ escudo para los días de más.</p></div>";
 
-    html += '<details class="mas" id="masoggi"' + (window.Inicio && Inicio.moreOpen() ? " open" : "") + '><summary><span class="mas-t">Más</span><span class="muted small">' +
+    html += '</div><aside class="oggi-side"><details class="mas" id="masoggi"' + (wide || (window.Inicio && Inicio.moreOpen()) ? " open" : "") + '><summary><span class="mas-t">Más</span><span class="muted small">' +
       (maint ? "pausa, repaso, frase del día, calendario" : "pausa, desafío, repaso, frase del día, calendario") + "</span></summary>" + more + "</details>";
 
     // Instalación
     if (!isStandalone()) {
-      html += '<div class="card install"><b>📲 Instalala en tu celu</b>' +
-        '<p class="muted">Funciona sin internet y tu progreso queda guardado en el teléfono.</p>' +
+      html += '<div class="card install"><b>' + (onPc() ? "💻 Instalala en la computadora" : "📲 Instalala en tu celu") + "</b>" +
+        '<p class="muted">Funciona sin internet y tu progreso queda guardado en ' + (onPc() ? "este equipo" : "el teléfono") + ".</p>" +
         (installPrompt
           ? '<button class="btn" id="install">Instalar app</button>'
+          : onPc() ? '<p class="muted">Edge: <b>⋯ → Aplicaciones → Instalar este sitio como una aplicación</b>. Chrome: el ícono de instalar de la barra de direcciones.</p>'
           : '<p class="muted">iPhone: <b>Compartir → Agregar a inicio</b>. ' +
             "Android: menú ⋮ → <b>Instalar app</b>.</p>") +
         "</div>";
     }
-    return html + versionLine();
+    return html + "</aside></div>" + versionLine();
   }
 
   /* ------------------------------------------------ hábito y metas */
@@ -945,7 +970,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.24";
+  var APP_VERSION = "v3.25";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -2390,7 +2415,10 @@
       var v = R[k];
       if (!v || (Array.isArray(v) && !v.length)) return;
       var name = (LG.refNames || {})[k] || "<b>" + esc(k) + "</b>";     // LANG.refNames: the books by name
-      refs.push(name + (Array.isArray(v) ? ", cap. " + v.map(esc).join(", ") : " · " + esc(v)));
+      // chapters are numbers; sections come as { n, title }
+      var one = function (x) { return x && typeof x === "object" ? esc(((x.n ? x.n + " " : "") + (x.title || "")).trim()) : esc(x); };
+      var objs = Array.isArray(v) && v.some(function (x) { return x && typeof x === "object"; });
+      refs.push(name + (Array.isArray(v) ? (objs ? ": " : ", cap. ") + v.map(one).filter(Boolean).join(", ") : " · " + esc(v)));
     });
 
     var nChal = (w.challenges || []).length;
@@ -4501,10 +4529,18 @@
              answer: fake ? UI.wordNo : UI.wordYes };
   }
   function lampoNext() { return lampo.mode === "parole" ? parolaItem() : Drills.lampoItem(state); }
+  /* «Escrito» (para el teclado de la computadora): la misma frase que ya
+     viste, del castellano a la lengua, pero tipeada entera.  Noventa
+     segundos y sin castigo por errar: la frase correcta queda un momento a
+     la vista y sigue.  Es práctica de recuperación con lo ya sabido, no una
+     carrera. */
+  var LAMPO_KEYS = { parole: "lampoParole", frasi: "lampo", scritto: "lampoScritto" };
+  function lampoMs() { return lampo && lampo.mode === "scritto" ? 90000 : LAMPO_MS; }
 
   function startLampo(mode) {
-    lampo = { end: Date.now() + LAMPO_MS, right: 0, wrong: 0, mode: mode === "parole" ? "parole" : "frasi",
+    lampo = { end: 0, right: 0, wrong: 0, mode: LAMPO_KEYS[mode] ? mode : "frasi",
               lock: false, timer: null, done: false };
+    lampo.end = Date.now() + lampoMs();
     lampo.item = lampoNext();
     view.screen = "lampo";
     render();
@@ -4515,13 +4551,27 @@
     if (!lampo || lampo.done) return;
     var left = lampo.end - Date.now();
     var bar = $("#lbar"), sec = $("#lsec");
-    if (bar) bar.style.width = Math.max(0, left / LAMPO_MS * 100) + "%";
+    if (bar) bar.style.width = Math.max(0, left / lampoMs() * 100) + "%";
     if (sec) sec.textContent = Math.max(0, Math.ceil(left / 1000)) + "″";
     if (left <= 0) finishLampo();
   }
 
   function renderLampo() {
     var it = lampo.item;
+    if (lampo.mode === "scritto") {
+      return '<div class="hud"><span class="lsec" id="lsec">' + Math.max(0, Math.ceil((lampo.end - Date.now()) / 1000)) + '″</span>' +
+        '<span class="progressline lampobar"><i id="lbar" style="width:' + Math.max(0, (lampo.end - Date.now()) / lampoMs() * 100) + '%"></i></span>' +
+        '<span class="combo">✓ ' + lampo.right + "</span>" +
+        '<button class="btn ghost" id="lquit">✕</button></div>' +
+        '<div class="card lampocard">' +
+          '<div class="prompt">⌨️ Escribila ' + esc(String(UI.inLang || "").replace("…", "")) + "</div>" +
+          '<div class="stem">' + esc(it.stem) + "</div>" +
+          '<div class="typed"><input id="lwrite" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Tu respuesta">' +
+          '<button class="btn" id="lsend">' + UI.check + "</button></div>" +
+          '<div id="lfb" aria-live="polite"></div>' +
+        "</div>" +
+        '<p class="muted center">Sin castigo por errar: mirás la frase y sigue. No cuentan acentos ni puntuación. Récord: ' + ((state.best || {}).lampoScritto || 0) + "</p>";
+    }
     return '<div class="hud"><span class="lsec" id="lsec">60″</span>' +
       '<span class="progressline lampobar"><i id="lbar" style="width:100%"></i></span>' +
       '<span class="combo">✓ ' + lampo.right + "</span>" +
@@ -4559,17 +4609,38 @@
     }, ok ? 220 : 900);
   }
 
+  function lampoWrite() {
+    var box = $("#lwrite");
+    if (!box || lampo.lock || lampo.done || !box.value.trim()) return;
+    lampo.lock = true;
+    var it = lampo.item, v = Frasi.gradeWritten(box.value, it.answer).verdict, ok = v === "giusto";
+    box.disabled = true;
+    if (ok) { lampo.right++; fx.right(); } else { lampo.wrong++; fx.wrong(); }
+    $("#lfb").innerHTML = ok ? '<p class="lw-ok">✓</p>'
+      : '<p class="lw-no">' + (v === "quasi" ? "Casi: " : "Era: ") + "<b>" + esc(it.answer) + "</b></p>";
+    // the time spent reading the right phrase is given back
+    var show = ok ? 250 : 1800;
+    if (!ok) lampo.end += show;
+    setTimeout(function () {
+      if (lampo.done) return;
+      lampo.item = lampoNext();
+      lampo.lock = false;
+      render();
+      tickLampo();
+    }, show);
+  }
+
   function finishLampo() {
     if (!lampo || lampo.done) return;
     lampo.done = true;
     clearInterval(lampo.timer);
     if (!state.best) state.best = {};
-    var key = lampo.mode === "parole" ? "lampoParole" : "lampo";
+    var key = LAMPO_KEYS[lampo.mode];
     var record = lampo.right > (state.best[key] || 0);
     if (record) state.best[key] = lampo.right;
-    var xp = lampo.right * (lampo.mode === "parole" ? 2 : 3);
+    var xp = lampo.right * (lampo.mode === "parole" ? 2 : lampo.mode === "scritto" ? 5 : 3);
     gain(xp);
-    Engine.addStrand(state, "fluidez", xp);
+    Engine.addStrand(state, lampo.mode === "scritto" ? "output" : "fluidez", xp);
     var won = Engine.checkBadges(state);
     persist();
     renderHeader();
@@ -4584,7 +4655,7 @@
     return "<h1>" + (r.record ? "⚡ ¡Nuevo récord!" : "⚡ Tiempo") + "</h1>" +
       '<div class="card center"><div class="scorebig"><b>' + lampo.right +
       "</b><span>aciertos</span><span>+" + r.xp + " xp</span></div>" +
-      '<p class="muted">Errores: ' + lampo.wrong + " · récord: " + state.best[lampo.mode === "parole" ? "lampoParole" : "lampo"] + "</p>" +
+      '<p class="muted">Errores: ' + lampo.wrong + " · récord: " + state.best[LAMPO_KEYS[lampo.mode]] + "</p>" +
       ((r.won || []).map(function (b) {
         return "<p>🏅 <b>" + esc(b.name) + "</b> — " + esc(b.desc) + "</p>";
       }).join("")) +
@@ -5042,7 +5113,8 @@
         '<input type="checkbox" id="gistauto"' + (nubeOn(sy) ? " checked" : "") + "></label>" +
       (st.length ? '<p class="muted small" id="giststate">' + esc(st.join(" ")) + "</p>" : "") +
       '<p class="muted small">El token queda solo en este teléfono, con las claves de IA (sirve para los dos idiomas), y nunca entra en la copia.</p>' +
-      (tok ? '<div class="row"><button class="tab" id="gistforget">Olvidar el token</button></div>' : "") +
+      (tok ? '<div class="row">' + (window.QR ? '<button class="tab" id="gistqr">📱 Pasar al celular</button>' : "") +
+        '<button class="tab" id="gistforget">Olvidar el token</button></div><div id="gistqrbox" hidden></div>' : "") +
       "</details>";
   }
   function nubeRefresh() { if (view.screen === "io") render(); }
@@ -5113,12 +5185,28 @@
       return done;
     });
   }
+  /* El token que llega en el enlace del QR (#gist=…): se guarda solo si el
+     alumno dice que sí (un enlace ajeno con otro token traería el progreso
+     de otra persona) y el fragmento se borra de la barra y del historial. */
+  function nubeFromLink() {
+    var m = /[#&]gist=([^&]+)/.exec(location.hash || "");
+    if (!m || !window.Nube) return;
+    var tok = "";
+    try { tok = decodeURIComponent(m[1]).trim(); } catch (e) { /* */ }
+    try { history.replaceState(null, "", location.pathname + location.search); } catch (e) { /* */ }
+    var S = Nube.store();
+    if (!/^[A-Za-z0-9_]{20,255}$/.test(tok) || tok === S.token()) return;
+    if (!confirm("Este enlace trae un token de GitHub para sincronizar tu progreso con tu otro dispositivo.\n\n¿Guardarlo en este dispositivo? Aceptá solo si el código QR lo generaste vos.")) return;
+    S.setToken(tok);
+    toast("🔄 Listo: este dispositivo ya se sincroniza con el otro.", 3500);
+  }
+
   /* La sincronización sola (celular ↔ computadora).  Con un token, y si
      no se apagó: al abrir la app, al volver a ella, al terminar una ronda
      y al cerrarla mira la fecha del gist (una llamada liviana) y hace lo
      que dice Nube.plan: subir lo de acá, traer lo del otro dispositivo
      (sin preguntar: acá no cambió nada) o, si se avanzó en los dos lados
-     sin conexión, no pisar nada y avisar (se elige en Io).  Traer
+     sin conexión, juntar las dos copias en una (Nube.mezclar) y subirla.  Traer
      reemplaza el guardado: solo en una pantalla tranquila, nunca en medio
      de una ronda o de un texto a medio escribir. */
   function nubeOn(sy) { return !!Nube.store().token() && (sy || nubeSync()).auto !== false; }
@@ -5168,13 +5256,35 @@
           changed = true;
         });
       }
-      if (what === "conflicto" && sy.conflict !== r.updated) {
-        nubeSync(function (x) { x.conflict = r.updated; });
-        changed = true;
-      }
-      if (what === "conflicto" && nubeWarned !== r.updated && !document.hidden) {
-        nubeWarned = r.updated;
-        toast("⚠️ Avanzaste en dos dispositivos sin sincronizar: elegí cuál copia queda en " + UI.me + " → Tu copia.", 6000);
+      if (what === "conflicto") {
+        // Progress on both sides: the two copies become one (Nube.mezclar)
+        // and it goes up, so the other device brings it next time.
+        if (!safeToReload()) { nubeLast = 0; return null; }
+        return Nube.pull(Object.assign({}, o, { id: r.id })).then(function (got) {
+          if (!safeToReload() || Nube.huella(state) !== fp) { nubeLast = 0; return; }
+          var both = Engine.fromRaw(Nube.mezclar(state, got.env.save, Nube.huellaXp(sy.fp)));
+          both.savedAt = Date.now();
+          state = both;
+          clearPending();
+          if (persistTimer) { clearTimeout(persistTimer); persistTimer = null; }
+          Engine.save(state);
+          var fp2 = Nube.huella(state), mark2 = state.savedAt;
+          applyTheme();
+          renderHeader();
+          render();
+          changed = true;
+          return Nube.push(o, saveEnvelope(), got).then(function (g) {
+            nubeSync(function (x) { x.id = g.id; x.gistAt = g.updated; x.up = Date.now(); x.down = Date.now(); x.mark = mark2; x.conflict = null; x.fp = fp2; });
+            toast("🔄 Junté lo que hiciste en los dos dispositivos.", 3500);
+          });
+        }).catch(function (e) {
+          // it could not be merged (the cloud's copy is of another language, or broken): the learner chooses in Io
+          if (sy.conflict !== r.updated) { nubeSync(function (x) { x.conflict = r.updated; }); changed = true; }
+          if (nubeWarned !== r.updated && !document.hidden && e && e.code !== "red") {
+            nubeWarned = r.updated;
+            toast("⚠️ No pude juntar la copia de la nube con la de acá: elegí cuál queda en " + UI.me + " → Tu copia.", 6000);
+          }
+        });
       }
       return null;
     }).catch(function () { /* sin red o GitHub caído: la próxima */ }).then(function () {
@@ -5204,7 +5314,21 @@
       toast(auto.checked ? "🔄 Se sincroniza sola: al abrir la app y después de cada ronda." : "Sincronización automática apagada.", 2500);
       if (auto.checked) nubeTick(true);
     };
-    on("#gistforget", function () { S.setToken(""); toast("Token borrado de este teléfono."); render(); });
+    on("#gistforget", function () { S.setToken(""); toast("Token borrado de este dispositivo."); render(); });
+    // The token to the phone without typing it: a QR with the app's address
+    // and the token in the fragment (it never travels to a server).
+    on("#gistqr", function () {
+      var qb = $("#gistqrbox");
+      if (!qb) return;
+      if (!qb.hidden) { qb.hidden = true; qb.innerHTML = ""; return; }
+      var url = location.origin + location.pathname + "?lang=" + LG.code + "#gist=" + encodeURIComponent(take());
+      var pic = QR.svg(url, 240);
+      qb.innerHTML = pic
+        ? '<div class="qrbox">' + pic + '<p class="muted small">Apuntá la cámara del celular a este código: abre la app con tu token ya puesto y te pregunta antes de guardarlo. ' +
+          "Es tu token: no lo muestres ni lo compartas. Tocá otra vez el botón para esconderlo.</p></div>"
+        : '<p class="muted small">No pude armar el código: copiá el token a mano.</p>';
+      qb.hidden = false;
+    });
   }
 
   /* Un evento que se repite (.ics): el teléfono lo agrega al calendario y
@@ -5529,8 +5653,18 @@
       // the tab changes only when the mission starts: closing the sheet stays in Oggi
       missionTap(nm.kind, nm.arg, false, w.week, function () { view.tab = "percorso"; });
     });
+    on("#heroalt", function () {
+      var w = course.weeks[Math.min(state.unlocked, 52) - 1];
+      var alt = deviceMission(weekPlan(w), nextMission(w), onPc());
+      if (alt) missionTap(alt.kind, alt.arg, false, w.week, function () { view.tab = "percorso"; });
+    });
     on("#topercorso", function () { go("percorso"); });
-    on("#backweek", function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); });
+    on("#backweek", function () {
+      view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0);
+      // the page of a week is long: land on the mission that follows
+      var nextM = app().querySelector("button.mission:not(.done)");
+      if (nextM && nextM.scrollIntoView) nextM.scrollIntoView({ block: "center" });
+    });
     on("#lesnext", lesNext);
     on("#lesquit", function () { clearPending(); view.screen = "briefing"; render(); });
     on("#resume", resumePending);
@@ -5636,6 +5770,13 @@
     on("#lquit", function () { go("oggi"); });
     on("#lagain", function () { startLampo(lampo.mode); });
     on("#lampoparole", function () { startLampo("parole"); });
+    on("#lamposcritto", function () { startLampo("scritto"); });
+    on("#lsend", lampoWrite);
+    var lw = $("#lwrite");
+    if (lw) {
+      lw.onkeydown = function (e) { if (e.key === "Enter") { e.preventDefault(); lampoWrite(); } };
+      lw.focus();
+    }
 
     var mcb = $("#mcbox");
     if (mcb && view.screen !== "lettura") mcb.classList.remove("on");
@@ -7781,6 +7922,14 @@
   var KB_END = [".row .btn:not(.ghost)", "#toggi"];   // the end of a round: what the screen proposes
   var KB_PICK = [".opt", "[data-fq]", "#tbank [data-tile]:not(.used)"];
   document.addEventListener("keydown", function (e) {
+    // Alt + número: la letra de la fila de acentos de la caja (las del paquete del idioma).
+    // AltGr no cuenta: en el teclado español escribe | @ # con esos números.
+    if (e.altKey && !e.ctrlKey && !e.metaKey && /^Digit[1-9]$/.test(e.code || "") && !(e.getModifierState && e.getModifierState("AltGraph"))) {
+      var keys = Array.prototype.filter.call(app().querySelectorAll(".accents [data-ins], .accents [data-escins]"), kbSeen);
+      var key = keys[+e.code.slice(5) - 1];
+      if (key) { e.preventDefault(); kbPress(key); }
+      return;
+    }
     if (e.ctrlKey || e.metaKey || e.altKey || e.repeat || e.defaultPrevented || !course) return;
     // a sheet over the screen (¿Por qué?, the glossary) takes the keys
     var sheet = document.querySelector(".porque-back, .strat-sheet, .mcbox");
@@ -7795,7 +7944,8 @@
     if (e.key === "Enter" || e.key === " ") {
       // the browser already presses the focused button
       if (tag === "BUTTON" || tag === "A" || tag === "SUMMARY" || (t && t.getAttribute && t.getAttribute("role") === "button")) return;
-      var nx = kbFirst(view.screen === "risultato" || view.screen === "lampofine" ? KB_END : KB_NEXT);
+      var nx = kbFirst(view.screen === "risultato" || view.screen === "lampofine" ? KB_END : KB_NEXT) ||
+        kbFirst([".lesdone .row .btn:not(.ghost)"]);   // the end of a lesson
       if (nx) { e.preventDefault(); kbPress(nx); }
       return;
     }
@@ -8232,6 +8382,7 @@
     .then(function (data) {
       course = data;
       try {
+        nubeFromLink();
         if (genderRules()) genderRules().learn(course);
         if (window.Mapas) Mapas.install(course);
         itemMap = Drills.itemsById(course);
