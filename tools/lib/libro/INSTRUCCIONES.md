@@ -18,6 +18,18 @@ Los libros:
   alumno tiene italiano B2: glosá solo lo difícil (léxico medieval, latín,
   passato remoto, congiuntivo, giros cultos). Toda cita en latín va traducida
   en `n`.
+- `paura` — Niccolò Ammaniti, *Io non ho paura* (2001), en **italiano**. El
+  alumno tiene italiano B1-B2 y es su primera novela entera: glosá lo que un
+  B1 no sabría. Narra Michele, un nene de nueve años, en el verano de 1978 en
+  un caserío del Sur. Narración en **passato prossimo** e imperfetto (no en
+  passato remoto); diálogos coloquiales y del Sur: *ci sta* = *c'è*,
+  *stare* por *essere*, imperfetto donde el estándar pide congiuntivo o
+  condizionale (*sembrava che ci stava* = *ci fosse*), *a me mi*, insultos y
+  palabrotas. Cuando una oración es regional o no estándar, poné en `std` la
+  misma oración en italiano estándar y explicá la diferencia en `n`.
+  El texto sale de una conversión imperfecta: a veces falta o sobra una
+  comilla « » o hay una errata; traducí el sentido y, si confunde, aclaralo
+  en `n` (*errata del texto: …*).
 - `bras` — Machado de Assis, *Memórias póstumas de Brás Cubas* (1881), en
   **portugués** (de Brasil). El alumno tiene portugués B1: glosá lo difícil y
   lo del siglo XIX (*cousa*, *dous*, mesóclisis *dir-lhe-ei*, pronombres,
@@ -31,7 +43,7 @@ Un solo objeto JSON (UTF-8, sin comentarios), con esta forma exacta:
 {
   "chunk": "c007",
   "resumen": "Qué pasa en este tramo, en 3 a 5 oraciones en castellano rioplatense (sin spoilers de lo que viene después).",
-  "contexto": "1 a 3 oraciones con lo histórico o cultural que hace falta para entenderlo (Berlín 1928, la abadía en 1327, Río en el siglo XIX…). Vacío si no hace falta.",
+  "contexto": "1 a 3 oraciones con lo histórico o cultural que hace falta para entenderlo (Berlín 1928, la abadía en 1327, el Sur de Italia en 1978, Río en el siglo XIX…). Vacío si no hace falta.",
   "vocab": [["Haltestelle (die)", "parada (del tranvía, del colectivo)"], ["...", "..."]],
   "gramatica": [
     {"t": "Título corto del punto", "x": "Explicación clara de 2 a 4 oraciones, con ejemplos del tramo entre *asteriscos*.", "ej": ["s00030", "s00034"]}
@@ -57,7 +69,7 @@ saltear ninguno** (aunque sea «Los.» o un título):
 - `g`: glosas, lista de pares `[forma del texto o lema, significado]`. Elegí
   las palabras que este alumno no sabría: en `bal` hasta 6 por oración (con
   el artículo de los sustantivos, el infinitivo y el participio de los verbos
-  irregulares, y el caso si ayuda: *dem Tor* = dativo); en `rosa` y `bras`
+  irregulares, y el caso si ayuda: *dem Tor* = dativo); en `rosa`, `paura` y `bras`
   hasta 4. Una palabra ya glosada en este mismo tramo no se repite, salvo que
   cambie el sentido. Lista vacía si no hace falta.
 - `n`: UNA nota breve (máximo 2 oraciones) sobre lo que más ayuda a entender
@@ -66,7 +78,8 @@ saltear ninguno** (aunque sea «Los.» o un título):
   latina traducida, quién habla. Formas entre *asteriscos*. Vacío si la
   oración es transparente.
 - `std`: solo en `bal`, la oración en alemán estándar si es berlinés o muy
-  coloquial; si no, vacío.
+  coloquial, y en `paura`, en italiano estándar si es regional o no
+  estándar; si no, vacío.
 - `lit`: traducción palabra por palabra **solo** cuando el orden o la
   estructura son muy distintos del castellano y verlo ayuda (en `bal`, a
   menudo en oraciones con verbo al final o separables); si no, vacío.

@@ -1,6 +1,8 @@
 import json,sys,os
+# python3 -I tramos.py SCRATCH [clave…]   (sin claves: todos los libros que tengan SCRATCH/work_<clave>)
 S=sys.argv[1]; MAXW=1500; MAXS=120
-for key,lang in [('bal','de'),('rosa','it'),('bras','pt')]:
+KEYS=sys.argv[2:] or [k for k in ('bal','rosa','bras','paura') if os.path.exists(os.path.join(S,'work_'+k,'book.json'))]
+for key in KEYS:
     W=os.path.join(S,'work_'+key); b=json.load(open(W+'/book.json'))
     os.makedirs(W+'/chunks',exist_ok=True); os.makedirs(W+'/out',exist_ok=True)
     chunks=[]; cur=None; w=0

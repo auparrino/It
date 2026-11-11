@@ -8,9 +8,10 @@ paquetes se commitean**: son del alumno.
 1. Extraer el ePub (`unzip libro.epub -d x`) y partirlo en oraciones
    numeradas: `segmentar_doblin.py x WORK` (Berlin Alexanderplatz) o
    `segmentar_eco_machado.py rosa|bras SCRATCH` (Il nome della rosa,
-   Memórias póstumas de Brás Cubas). Escriben `WORK/book.json`. Otro libro
+   Memórias póstumas de Brás Cubas) o
+   `segmentar_ammaniti.py x/ SCRATCH` (Io non ho paura). Escriben `WORK/book.json`. Otro libro
    necesita su propio segmentador (cada ePub marca distinto los capítulos).
-2. `tramos.py SCRATCH`: corta el libro en tramos de ≈1500 palabras
+2. `tramos.py SCRATCH [clave]`: corta el libro en tramos de ≈1500 palabras
    (`WORK/chunks/cNNN.txt` y `WORK/chunks.json`).
 3. Un agente por tramo (Sonnet alcanza) sigue `INSTRUCCIONES.md` y escribe
    `WORK/out/cNNN.json`: resumen, contexto, vocabulario, gramática,
