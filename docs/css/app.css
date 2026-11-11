@@ -1063,8 +1063,14 @@ body.lb-docked #app { padding-bottom: 96px; }
    porque el tema de cada idioma (lang/<código>/theme.css) se carga después
    de este archivo. */
 @media (min-width: 1000px) {
-  html body .wrap { max-width: 1040px; padding-bottom: 56px; }
-  html body header.top .bar { max-width: 1040px; }
+  /* En una ventana grande todo crece con el ancho: la letra (de 16 px a
+     1000 px de ancho hasta 21,6 px a 2050) y, con ella, las columnas, que
+     se miden en rem.  Si no, queda una app de teléfono chiquita en el medio
+     de un monitor. */
+  html { font-size: clamp(100%, 0.7vw + 45%, 135%); }
+  html body { font-size: 1.0625rem; }
+  html body .wrap { max-width: 65rem; padding-bottom: 56px; }
+  html body header.top .bar { max-width: 65rem; }
 
   /* las pestañas: arriba, al centro de la cabecera */
   html body .nav { top: 4px; bottom: auto; left: 50%; right: auto; transform: translateX(-50%); width: auto; height: 78px;
@@ -1085,7 +1091,7 @@ body.lb-docked #app { padding-bottom: 96px; }
   html body .opt:hover:not(:disabled) { transform: translateX(2px); }
 
   /* textos largos: un renglón que se lee de corrido */
-  html body.ingame .wrap { max-width: 780px; }
+  html body.ingame .wrap { max-width: 48rem; }
 }
 
 /* Hoy en dos columnas: el plan a la izquierda, lo demás (xp, atajos,
@@ -1101,11 +1107,11 @@ body.lb-docked #app { padding-bottom: 96px; }
 /* La corrección al costado: la tarjeta de la pregunta se corre a la
    izquierda (no cambia de ancho: nada se reacomoda) y la corrección entra
    por la derecha, las dos a la vista. */
-@media (min-width: 1200px) {
+@media (min-width: 1280px) {
   html body.ingame .wrap { position: relative; left: 0; transition: left .28s cubic-bezier(.2, .8, .2, 1); }
-  html body.ingame:has(.feedback:not(.prompt)) .wrap { left: -222px; padding-bottom: 56px; }
-  html body.ingame .feedback:not(.prompt) { left: calc(50% + 176px); right: auto; top: 148px; bottom: auto; width: 420px; margin: 0;
-    max-height: calc(100vh - 172px); border-radius: 18px; border-top-width: 4px; padding: 20px;
+  html body.ingame:has(.feedback:not(.prompt)) .wrap { left: -14.25rem; padding-bottom: 56px; }
+  html body.ingame .feedback:not(.prompt) { left: calc(50% + 10.25rem); right: auto; top: 9.25rem; bottom: auto; width: 27rem; margin: 0;
+    max-height: calc(100vh - 10.75rem); border-radius: 18px; border-top-width: 4px; padding: 20px;
     box-shadow: 0 10px 34px rgba(30, 20, 10, .16); animation: pc-side .28s cubic-bezier(.2, .8, .2, 1); }
   /* la tecla de cada cosa, donde se usa */
   html body.ingame .feedback #next::after, html body.ingame .feedback #lesnext2::after,
@@ -1200,9 +1206,9 @@ body.lb-docked #app { padding-bottom: 96px; }
 .lb-sheet.inline { position: relative; }
 .lb-hint { margin: 4px 0; }
 @media (min-width: 1100px) {
-  html body .lb-texto { max-width: 640px; }
-  html body .lb-sheet:not(.inline) { left: calc(50% + 160px); right: auto; top: 150px; bottom: auto; width: 360px; max-width: none; margin: 0;
-    max-height: calc(100vh - 172px); border-radius: 16px; padding: 14px 16px; box-shadow: 0 10px 34px rgba(30, 20, 10, .16); }
+  html body .lb-texto { max-width: 40rem; }
+  html body .lb-sheet:not(.inline) { left: calc(50% + 10rem); right: auto; top: 9.4rem; bottom: auto; width: 22.5rem; max-width: none; margin: 0;
+    max-height: calc(100vh - 10.75rem); border-radius: 16px; padding: 14px 16px; box-shadow: 0 10px 34px rgba(30, 20, 10, .16); }
   html body .lb-sheet:not(.inline) .lb-grip { display: none; }
 }
 .lb-nav { flex-wrap: wrap; }
