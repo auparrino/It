@@ -256,13 +256,18 @@
   function renderTramo(p) {
     var state = H.state(), pr = progress(state, p.id), tr = p.tramos[pr.t], all = ids(tr);
     if (pr.i >= all.length) pr.i = 0;
-    var steps = ["Antes de leer", "Lectura", "Gramática", "Preguntas"];
-    var head = '<button class="btn ghost" id="lbbook">← ' + esc(p.title) + "</button>" +
-      "<h1>Tramo " + (pr.t + 1) + ' <small class="muted">de ' + p.tramos.length + "</small></h1>" +
-      '<p class="muted">' + esc(tr.part) + (chapterOf(tr) ? " · " + esc(chapterOf(tr)) : "") + "</p>" +
+    /* Una cabecera mínima: se abre en el texto.  Dónde estás (tramo,
+       oración, lo de hoy) en un renglón con su barra; lo demás del tramo
+       (contexto y palabras, gramática, preguntas, la otra forma de leer)
+       queda plegado en «Más de este tramo». */
+    var steps = ["Contexto y palabras", "Leer", "Gramática", "Preguntas"];
+    var head = '<div class="lb-top"><button class="btn ghost" id="lbbook" aria-label="Volver al libro">←</button>' +
+      '<div class="lb-where"><b>' + esc(p.title) + '</b><span class="muted small" id="lbwhere">' + esc(whereText(p, pr, all)) + "</span>" +
+      '<span class="lb-prog"><i id="lbbar" style="width:' + wherePct(pr, all) + '%"></i></span></div></div>' +
+      '<details class="lb-menu"' + (ui.step !== 1 ? " open" : "") + "><summary>Más de este tramo</summary>" +
       '<div class="row lb-steps">' + steps.map(function (s, k) {
-        return '<button class="tab' + (ui.step === k ? " on" : "") + '" data-lbstep="' + k + '" aria-pressed="' + (ui.step === k) + '">' + (k + 1) + ". " + s + "</button>";
-      }).join("") + "</div>";
+        return '<button class="tab' + (ui.step === k ? " on" : "") + '" data-lbstep="' + k + '" aria-pressed="' + (ui.step === k) + '">' + s + "</button>";
+      }).join("") + "</div>" + (ui.step === 1 ? modeBar() : "") + "</details>";
     var body = "";
     if (ui.step === 0) {
       body = '<div class="card">' + (tr.contexto ? "<h2>Contexto</h2><p>" + mk(tr.contexto) + "</p>" : "") +
@@ -295,9 +300,19 @@
     return head + body;
   }
 
+  function whereText(p, pr, all) {
+    var day = pr.day && pr.day.d === dayKey() ? pr.day : { n: 0 };
+    return "Tramo " + (pr.t + 1) + " de " + p.tramos.length + " · oración " + Math.min(pr.i + 1, all.length) + " de " + all.length +
+      " · hoy " + Math.min(day.n, META) + " / " + META + (day.n >= META ? " ✓" : "");
+  }
+  function wherePct(pr, all) { return all.length ? Math.round(Math.min(pr.i + 1, all.length) / all.length * 100) : 0; }
+  // A wide screen: the explanation goes beside the text; else, right under its sentence.
+  function side() { return !!(root.matchMedia && root.matchMedia("(min-width: 1100px)").matches); }
+  var HINT = '<p class="muted small lb-hint">Tocá una oración para ver su traducción y sus palabras. Con el teclado: ← y →.</p>';
+
   // What one sentence says: translation, standard form, word by word, words, note.
   function explain(s, id) {
-    if (!ui.show) return '<p class="muted small">Tratá de entenderla sola. Tocá «💬» para ver la explicación.</p>';
+    if (!ui.show) return '<p class="muted small">Tratá de entenderla sola. «Ver ayuda» muestra la traducción y las palabras.</p>';
     return '<p class="lb-es">' + esc(s.es || "") + "</p>" +
       (s.std ? '<p class="small"><span class="muted">Estándar:</span> <span lang="' + tts() + '">' + esc(s.std) + "</span></p>" : "") +
       (s.lit ? '<p class="small"><span class="muted">Palabra por palabra:</span> ' + esc(s.lit) + "</p>" : "") +
@@ -377,11 +392,10 @@
   function navRow(pr, all) {
     return '<div class="lb-nav">' +
       '<button class="btn ghost" id="lbprev" aria-label="Oración anterior"' + (pr.i ? "" : " disabled") + ">←</button>" +
-      '<button class="tab" id="lbsay" aria-label="Escuchar">🔊</button>' +
-      '<button class="tab" id="lbshow" aria-pressed="' + ui.show + '" aria-label="Explicación">' + (ui.show ? "🙈" : "💬") + "</button>" +
-      '<span class="muted small lb-count">' + (pr.i + 1) + " / " + all.length + "</span>" +
+      '<button class="tab" id="lbsay">🔊 Escuchar</button>' +
+      '<button class="tab" id="lbshow" aria-pressed="' + ui.show + '">' + (ui.show ? "🙈 Tapar ayuda" : "💬 Ver ayuda") + "</button>" +
       (pr.i + 1 < all.length ? '<button class="btn" id="lbnext" aria-label="Oración siguiente">→</button>' :
-        '<button class="btn" data-lbstep="2">Gramática →</button>') + "</div>";
+        '<button class="btn" data-lbstep="3" aria-label="Fin del tramo: preguntas">Fin ✓</button>') + "</div>";
   }
   function sheet(p, pr, all) {
     var s = p.s[all[pr.i]] || {};
@@ -408,7 +422,7 @@
       (tr.p || []).forEach(function (x, k) {
         if (!Array.isArray(x) && Array.isArray(tr.p[k + 1]) && tr.p[k + 1][0] === all[pr.i]) h = '<h3 class="lb-h">' + esc(x.h) + "</h3>";
       });
-      return modeBar() + '<div class="card lb-frase" id="lbswipe">' + h +
+      return '<div class="card lb-frase" id="lbswipe">' + h +
         (prev ? '<p class="lb-ctx" lang="' + tts() + '">' + esc(prev.t) + "</p>" : "") +
         '<p class="lb-cur lb-big" lang="' + tts() + '">' + esc(s.t || "") + "</p>" +
         (next ? '<p class="lb-ctx" lang="' + tts() + '">' + esc(next.t) + "</p>" : "") +
@@ -423,10 +437,9 @@
         return '<span class="lb-s' + (ui.open && id === curId ? " cur" : "") + (k < pr.i ? " read" : "") + '" data-lbs="' + k + '">' + esc(o.t || "") + "</span>";
       }).join(" ") + "</p>";
     }).join("");
-    return modeBar() + '<p class="muted small">Tocá una oración para ver su explicación.' +
-      (pr.i ? ' <button class="tab" id="lbresume">▶ Seguir en la oración ' + (pr.i + 1) + "</button>" : "") + "</p>" +
+    return (pr.i && !ui.open ? '<p class="muted small"><button class="tab" id="lbresume">▶ Seguir en la oración ' + (pr.i + 1) + "</button></p>" : "") +
       '<div class="card lb-texto">' + text + "</div>" +
-      '<div class="lb-sheet" id="lbsheet" aria-live="polite"' + (ui.open ? "" : " hidden") + ">" + (ui.open ? sheet(p, pr, all) : "") + "</div>";
+      '<div class="lb-sheet" id="lbsheet" aria-live="polite"' + (ui.open || side() ? "" : " hidden") + ">" + (ui.open ? sheet(p, pr, all) : side() ? HINT : "") + "</div>";
   }
 
   function owns(s) { return s === "guiada" || s === "guiada-shelf" || s === "guiada-tramo"; }
@@ -446,7 +459,7 @@
   function openTramo(i) {
     var p = packs[ui.book], pr = progress(H.state(), p.id);
     if (pr.t !== i) { pr.t = i; pr.i = 0; }
-    ui.step = pr.i ? 1 : 0;
+    ui.step = 1;   // straight to the text; the context is one touch away («Más de este tramo»)
     ui.open = false;
     H.persist();
     show("guiada-tramo");
@@ -468,12 +481,26 @@
       el.classList.toggle("cur", !!ui.open && n === pr.i);
       el.classList.toggle("read", n < pr.i);
     });
-    sh.hidden = !ui.open;
-    sh.innerHTML = ui.open ? sheet(p, pr, all) : "";
-    document.body.classList.toggle("lb-sheet-open", !!ui.open);
+    sh.hidden = !ui.open && !side();
+    sh.innerHTML = ui.open ? sheet(p, pr, all) : side() ? HINT : "";
+    var wh = document.getElementById("lbwhere"), bar = document.getElementById("lbbar");
+    if (wh) wh.textContent = whereText(p, pr, all);
+    if (bar) bar.style.width = wherePct(pr, all) + "%";
+    placeSheet();
     wireSheet(p, pr);
     keepCurrent();
     jumpToAsk();
+  }
+  /* Where the explanation goes: on a wide screen, beside the text (css);
+     on a phone, right under its sentence, inside the text, so it covers
+     nothing and the reading goes on below it. */
+  function placeSheet() {
+    var sh = document.getElementById("lbsheet");
+    if (!sh) return;
+    var cur = document.querySelector(".lb-s.cur"), inline = !side() && !!ui.open && !!cur;
+    sh.classList.toggle("inline", inline);
+    if (inline) { if (cur.nextSibling !== sh) cur.parentNode.insertBefore(sh, cur.nextSibling); }
+    else { var card = document.querySelector(".lb-texto"); if (card && sh.parentNode !== card.parentNode) card.parentNode.insertBefore(sh, card.nextSibling); }
   }
   // The question box or the AI's answer in sight (the sheet scrolls, not the page).
   function jumpToAsk() {
@@ -489,8 +516,10 @@
   function keepCurrent() {
     var el = document.querySelector(".lb-s.cur"), sh = document.getElementById("lbsheet");
     if (!el || !sh || sh.hidden) return;
-    var r = el.getBoundingClientRect(), free = sh.getBoundingClientRect().top;
-    if (r.top < 70 || r.bottom > free - 12) root.scrollTo(0, root.pageYOffset + r.top - Math.max(70, (free - r.height) / 3));
+    // the sentence and what explains it, in sight: the sentence in the upper third
+    var r = el.getBoundingClientRect(), vh = root.innerHeight || 700;
+    var end = sh.classList.contains("inline") ? sh.getBoundingClientRect().bottom : r.bottom;
+    if (r.top < 90 || end > vh - 16) root.scrollTo(0, root.pageYOffset + r.top - Math.max(90, Math.min(vh / 4, vh - (end - r.top) - 24)));
   }
   function wireSheet(p, pr) {
     var on = function (sel, fn) { var el = document.querySelector(sel); if (el) el.onclick = fn; };
@@ -570,12 +599,19 @@
     var p = packs[ui.book];
     if (!p) return;
     var pr = progress(H.state(), p.id);
-    document.body.classList.toggle("lb-sheet-open", ui.step === 1 && ui.mode === "texto" && !!ui.open);
+    document.body.classList.remove("lb-sheet-open");   // the explanation no longer covers the text (placeSheet)
+    placeSheet();
     document.body.classList.toggle("lb-docked", ui.step === 1 && ui.mode === "frase");
     if (ui.step === 1) wireSheet(p, pr);
     keepCurrent();
     jumpToAsk();
-    document.querySelectorAll("[data-lbs]").forEach(function (sp) { sp.onclick = function () { moveTo(+sp.dataset.lbs, true); }; });
+    document.querySelectorAll("[data-lbs]").forEach(function (sp) {
+      sp.onclick = function () {
+        // a second touch on the open sentence closes its explanation
+        if (ui.open && +sp.dataset.lbs === pr.i) { ui.open = false; moveTo(pr.i); return; }
+        moveTo(+sp.dataset.lbs, true);
+      };
+    });
     on("#lbresume", function () { moveTo(pr.i, true); });
     document.querySelectorAll("[data-lbmode]").forEach(function (b) {
       b.onclick = function () {
@@ -636,14 +672,30 @@
   function resume(id) {
     ui.book = id;
     getPack(id).then(function () {
-      var pr = progress(H.state(), id);
-      ui.step = pr.i || (pr.hi && pr.hi[pr.t] != null) ? 1 : 0;
+      progress(H.state(), id);   // where the reader was (made if it is the first time)
+      ui.step = 1;
       ui.open = false;
       show("guiada-tramo");
     }).catch(function (e) { H.toast("⚠️ " + (e.message || e)); });
   }
 
-  function init(host) { H = host; }
+  function init(host) {
+    H = host;
+    // With a keyboard: → and ← go from sentence to sentence, Esc closes the explanation.
+    if (typeof document === "undefined" || init.keys) return;
+    init.keys = true;
+    document.addEventListener("keydown", function (e) {
+      if (e.ctrlKey || e.metaKey || e.altKey || !H || H.view().screen !== "guiada-tramo" || ui.step !== 1) return;
+      var t = e.target, tag = t && t.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || document.getElementById("lbhoy")) return;
+      var p = packs[ui.book];
+      if (!p) return;
+      var pr = progress(H.state(), p.id);
+      if (e.key === "ArrowRight") { e.preventDefault(); moveTo(ui.open ? pr.i + 1 : pr.i, true); }
+      else if (e.key === "ArrowLeft") { e.preventDefault(); moveTo(pr.i - 1, true); }
+      else if (e.key === "Escape" && ui.open) { ui.open = false; moveTo(pr.i); }
+    });
+  }
 
   var api = { init: init, owns: owns, render: render, wire: wire, card: card,
               validate: validate, ids: ids, progress: progress, doneCount: doneCount, meta: meta,

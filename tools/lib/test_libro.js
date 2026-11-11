@@ -83,6 +83,12 @@ ok(sb.indexOf('type="file"') > 0, "el estante tiene el selector de archivo");
   ok(L.reto(big, pr, rnd).length === 0, "con muy poco leído no hay desafío (faltarían opciones)");
 })();
 
+// la pantalla de lectura: directo al texto, sin pestañas arriba, botones con nombre
+ok(/ui\.step = 1;\s*\/\/ straight to the text/.test(fs.readFileSync(path.join(ROOT, "docs/js/libro.js"), "utf8")), "abrir un tramo lleva directo al texto");
+ok(/🔊 Escuchar/.test(SRC) && /Tapar ayuda/.test(SRC) && /Ver ayuda/.test(SRC), "los botones de la explicación dicen qué hacen");
+ok(/function placeSheet/.test(SRC) && /insertBefore\(sh, cur\.nextSibling\)/.test(SRC), "en el celular la explicación va debajo de su oración, no encima del texto");
+ok(!/classList\.toggle\("lb-sheet-open"/.test(SRC), "y ya no se reserva media pantalla para una hoja fija");
+
 // el role-play del alemán
 var S = require(path.join(ROOT, "docs/lang/de/scrivi.js"));
 ok(typeof S.parlaStart === "function" && typeof S.parlaTurn === "function" && typeof S.parlaReview === "function" && typeof S.parlaGoals === "function",

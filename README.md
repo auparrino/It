@@ -70,6 +70,13 @@ qué porcentaje del libro llevás y con qué oración seguís mañana, y ofrece 
 una palabra sacada, su traducción a la vista y cuatro opciones de esas mismas
 páginas. El desafío no crea fichas de repaso.
 
+La pantalla de lectura abre directo en el texto, con una cabecera de un
+renglón (tramo, oración, lo de hoy y una barra). La explicación de una oración
+aparece debajo de ella en el celular y al costado del texto en la computadora,
+sin taparlo; los botones dicen qué hacen («Escuchar», «Tapar ayuda») y las
+flechas ← → pasan de oración. El contexto, la gramática y las preguntas del
+tramo quedan en «Más de este tramo».
+
 ## El repaso, primero
 
 Si hay fichas vencidas, el botón principal de la pantalla de hoy es el repaso

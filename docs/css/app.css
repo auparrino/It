@@ -1177,3 +1177,35 @@ body.lb-docked #app { padding-bottom: 96px; }
 .lb-manana { font-weight: 700; }
 .lb-hoy-in .row { margin-top: 14px; flex-wrap: wrap; }
 @media (min-width: 700px) { .lb-hoy { align-items: center; } .lb-hoy-in { border-radius: 18px; } }
+
+/* Lectura guiada, más cómoda: cabecera mínima, la explicación debajo de su
+   oración (celular) o al costado del texto (pantalla ancha), sin tapar. */
+.lb-top { display: flex; gap: 10px; align-items: center; margin: 12px 0 6px; }
+.lb-top .btn { min-width: 44px; padding: 8px 12px; flex: none; }
+.lb-where { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.lb-where b { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lb-prog { display: block; height: 4px; border-radius: 4px; background: color-mix(in srgb, currentColor 12%, transparent); overflow: hidden; }
+.lb-prog i { display: block; height: 100%; background: var(--k-ok, #1c7c43); transition: width .2s; }
+.lb-menu { margin: 0 0 8px; }
+.lb-menu > summary { cursor: pointer; font-size: .85rem; font-weight: 700; opacity: .7; list-style: none; padding: 6px 0; }
+.lb-menu > summary::-webkit-details-marker { display: none; }
+.lb-menu > summary::after { content: " ▾"; }
+.lb-menu[open] > summary::after { content: " ▴"; }
+.lb-nav .tab { font-size: .85rem; padding: 6px 8px; white-space: nowrap; }
+.lb-sheet.inline { position: static; display: block; max-height: none; max-width: none; margin: 8px 0 12px; padding: 10px 12px 12px; border-radius: 12px;
+  box-shadow: none; border-left: 4px solid var(--sol, #f5c518); background: color-mix(in srgb, currentColor 6%, transparent); color: inherit; font-size: .95em; opacity: 1; }
+.lb-sheet.inline .lb-grip, .lb-sheet.inline .lb-cur { display: none; }   /* the sentence is right above, marked */
+.lb-sheet.inline .lb-sheet-body { overflow: visible; padding-right: 28px; }
+.lb-sheet.inline .lb-close { top: 6px; right: 6px; }
+.lb-sheet.inline { position: relative; }
+.lb-hint { margin: 4px 0; }
+@media (min-width: 1100px) {
+  html body .lb-texto { max-width: 640px; }
+  html body .lb-sheet:not(.inline) { left: calc(50% + 160px); right: auto; top: 150px; bottom: auto; width: 360px; max-width: none; margin: 0;
+    max-height: calc(100vh - 172px); border-radius: 16px; padding: 14px 16px; box-shadow: 0 10px 34px rgba(30, 20, 10, .16); }
+  html body .lb-sheet:not(.inline) .lb-grip { display: none; }
+}
+.lb-nav { flex-wrap: wrap; }
+.lb-nav #lbnext, .lb-nav [data-lbstep="3"] { margin-left: auto; }
+.lb-sheet.inline .lb-nav .btn { min-width: 44px; padding: 8px 12px; }
+.lb-sheet.inline .lb-nav { gap: 4px; }
