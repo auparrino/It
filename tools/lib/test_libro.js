@@ -43,6 +43,46 @@ ok(/Cargar|\.json/.test(L.render("guiada-shelf")), "el estante pide el archivo")
 var sb = L.render("guiada-shelf");
 ok(sb.indexOf('type="file"') > 0, "el estante tiene el selector de archivo");
 
+// la lectura del día: cada oración cuenta una vez, la meta se avisa una vez, y el desafío sale de lo leído
+(function () {
+  var S = {}, big = { app: "c1-libro", v: 1, id: "largo", lang: "xx", title: "Largo", tramos: [{ id: "t1", part: "", p: [[]] }, { id: "t2", part: "", p: [[]] }], s: {} };
+  var forms = ["monaco", "abbazia", "biblioteca", "manoscritto", "labirinto", "veleno", "campana", "novizio", "abate", "torre", "notte", "segreto", "libro", "pietra"];
+  for (var k = 0; k < 14; k++) {
+    var id = "x" + k;
+    big.tramos[0].p[0].push(id);
+    big.s[id] = { t: "Nella grande storia il " + forms[k] + " resta in silenzio per sempre.", es: "En la gran historia el " + k + " queda en silencio.", g: [[forms[k], "glosa " + k]] };
+  }
+  big.tramos[1].p[0].push("y0"); big.s.y0 = { t: "Fine.", es: "Fin." };
+  var pr = L.progress(S, "largo"), NOW = Date.parse("2026-11-11T12:00:00");
+  ok(L.META >= 8 && L.META <= 15, "la meta del día es un rato corto (" + L.META + " oraciones)");
+  var hit = false;
+  for (var i = 0; i < L.META - 1; i++) { hit = L.noteRead(pr, big, i, i + 1, NOW) || hit; pr.i = i + 1; }
+  ok(!hit && pr.day.n === L.META - 1, "antes de la meta no avisa");
+  ok(L.noteRead(pr, big, L.META - 1, L.META, NOW) === true, "al llegar a la meta, avisa");
+  pr.i = L.META;
+  ok(L.noteRead(pr, big, L.META, L.META + 1, NOW) === false && pr.day.n === L.META + 1, "y no vuelve a avisar ese día");
+  var n0 = pr.day.n;
+  L.noteRead(pr, big, 3, 4, NOW);
+  ok(pr.day.n === n0, "volver atrás y pasar de nuevo no cuenta dos veces");
+  var S2 = {}, pr2 = L.progress(S2, "largo");
+  L.noteRead(pr2, big, 0, 12, NOW);
+  ok(!pr2.day || pr2.day.n === 0, "saltar lejos tocando una oración no cuenta como leer lo del medio");
+  ok(pr.day.w > 0 && pr.total === pr.day.n, "cuenta palabras y el total leído");
+  pr.i = L.META + 1;
+  ok(L.noteRead(pr, big, pr.i, pr.i + 1, NOW + 86400000) === false && pr.day.n === 1, "al otro día la cuenta empieza de nuevo");
+  pr.t = 1; pr.i = 0;
+  ok(L.bookPct(big, pr) === 93, "el avance en el libro, por oraciones (14 de 15)");
+  pr.t = 0; pr.day = { d: "x", n: 10, w: 90, ids: big.tramos[0].p[0].slice(0, 10) };
+  var seq = 7, rnd = function () { seq = (seq * 9301 + 49297) % 233280; return seq / 233280; };
+  var items = L.reto(big, pr, rnd);
+  ok(items.length === 5, "el desafío: cinco preguntas con lo leído hoy (" + items.length + ")");
+  ok(items.every(function (x) { return x.src === "lettura" && x.nocard && x.options.length === 4 && x.options.indexOf(x.answer) >= 0; }), "con cuatro opciones, la buena entre ellas, y sin crear fichas de repaso");
+  ok(items.every(function (x) { return /___/.test(x.stem) && x.stem.toLowerCase().indexOf(x.answer.toLowerCase()) < 0 && /En castellano: «/.test(x.prompt); }), "la oración va en pantalla con el hueco y su traducción: se contesta entendiendo, no de memoria");
+  ok(new Set(items.map(function (x) { return x.id; })).size === 5, "una pregunta por oración");
+  pr.day.ids = ["x0", "x1"];
+  ok(L.reto(big, pr, rnd).length === 0, "con muy poco leído no hay desafío (faltarían opciones)");
+})();
+
 // el role-play del alemán
 var S = require(path.join(ROOT, "docs/lang/de/scrivi.js"));
 ok(typeof S.parlaStart === "function" && typeof S.parlaTurn === "function" && typeof S.parlaReview === "function" && typeof S.parlaGoals === "function",

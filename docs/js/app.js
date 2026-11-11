@@ -755,6 +755,8 @@
     // The week of the percorso and its next mission, on top (3.2: the
     // percorso organises the day, not a plan by minutes).
     if (!maint && !gentle) html += weekTopHtml(w, plan, doneN, nm);
+    // the book in progress (libro.js): reading is a way into the session, not a corner of the profile
+    if (window.Libro && Libro.oggiCard) html += Libro.oggiCard();
     // One habit card a day at most, that can be put off (the return first).
     if (!gentle) html += window.Inicio ? Inicio.habit(oggiHabitCards()) : oggiHabitCards().map(function (c) { return c.html; }).join("");
 
@@ -1053,7 +1055,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.26";
+  var APP_VERSION = "v3.27";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -8422,7 +8424,9 @@
     state: function () { return state; }, view: function () { return view; }, persist: persist, render: render, go: go,
     show: showScreen, toast: toast, speak: speak, esc: esc, ui: function () { return UI; },
     aiKeys: function () { return aiKey() ? aiKeys() : null; },
-    gain: function (n) { gain(n); Engine.addStrand(state, "input", n); renderHeader(); }
+    gain: function (n) { gain(n); Engine.addStrand(state, "input", n); renderHeader(); },
+    // the challenge with what was read today (libro.js: reto)
+    play: function (items) { view.tab = "oggi"; startRound("lista", items); }
   });
 
   // La Biblioteca (biblioteca.js): libros enteros, con el lector y el input.

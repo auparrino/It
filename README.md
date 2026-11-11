@@ -60,6 +60,16 @@ complemento…) se pide a la IA con tu clave y va rotulada como generada: con
 reglas simples falla donde más importa (en *Mi piace il caffè* el sujeto es *il
 caffè*).
 
+## Leer es el centro: la lectura del día
+
+Con un libro cargado en la lectura guiada (`docs/js/libro.js`), la pantalla de
+hoy lo muestra con un toque para seguir donde quedaste. La meta del día son
+10 oraciones (unos 10 minutos). Al llegar, «Listo por hoy» dice cuánto leíste,
+qué porcentaje del libro llevás y con qué oración seguís mañana, y ofrece un
+**desafío** de hasta cinco preguntas armadas con lo que leíste: la oración con
+una palabra sacada, su traducción a la vista y cuatro opciones de esas mismas
+páginas. El desafío no crea fichas de repaso.
+
 ## El repaso, primero
 
 Si hay fichas vencidas, el botón principal de la pantalla de hoy es el repaso

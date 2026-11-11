@@ -64,6 +64,83 @@
     var pr = (state.libros || {})[pack.id];
     return pr ? Object.keys(pr.done || {}).length : 0;
   }
+  /* ------------------------------------------------ la lectura del día
+     Leer el libro es el centro de la sesión, en ratos cortos y con cierre.
+     Cada oración a la que se avanza cuenta una vez (pr.hi: hasta dónde se
+     llegó en cada tramo); al llegar a la meta del día (META oraciones) la
+     app lo dice, muestra cuánto del libro va leído y dónde se sigue mañana,
+     y ofrece un desafío de cinco preguntas armado con lo leído hoy.  Saltar
+     lejos tocando una oración no cuenta como leer lo del medio. */
+  var META = 10;
+  function dayKey(now) { var d = new Date(now || Date.now()); return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate(); }
+  function wordCount(t) { return (String(t || "").match(/[A-Za-zÀ-ÖØ-öø-ÿ]+/g) || []).length; }
+  function today(pr, now) {
+    var k = dayKey(now);
+    if (!pr.day || pr.day.d !== k) pr.day = { d: k, n: 0, w: 0, ids: [] };
+    return pr.day;
+  }
+  // From sentence `from` to `to` of the tramo: true when today's goal was just reached.
+  function noteRead(pr, p, from, to, now) {
+    var tr = p.tramos[pr.t], all = tr ? ids(tr) : [];
+    if (!(to > from) || to - from > 3) return false;
+    if (!pr.hi) pr.hi = {};
+    var top = pr.hi[pr.t] == null ? -1 : pr.hi[pr.t], day = today(pr, now), before = day.n;
+    for (var k = Math.max(from, top + 1); k < to && k < all.length; k++) {
+      day.n++;
+      day.w += wordCount((p.s[all[k]] || {}).t);
+      if (day.ids.length < 60) day.ids.push(all[k]);
+      pr.total = (pr.total || 0) + 1;
+    }
+    if (to - 1 > top) pr.hi[pr.t] = to - 1;
+    if (before < META && day.n >= META && !day.shown) { day.shown = true; return true; }
+    return false;
+  }
+  // How far into the book the reader is (by sentences), 0-100.
+  function bookPct(p, pr) {
+    var before = 0, total = 0;
+    p.tramos.forEach(function (tr, k) { var n = ids(tr).length; total += n; if (k < pr.t) before += n; });
+    return total ? Math.round((before + Math.min(pr.i, ids(p.tramos[pr.t] || {}).length)) / total * 100) : 0;
+  }
+  function shuffled(a, rnd) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor((rnd || Math.random)() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  /* The challenge: up to five sentences read today, each with one of its
+     glossed words taken out.  The translation is in the question and the
+     options are words of the same pages: it is answered by understanding
+     the sentence, not by remembering the text. */
+  function reto(p, pr, rnd) {
+    var day = pr.day || { ids: [] }, pool = [], cand = [];
+    day.ids.forEach(function (sid) {
+      var s = p.s[sid] || {};
+      (s.g || []).forEach(function (g) {
+        var form = String(g[0] || "").trim();
+        if (!form || /\s/.test(form) || form.length < 3) return;
+        if (pool.indexOf(form.toLowerCase()) < 0) pool.push(form.toLowerCase());
+        var re = new RegExp("(^|[^A-Za-zÀ-ÖØ-öø-ÿ])(" + form.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")(?![A-Za-zÀ-ÖØ-öø-ÿ])", "i");
+        var m = re.exec(s.t || "");
+        if (m && s.es) cand.push({ sid: sid, s: s, form: m[2], at: m.index + m[1].length, es: String(g[1] || "") });
+      });
+    });
+    var seen = {}, out = [];
+    shuffled(cand, rnd).forEach(function (c) {
+      if (out.length >= 5 || seen[c.sid]) return;
+      var others = shuffled(pool.filter(function (f) { return f !== c.form.toLowerCase(); }), rnd).slice(0, 3);
+      if (others.length < 3) return;
+      seen[c.sid] = 1;
+      // a window of the sentence around the gap (the sentences of a novel are long)
+      var t = c.s.t, a = Math.max(0, t.lastIndexOf(" ", Math.max(0, c.at - 90))), b = t.indexOf(" ", Math.min(t.length, c.at + c.form.length + 90));
+      if (b < 0) b = t.length;
+      var stem = (a > 0 ? "… " : "") + t.slice(a, c.at).replace(/^\s+/, "") + "___" + t.slice(c.at + c.form.length, b) + (b < t.length ? " …" : "");
+      out.push({ id: "libro:" + p.id + ":" + c.sid, src: "lettura", nocard: true, type: "choice",
+        prompt: "De tu lectura de hoy: ¿qué palabra va? En castellano: «" + c.s.es + "»",
+        stem: stem, options: shuffled([c.form].concat(others), rnd), answer: c.form, accept: [c.form],
+        note: "*" + c.form + "*: " + c.es });
+    });
+    return out;
+  }
+
   function meta(p) {
     return { id: p.id, lang: p.lang, title: p.title, author: p.author || "", year: p.year || "",
              n: p.tramos.length, sents: Object.keys(p.s).length };
@@ -379,9 +456,11 @@
     var p = packs[ui.book], pr = progress(H.state(), p.id), all = ids(p.tramos[pr.t]);
     var to = Math.max(0, Math.min(all.length - 1, k));
     if (to !== pr.i && !ui.busy) { ui.ask = null; ui.iaErr = ""; }
+    var reached = noteRead(pr, p, pr.i, to);
     pr.i = to;
     if (open) ui.open = true;
     H.persist();
+    if (reached) setTimeout(function () { hoyCard(p, pr); }, 0);
     var sh = document.getElementById("lbsheet");
     if (ui.mode === "frase" || !sh) { H.render(); return; }
     document.querySelectorAll(".lb-s").forEach(function (el) {
@@ -449,6 +528,7 @@
     document.querySelectorAll("[data-libro]").forEach(function (b) {
       b.onclick = function () { H.view().tab = "io"; openBook(b.dataset.libro); };
     });
+    document.querySelectorAll("[data-libro-go]").forEach(function (b) { b.onclick = function () { resume(b.getAttribute("data-libro-go")); }; });
   }
   function wire(s) {
     wireCard();
@@ -515,10 +595,59 @@
     });
   }
 
+  /* «Listo por hoy»: lo leído, cuánto va del libro, dónde se sigue mañana. */
+  function hoyCard(p, pr) {
+    if (typeof document === "undefined" || document.getElementById("lbhoy")) return;
+    var all = ids(p.tramos[pr.t]), next = p.s[all[pr.i]] || {}, day = today(pr);
+    var words = String(next.t || "").split(/\s+/).slice(0, 9).join(" ");
+    var items = reto(p, pr);
+    var box = document.createElement("div");
+    box.id = "lbhoy";
+    box.className = "lb-hoy";
+    box.setAttribute("role", "dialog");
+    box.setAttribute("aria-label", "Listo por hoy");
+    box.innerHTML = '<div class="lb-hoy-in"><h2>📕 Listo por hoy</h2>' +
+      "<p>Leíste <b>" + day.n + " oraciones</b> (" + day.w + " palabras) de <i>" + esc(p.title) + "</i>, en el original.</p>" +
+      '<p class="muted">Vas por el ' + bookPct(p, pr) + " % del libro · tramo " + (pr.t + 1) + " de " + p.tramos.length +
+        (pr.total ? " · " + pr.total + " oraciones leídas en total" : "") + ".</p>" +
+      (words ? '<p class="lb-manana">Mañana seguís acá: <span lang="' + tts() + '">«' + esc(words) + "…»</span></p>" : "") +
+      '<div class="row">' + (items.length ? '<button class="btn" id="lbreto">🎯 Desafío: ' + items.length + (items.length === 1 ? " pregunta" : " preguntas") + " con lo que leíste</button>" : "") +
+      '<button class="tab" id="lbmas">Seguir leyendo</button><button class="tab" id="lbfin">Terminar por hoy</button></div></div>';
+    document.body.appendChild(box);
+    var close = function () { box.remove(); };
+    var on = function (sel, fn) { var el = box.querySelector(sel); if (el) el.onclick = fn; };
+    on("#lbmas", close);
+    on("#lbfin", function () { close(); H.go("oggi"); });
+    on("#lbreto", function () { close(); if (H.play) H.play(items); });
+  }
+  // The book in progress, on the home screen: one touch to go on reading.
+  function oggiCard() {
+    if (list === null) { loadList().then(function () { if (H.view().screen === "oggi") H.render(); }).catch(function () { list = []; }); return ""; }
+    var state = H.state(), books = mine().filter(function (m) { return (state.libros || {})[m.id]; });
+    var m = books[0] || mine()[0];
+    if (!m) return "";
+    var pr = progress(state, m.id), day = pr.day && pr.day.d === dayKey() ? pr.day : { n: 0 };
+    return '<div class="card weekcard lb-oggi"><span class="muted">📕 Tu libro, en el original</span><b>' + esc(m.title) + "</b>" +
+      '<span class="muted">Tramo ' + (pr.t + 1) + " de " + m.n + " · hoy: " + Math.min(day.n, META) + " / " + META + " oraciones" +
+        (day.n >= META ? " ✓" : "") + (pr.total ? " · " + pr.total + " leídas en total" : "") + "</span>" +
+      '<span class="row" style="margin-top:10px"><button class="btn' + (day.n >= META ? " ghost" : "") + '" data-libro-go="' + esc(m.id) + '">📖 ' +
+        (day.n >= META ? "Leer un poco más" : "Seguir leyendo · unos 10 minutos") + "</button></span></div>";
+  }
+  function resume(id) {
+    ui.book = id;
+    getPack(id).then(function () {
+      var pr = progress(H.state(), id);
+      ui.step = pr.i || (pr.hi && pr.hi[pr.t] != null) ? 1 : 0;
+      ui.open = false;
+      show("guiada-tramo");
+    }).catch(function (e) { H.toast("⚠️ " + (e.message || e)); });
+  }
+
   function init(host) { H = host; }
 
   var api = { init: init, owns: owns, render: render, wire: wire, card: card,
-              validate: validate, ids: ids, progress: progress, doneCount: doneCount, meta: meta };
+              validate: validate, ids: ids, progress: progress, doneCount: doneCount, meta: meta,
+              oggiCard: oggiCard, noteRead: noteRead, reto: reto, bookPct: bookPct, META: META };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Libro = api;
 })(typeof window !== "undefined" ? window : globalThis);

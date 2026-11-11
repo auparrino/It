@@ -1167,3 +1167,13 @@ body.lb-docked #app { padding-bottom: 96px; }
 @media (min-width: 1000px) {
   html body #app > .card > p, html body #app > .card > .ltext, html body #app > .card > ul, html body #app > .card > ol { max-width: 76ch; }
 }
+
+/* Lectura guiada: «Listo por hoy» (libro.js) */
+.lb-hoy { position: fixed; inset: 0; z-index: 70; display: flex; align-items: flex-end; justify-content: center; background: rgba(10, 14, 20, .45); }
+.lb-hoy-in { width: min(100%, 560px); background: var(--papel, #fff); color: var(--tinta, #222); border-radius: 18px 18px 0 0; padding: 20px 20px calc(18px + env(safe-area-inset-bottom));
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, .2); }
+.lb-hoy-in h2 { margin: 0 0 8px; }
+.lb-hoy-in p { margin: 6px 0; }
+.lb-manana { font-weight: 700; }
+.lb-hoy-in .row { margin-top: 14px; flex-wrap: wrap; }
+@media (min-width: 700px) { .lb-hoy { align-items: center; } .lb-hoy-in { border-radius: 18px; } }

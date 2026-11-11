@@ -72,6 +72,29 @@ Lo que se hizo con esto (v3.26):
 - El final de ronda dice en una línea lo que falta para abrir la semana (B4, en
   parte); «encontrá el error» se puede hacer con el teclado (C3, en parte).
 
+## Qué lo desengancha y qué lo trae de vuelta (dicho por el alumno)
+
+Preguntado directamente: deja de abrir la app porque **le aburre ejercitar**,
+porque **las sesiones son largas** y porque **no siente avance**. Lo que le da
+ganas de volver: **leer cosas reales** (empezó *Il nome della rosa* en lectura
+guiada), **usarlo para algo** y **que sea un desafío**. Las rachas y los premios
+le son indiferentes. Su copia lo confirma: casi todo su tiempo es «forma»
+(gramática) y muy poco es leer.
+
+Lo que se hizo con esto (v3.27): **la lectura del día**. El libro que está
+leyendo aparece en la pantalla de hoy; la meta son 10 oraciones (un rato corto
+con cierre); «Listo por hoy» muestra lo leído, el avance en el libro y dónde se
+sigue mañana; y el desafío sale de lo leído, sin sumar fichas al repaso.
+
+Lo que queda en esta línea, sin hacer:
+
+- Que la gramática de la semana se practique **con oraciones del libro** que
+  está leyendo, en vez de oraciones sueltas (costo medio).
+- Cortes naturales cada 12 a 15 pantallas en las lecciones (C1).
+- Tareas «para algo»: entender un mail o un aviso real y contestarlo, con la IA
+  como interlocutor por escrito (la pendiente 1.6 del plan, sin voz).
+- Los tres idiomas en una sola pantalla de hoy.
+
 ## Lo que ya se hizo en esta tanda (v3.24 y v3.25)
 
 | Qué | Dónde |
