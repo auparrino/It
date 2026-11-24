@@ -44,9 +44,14 @@ pack.ALL.forEach(function (code) {
   var f = path.join(pack.ROOT, "tools", code, "can.py");
   ok(fs.existsSync(f), code + ": tools/" + code + "/can.py existe");
   if (!fs.existsSync(f)) return;
-  var py = fs.readFileSync(f, "utf8");
-  var weeks = (py.match(/^ {4}(\d+): \[/gm) || []).map(function (m) { return +m.replace(/\D/g, ""); });
-  T.eq(weeks, Array.apply(null, Array(52)).map(function (_, i) { return i + 1; }), code + ": can.py tiene las 52 semanas, en orden");
+  // CAN as python sees it (a dict written out, or put together from each week's file: Greek)
+  var weeks = [];
+  try {
+    weeks = JSON.parse(cp.execFileSync("python3", ["-c", "import json, can; print(json.dumps(list(can.CAN)))"],
+      { cwd: path.join(pack.ROOT, "tools", code), encoding: "utf8" }));
+  } catch (e) { ok(false, code + ": can.py no carga: " + String(e.message).split("\n")[0]); }
+  var NW = pack.data(code, "course.json").weeks.length;
+  T.eq(weeks, Array.apply(null, Array(NW)).map(function (_, i) { return i + 1; }), code + ": can.py tiene las " + NW + " semanas, en orden");
   var BUILD = fs.readFileSync(path.join(pack.ROOT, "tools", code, "build_course.py"), "utf8");
   ok(/puedo\.attach\(course, can\.CAN\)/.test(BUILD), code + ": build_course.py copia los objetivos");
 });
@@ -103,68 +108,71 @@ pack.ALL.forEach(function (code) {
   });
   ok(!bad.length, L + "52 semanas con 3-4 objetivos y sus ítems" + (bad.length ? ": " + bad.slice(0, 5).join(" · ") : ""));
   var nGoals = course.weeks.reduce(function (a, w) { return a + P.list(w).length; }, 0);
-  ok(nGoals >= 156, L + nGoals + " objetivos en total" + (nGoals ? "" : " (¿falta regenerar docs/ con npm run build?)"));
+  ok(nGoals >= last * 3, L + nGoals + " objetivos en total" + (nGoals ? "" : " (¿falta regenerar docs/ con npm run build?)"));
   if (!nGoals) return;
 
-  // the week opens: the goals, as a list
-  var w20 = course.weeks[19], cs = P.list(w20);
+  // the week opens: the goals, as a list (week 20; week 4 in a course that is starting: Greek)
+  var K = last >= 26 ? 20 : 4;
+  var w20 = course.weeks[K - 1], cs = P.list(w20);
   var st = E.fromRaw({ xp: 0, cards: {} });
   var intro = P.introHtml(w20, st);
   ok(/Al final de la semana vas a poder/.test(intro) && cs.every(function (c) { return intro.indexOf(c.t.replace(/&/g, "&amp;").replace(/</g, "&lt;")) >= 0 || intro.indexOf(c.t) >= 0; }),
      L + "al abrir la semana se ven sus objetivos");
   ok(P.cardHtml(w20, st, false) === "", L + "sin las misiones hechas, no hay tarjeta");
   var card = P.cardHtml(w20, st, true);
-  ok(/¿Ya podés…\?/.test(card) && (card.match(/data-puedo="20:\d:(si|medio|no)"/g) || []).length === cs.length * 3, L + "la tarjeta: tres botones por objetivo");
+  ok(/¿Ya podés…\?/.test(card) && (card.match(new RegExp('data-puedo="' + K + ':\\d:(si|medio|no)"', "g")) || []).length === cs.length * 3, L + "la tarjeta: tres botones por objetivo");
 
   // «todavía no»: recorded, and its items come back tomorrow
-  var r = P.answer(st, course, 20, 1, "no");
-  ok(r.test === false && st.puedo[20][1].a === "no", L + "«todavía no» se guarda y no prueba");
+  var r = P.answer(st, course, K, 1, "no");
+  ok(r.test === false && st.puedo[K][1].a === "no", L + "«todavía no» se guarda y no prueba");
   var tomorrow = new Date(Date.now() + 86400000); tomorrow.setHours(4, 0, 0, 0);
   ok(cs[1].items.every(function (id) { return st.cards[id] && st.cards[id].due === tomorrow.getTime(); }), L + "sus ítems vuelven mañana en el repaso");
-  var weak = Dr.weakItems(course, course.weeks[25], st, map).map(function (it) { return it.id; });
+  var weak = Dr.weakItems(course, course.weeks[K + 5], st, map).map(function (it) { return it.id; });
   ok(cs[1].items.every(function (id) { return weak.indexOf(id) >= 0; }), L + "y entran en «Tus puntos débiles» de la estación");
   ok(/⬜/.test(P.introHtml(w20, st)), L + "la lista de la semana marca lo contestado");
 
   // «sí»: the test, with the tied items
-  r = P.answer(st, course, 20, 0, "si");
-  ok(r.test === true && st.puedo[20][0].a === "si" && st.puedo[20][0].ok === null, L + "«sí» pide la prueba");
-  var its = P.items(course, "20:0", map);
+  r = P.answer(st, course, K, 0, "si");
+  ok(r.test === true && st.puedo[K][0].a === "si" && st.puedo[K][0].ok === null, L + "«sí» pide la prueba");
+  var its = P.items(course, K + ":0", map);
   T.eq(its.map(function (it) { return it.id; }), cs[0].items, L + "la prueba son los ítems atados");
-  ok(!P.items(course, "20:9", map).length && !P.items(course, "x", map).length, L + "un objetivo que no existe no arma prueba");
+  ok(!P.items(course, K + ":9", map).length && !P.items(course, "x", map).length, L + "un objetivo que no existe no arma prueba");
   var R = E.VERDICT.RIGHT, W = E.VERDICT.WRONG;
   var logOk = cs[0].items.map(function (id) { return { id: id, verdict: R }; }).concat([{ id: "otro", verdict: W }]);
-  ok(P.roundDone(st, "20:0", logOk, course).ok === true && st.puedo[20][0].ok === true && st.puedo[20][0].a === "si",
+  ok(P.roundDone(st, K + ":0", logOk, course).ok === true && st.puedo[K][0].ok === true && st.puedo[K][0].a === "si",
      L + "todo bien en la prueba: salió (lo que no es del objetivo no cuenta)");
-  ok(/te salió/.test(P.resultHtml(st, course, "20:0")), L + "calibración: «dijiste que sí y te salió»");
+  ok(/te salió/.test(P.resultHtml(st, course, K + ":0")), L + "calibración: «dijiste que sí y te salió»");
   var logBad = [{ id: cs[0].items[0], verdict: W }, { id: cs[0].items[0], verdict: R, retry: true }];
   var st2 = E.fromRaw({ xp: 0, cards: {} });
-  P.answer(st2, course, 20, 0, "si");
-  ok(P.roundDone(st2, "20:0", logBad, course).ok === false && st2.puedo[20][0].ok === false, L + "un error en la primera respuesta: no salió");
-  ok(/fallaste/.test(P.resultHtml(st2, course, "20:0")), L + "calibración: «dijiste que sí y fallaste»");
+  P.answer(st2, course, K, 0, "si");
+  ok(P.roundDone(st2, K + ":0", logBad, course).ok === false && st2.puedo[K][0].ok === false, L + "un error en la primera respuesta: no salió");
+  ok(/fallaste/.test(P.resultHtml(st2, course, K + ":0")), L + "calibración: «dijiste que sí y fallaste»");
   var st4 = E.fromRaw({ xp: 0, cards: {} });
-  P.answer(st4, course, 20, 0, "si");
-  ok(P.roundDone(st4, "20:0", [{ id: "otro", verdict: W }], course).ok === null && st4.puedo[20][0].ok === null &&
-     !/fallaste/.test(P.resultHtml(st4, course, "20:0")), L + "sin ninguno de sus ítems respondido, no hay veredicto");
+  P.answer(st4, course, K, 0, "si");
+  ok(P.roundDone(st4, K + ":0", [{ id: "otro", verdict: W }], course).ok === null && st4.puedo[K][0].ok === null &&
+     !/fallaste/.test(P.resultHtml(st4, course, K + ":0")), L + "sin ninguno de sus ítems respondido, no hay veredicto");
   ok(cs[0].items.every(function (id) { return st2.cards[id] && st2.cards[id].due <= tomorrow.getTime(); }), L + "lo fallado vuelve mañana");
   ok(/🔁/.test(P.cardHtml(w20, st2, true)), L + "la tarjeta lo muestra");
 
   // the balance, and the station
-  P.answer(st, course, 20, 2, "medio");
-  if (cs[3]) P.answer(st, course, 20, 3, "si");
-  var b = P.balance(st, course, [20])[0];
+  P.answer(st, course, K, 2, "medio");
+  if (cs[3]) P.answer(st, course, K, 3, "si");
+  var b = P.balance(st, course, [K])[0];
   ok(b && b.si === (cs[3] ? 2 : 1) && b.medio === 1 && b.no === 1 && b.ok === 1, L + "el balance de la semana");
   ok(/Tu balance de la semana/.test(P.cardHtml(w20, st, true)), L + "con todo contestado, la tarjeta dice el balance");
-  var sh = P.stationHtml(st, course, 22);
-  ok(/Lo que dijiste que podés/.test(sh) && /Semana 20/.test(sh) && /sin contestar/.test(sh) && /Para repasar: semana 20/.test(sh),
+  var sh = P.stationHtml(st, course, K + 2);
+  ok(/Lo que dijiste que podés/.test(sh) && new RegExp("Semana " + K + "\\b").test(sh) && /sin contestar/.test(sh) && new RegExp("Para repasar: semana " + K + "\\b").test(sh),
      L + "la Estación muestra el balance de sus tres semanas");
-  ok(/arma este balance/.test(P.stationHtml(E.fromRaw({ xp: 0, cards: {} }), course, 22)), L + "sin respuestas, la Estación explica de dónde sale");
+  ok(/arma este balance/.test(P.stationHtml(E.fromRaw({ xp: 0, cards: {} }), course, K + 2)), L + "sin respuestas, la Estación explica de dónde sale");
 
   // the save
   ok(!("puedo" in E.fromRaw({ xp: 1, cards: {}, puedo: "roto" })), L + "un state.puedo roto se descarta");
-  ok(E.fromRaw({ xp: 1, cards: {}, puedo: { 20: { 0: { a: "si", ok: true } } } }).puedo[20][0].ok === true, L + "uno bien formado se conserva");
-  var st3 = E.fromRaw({ xp: 1, cards: {}, puedo: { 20: "x" } });
-  ok(P.answer(st3, course, 20, 0, "medio").test === false && st3.puedo[20][0].a === "medio", L + "una semana rota del guardado se rehace");
-  ok(P.answer(st3, course, 20, 0, "quizás").test === false && st3.puedo[20][0].a === "medio", L + "una respuesta desconocida no cambia nada");
+  var good = {}; good[K] = { 0: { a: "si", ok: true } };
+  ok(E.fromRaw({ xp: 1, cards: {}, puedo: good }).puedo[K][0].ok === true, L + "uno bien formado se conserva");
+  var broken = {}; broken[K] = "x";
+  var st3 = E.fromRaw({ xp: 1, cards: {}, puedo: broken });
+  ok(P.answer(st3, course, K, 0, "medio").test === false && st3.puedo[K][0].a === "medio", L + "una semana rota del guardado se rehace");
+  ok(P.answer(st3, course, K, 0, "quizás").test === false && st3.puedo[K][0].a === "medio", L + "una respuesta desconocida no cambia nada");
 });
 
 T.done();

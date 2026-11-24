@@ -51,6 +51,15 @@ var PAIRS = {
             ["gold", "holz"], ["gold", "holz-escuro"]],
     dark: [["tinta", "areia"], ["tinta", "papel"], ["cinza", "papel"], ["boton-tinta", "boton"],
            ["mar", "papel"], ["mata", "papel"], ["coral", "papel"], ["sol", "papel"], ["gold", "holz"]]
+  },
+  el: {
+    light: [["tinta", "areia"], ["tinta", "papel"], ["cinza", "papel"], ["cinza", "areia"],
+            ["#ffffff", "boton"], ["#ffffff", "boton-hover"], ["mar", "papel"], ["mar-escuro", "papel"],
+            ["mata", "papel"], ["mata-escuro", "papel"], ["coral", "papel"], ["coral-escuro", "papel"],
+            ["sol-escuro", "papel"], ["#3a2600", "sol"], ["#ffffff", "mar"], ["#ffffff", "mata"], ["#ffffff", "coral"],
+            ["bugan", "papel"], ["#ffffff", "placa"]],
+    dark: [["tinta", "areia"], ["tinta", "papel"], ["cinza", "papel"], ["boton-tinta", "boton"],
+           ["mar", "papel"], ["mata", "papel"], ["coral", "papel"], ["sol", "papel"], ["bugan", "papel"], ["#ffffff", "placa"]]
   }
 };
 
@@ -118,6 +127,14 @@ var de = fs.readFileSync(path.join(pack.langDir("de"), "theme.css"), "utf8");
   ok(de.indexOf(k) >= 0, "de: el tema no tiene " + k);
 });
 ok(!/berl[ií]n|spree|tiergarten/i.test(de + JSON.stringify(Boot.LANGS.de)), "de: queda una referencia a Berlín en el tema");
+
+// The Greek theme: the islands of the Aegean (lime white, the blue of the domes, the meander, the
+// bougainvillea), GFS Didot; nothing left of Bavaria.
+var el = fs.readFileSync(path.join(pack.langDir("el"), "theme.css"), "utf8");
+["--meandros", "--bugan", "--placa", "GFS Didot", "Noto Greek", "unicode-range"].forEach(function (k) {
+  ok(el.indexOf(k) >= 0, "el: el tema no tiene " + k);
+});
+ok(!/rauten|alpen|maibaum|holz|grenze|bayer|baviera|wirtshaus|brezel/i.test(el), "el: queda una referencia a Baviera en el tema");
 
 console.log("tema: " + n + " comprobaciones, " + bad + " errores");
 process.exit(bad ? 1 : 0);

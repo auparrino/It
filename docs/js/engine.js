@@ -22,7 +22,7 @@
   // Everything else that only reflects typing habits (case, punctuation,
   // spaces, quotes, the spaces around a hyphen: «chama - se») is normalised
   // away.
-  function normalise(s) {
+  function normaliseCore(s) {
     return String(s == null ? "" : s)
       .normalize("NFC")
       .toLowerCase()
@@ -33,6 +33,9 @@
       .replace(/^[\s.,;:!?]+|[\s.,;:!?]+$/g, "")
       .trim();
   }
+  // What the language's own spelling adds (grade.norm; Greek: the final
+  // sigma is a sigma, the Greek question mark is a question mark).
+  function normalise(s) { var out = normaliseCore(s); return GR.norm ? GR.norm(out) : out; }
 
   function deaccent(s) {
     return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -77,15 +80,20 @@
      markIsGrammar, the crase).  At most one word in three. */
   var KB_ROWS = ["qwertyuiop", "asdfghjklñ", "zxcvbnm"];
   var NEAR = {};
-  KB_ROWS.forEach(function (row, r) {
-    row.split("").forEach(function (c, i) {
-      var n = NEAR[c] || (NEAR[c] = {});
-      [[r, i - 1], [r, i + 1], [r - 1, i], [r - 1, i + 1], [r + 1, i - 1], [r + 1, i]].forEach(function (p) {
-        var o = KB_ROWS[p[0]] && KB_ROWS[p[0]][p[1]];
-        if (o) n[o] = 1;
+  function nearRows(rows) {
+    rows.forEach(function (row, r) {
+      row.split("").forEach(function (c, i) {
+        var n = NEAR[c] || (NEAR[c] = {});
+        [[r, i - 1], [r, i + 1], [r - 1, i], [r - 1, i + 1], [r + 1, i - 1], [r + 1, i]].forEach(function (p) {
+          var o = rows[p[0]] && rows[p[0]][p[1]];
+          if (o) n[o] = 1;
+        });
       });
     });
-  });
+  }
+  nearRows(KB_ROWS);
+  // the keyboard of a language with another alphabet (Greek: LANG.ui.kbRows)
+  if (LANG.ui && LANG.ui.kbRows && LANG.ui.kbRows.join("") !== "qwertyuiopasdfghjklzxcvbnm") nearRows(LANG.ui.kbRows);
   function near(a, b) { a = deaccent(a); b = deaccent(b); return a === b || !!(NEAR[a] && NEAR[a][b]); }
   function degeminate(w) { return w.replace(/(.)\1+/g, "$1"); }
   function wordSlip(g, w) {
@@ -150,9 +158,10 @@
 
     var raw = (item.accept && item.accept.length ? item.accept : [item.answer]);
     var accepted = raw.map(normalise).filter(Boolean);
-    // A sentence ends with . ! or ?: «Zahlen, bitte.» is one answer.
+    // A sentence ends with . ! or ? (or the Greek question mark, ;):
+    // «Zahlen, bitte.» is one answer.
     var sentence = {};
-    raw.forEach(function (a) { if (/[.!?]\s*$/.test(String(a || ""))) sentence[normalise(a)] = 1; });
+    raw.forEach(function (a) { if (/[.!?;\u037e]\s*$/.test(String(a || ""))) sentence[normalise(a)] = 1; });
 
     // Some answers are a list of equally valid words ("grandi, buone").
     var expanded = accepted.slice();

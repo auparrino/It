@@ -37,7 +37,9 @@
     return (nav.maxTouchPoints > 0 || mm("(any-pointer: coarse)")) && mm("(hover: none)");
   }
   // ¿Se usa el teclado de la app en este momento?
-  function active() { return touch() && mode() === "app"; }
+  // (a language with another alphabet shows it with a mouse too: LANG.ui.kbAlways)
+  function wanted() { return touch() || !!ui().kbAlways; }
+  function active() { return wanted() && mode() === "app"; }
 
   function ui() { return (root.LANG && root.LANG.ui) || {}; }
   // Las filas de letras y lo que falta de las teclas especiales (las que no están en las filas).
@@ -87,7 +89,8 @@
     var L = layout(), rows = layer === "abc" ? L.rows : SYMBOLS;
     // the way to the phone's keyboard says what it does (the ⌨️ of before
     // looked like Gboard's «hide the keyboard» and was pressed for that)
-    var html = '<div class="kbtop"><button type="button" class="kblink" data-k="phone">Usar el teclado del teléfono</button></div>';
+    var html = '<div class="kbtop"><button type="button" class="kblink" data-k="phone">' +
+      (touch() ? "Usar el teclado del teléfono" : "Ocultar: escribo con mi teclado") + "</button></div>";
     if (layer === "abc" && L.extra.length) {
       html += '<div class="kbrow kbextra">' + L.extra.map(function (c) { return key(shift && c !== "ß" ? c.toUpperCase() : c); }).join("") + "</div>";
     }
@@ -108,7 +111,7 @@
       (layer === "abc" ? key("123", "kbmod", "123", "números y signos") : key("abc", "kbmod", "abc", "letras")) +
       (layer === "abc" ? key(",", "kbpunct") + (mark ? key(mark, "kbpunct") : "") : "") +
       key(" ", "kbspace", (root.LANG && root.LANG.name) || "espacio", "espacio") +
-      (layer === "abc" ? key(".", "kbpunct") + key("?", "kbpunct") : "") +
+      (layer === "abc" ? key(".", "kbpunct") + key(ui().kbQuestion || "?", "kbpunct") : "") +
       key("enter", "kbmod kbenter", "↵", "enviar") + "</div>";
     panel.innerHTML = html;
   }
@@ -272,6 +275,41 @@
     if (el && active()) { el.blur(); setTimeout(function () { el.focus(); }, 60); }
   }
 
+  /* A physical keyboard without the letters of the language (Greek on a
+     Spanish keyboard): LANG.ui.kbMap says which letter each key writes (the
+     layout of that language: a → α, s → σ, w → ς…) and LANG.ui.kbDead the
+     key of the accent (; or ´, then the vowel: ;a → ά).  A keyboard that
+     already writes the language sends its own letters, which are not in
+     the map: nothing changes for it. */
+  var dead = false;
+  function physical(e) {
+    var map = ui().kbMap, el = e.target;
+    if (!map || !marked(el) || e.ctrlKey || e.metaKey || e.altKey || e.isComposing) return;
+    var k = e.key, dk = ui().kbDead || { on: [], to: {} };
+    if (k === "Shift" || k === "CapsLock") return;
+    if (dk.on.indexOf(k) >= 0 && !dead) { dead = true; e.preventDefault(); return; }
+    if (!k || k.length !== 1) {
+      // Enter, Backspace… after the accent key: the key was a question mark
+      if (dead) { dead = false; if (k === "Enter" || k === "Tab") insert(el, map["?"] || ";"); }
+      return;
+    }
+    var low = k.toLowerCase(), ch = map[low] != null ? map[low] : map[k] != null ? map[k] : null;
+    if (ch != null && k !== low && ch.toUpperCase() !== ch) ch = ch === "ς" ? "Σ" : ch.toUpperCase();
+    if (dead) {
+      dead = false;
+      var base = ch != null ? ch : k;
+      if (dk.to[base]) { e.preventDefault(); insert(el, dk.to[base]); return; }
+      insert(el, map["?"] || ";");               // not a vowel: the key was a question mark
+    }
+    if (ch == null) return;
+    e.preventDefault();
+    insert(el, ch);
+  }
+  if (doc && doc.addEventListener) {
+    doc.addEventListener("keydown", physical, true);
+    doc.addEventListener("focusout", function () { dead = false; });
+  }
+
   if (doc && doc.addEventListener) {
     doc.addEventListener("focusin", function (e) {
       var el = e.target;
@@ -286,7 +324,7 @@
       if (marked(el) && active()) { hideChip(); show(el); }
       else {
         if (panel && !panel.contains(el)) hideSoon();
-        if (marked(el) && touch()) showChip(); else if (!(chip && chip.contains(el))) hideChip();
+        if (marked(el) && wanted()) showChip(); else if (!(chip && chip.contains(el))) hideChip();
       }
     });
     doc.addEventListener("focusout", function (e) {
@@ -308,7 +346,7 @@
   }
 
   // api.qualify(el): app.js says which boxes are answers in the language of the course
-  var api = { qualify: null, mark: mark, active: active, mode: mode, setMode: function (m) { setMode(m); remark(); if (!active()) hide(); },
+  var api = { qualify: null, mark: mark, active: active, wanted: wanted, mode: mode, setMode: function (m) { setMode(m); remark(); if (!active()) hide(); },
               touch: touch, layout: layout, useApp: useApp, usePhone: usePhone, press: press, show: show, hide: hide,
               isOpen: function () { return !!(panel && !panel.hidden); } };
   if (typeof module === "object" && module.exports) module.exports = api;

@@ -76,7 +76,7 @@
   function sameKey(it) {
     var stem = String(it.stem || "").toLowerCase();
     // a bare «___» says nothing: there the question is in the prompt
-    if (!/[a-zà-ÿ]/.test(stem)) stem += "|" + String(it.prompt || "").toLowerCase();
+    if (!/[a-zà-ÿ\u0370-\u03ff]/.test(stem)) stem += "|" + String(it.prompt || "").toLowerCase();
     return "=" + stem + "|" + String(it.answer || "").toLowerCase();
   }
 
@@ -374,7 +374,7 @@
     // diagnosis would then talk about agreement.  Verb items keep the pool
     // of other persons (step 3).
     var nominal = it.type === "plural" || /plural|singular|concordan|adjetiv|femenin|masculin|sustantiv|artículo/i.test(it.prompt || "");
-    var BR = DR.baseRe || [/([a-zà-ÿ']+)\s*→/i, /\(([a-zà-ÿ']+)\)/i];
+    var BR = DR.baseRe || [/([a-zà-ÿ\u0370-\u03ff']+)\s*→/i, /\(([a-zà-ÿ\u0370-\u03ff']+)\)/i];
     var m = BR[0].exec(it.stem || "") || BR[1].exec(it.stem || "");
     var base = m ? m[1] : null;
     if (it.type === "conjugate" || (!nominal && !base)) return out;

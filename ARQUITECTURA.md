@@ -1,7 +1,7 @@
 # Una app, varios idiomas
 
-*La Via C1* (italiano), *Rumo C1* (portugués de Brasil) y *Weg C1* (alemán,
-en construcción) son una sola app:
+*La Via C1* (italiano), *Rumo C1* (portugués de Brasil), *Weg C1* (alemán,
+en construcción) y *Δρόμος C1* (griego moderno, su primera temporada) son una sola app:
 un **núcleo** común y un **paquete** por idioma. Un arreglo en el núcleo vale
 para los dos idiomas; cada idioma conserva su contenido, sus reglas, su
 estética y su progreso.
@@ -185,6 +185,35 @@ expone `pack.LANGS` (los idiomas completos, que recorren los tests comunes)
 y `pack.ALL` (todos); el alemán tiene su propio test (`tools/de/test_curso.js`),
 su año simulado (`npm run sim`) y su prueba en el navegador
 (`tools/lib/smoke_aleman.js`). Detalle en [README-aleman.md](README-aleman.md).
+
+**Otro alfabeto** (el griego, `lang/el/`). También arranca con `missing`
+(su primera temporada: 13 semanas), y además trae lo que el núcleo necesita
+para una lengua que no se escribe con letras latinas:
+- **Las letras**: `LANG.letters` (las de una palabra: el núcleo las usa en
+  lugar de `a-zà-ÿ`) y `LANG.ownLetters` (solo las suyas). Las clases de
+  letras del núcleo (`lezione.js`, `drills.js`, `esencial.js`,
+  `referencia.js`, `porque.js`) incluyen el rango griego.
+- **La corrección**: `LANG.rules.grade.norm` se aplica al normalizar una
+  respuesta (la sigma final es una sigma; `;` y `?` son el mismo signo). El
+  acento que falta es «casi» y en otra sílaba es un error (`strictMarks`).
+  Una opción tocada que no es la respuesta nunca vale, aunque la corrección
+  la lea igual (`answer` en `app.js`).
+- **El teclado** (`js/teclado.js`): `LANG.ui.kbRows` con la distribución
+  griega, `kbQuestion` (el `;`), `kbAlways` (el teclado en pantalla también
+  con mouse: el teclado del alumno no tiene esas letras) y, para el teclado
+  físico, `kbMap` (tecla latina → letra griega) y `kbDead` (la tecla del
+  acento: `;` o `´` y después la vocal).
+- **La ayuda de lectura**: `LANG.rules.sound` = `{of, until}`; `app.js`
+  (`soundHtml`) muestra cómo suena una palabra debajo de las palabras de la
+  semana, en la tarjeta de palabra nueva y en la corrección, hasta la semana
+  `until` (o según `state.soundAid`, que se cambia en el perfil).
+- **Lo que se lee en voz alta**: solo lo escrito en ese alfabeto (`sayOnly`
+  en `app.js` y en `tools/audio/textos.js`): de «νερό (agua)» se dice
+  *νερό*.
+- **Herramientas**: `tools/el/` (una semana por archivo, `check_semana.py`
+  con los controles de la escritura griega, `sillabo.py`), su test
+  (`tools/el/test_curso.js`) y su prueba en el navegador
+  (`tools/lib/smoke_griego.js`). Detalle en [README-griego.md](README-griego.md).
 
 **La IA** (`js/ia.js`): Claude Haiku (`claude-haiku-5-5`), con la clave de
 Anthropic del alumno (`<prefijo>.claude.key`, fuera del guardado), por la API

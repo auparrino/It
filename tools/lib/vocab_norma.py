@@ -19,12 +19,17 @@ la gramática (sillabo.py), y fallan si alguno no se enseña nunca.
 import re
 import unicodedata
 
-WORD = re.compile(r"[A-Za-zÀ-ÿß]+(?:['’][A-Za-zÀ-ÿ]+)?")
+WORD = re.compile(r"[A-Za-zÀ-ÿß\u0370-\u03ff\u1f00-\u1fff]+(?:['’][A-Za-zÀ-ÿ]+)?")
+GREEK = re.compile(r"[\u0370-\u03ff\u1f00-\u1fff]")
 
 ENDINGS = {
     "de": ["ieren", "iert", "test", "ten", "tet", "te", "ern", "eren", "en", "em", "er", "es", "est", "et", "st", "e", "n", "s", "t"],
     "pt": ["mente", "ando", "endo", "indo", "ados", "idos", "ada", "ida", "ado", "ido", "amos", "emos", "imos",
            "ar", "er", "ir", "am", "em", "as", "es", "os", "o", "a", "s", "e"],
+    # griego (sin acentos y con σ por ς: plain): casos, plurales y personas
+    "el": ["ομαστε", "ονται", "ουμε", "ματα", "ομαι", "εσαι", "εται", "εστε", "αμαι", "ασαι", "αται",
+           "ετε", "ουν", "ατε", "ανε", "αμε", "ουσ", "εισ", "αει", "ιων", "ιου", "ησ", "οσ", "ασ", "εσ", "ων", "ου",
+           "οι", "ει", "αω", "ια", "η", "α", "ο", "ε", "ι", "ω", "σ", "ν"],
 }
 NUMBER = {
     "de": re.compile(r"^(?:ein|eins|zwei|drei|vier|fünf|sechs|sech|sieben|sieb|acht|neun|zehn|elf|zwölf|zwanzig|dreißig|"
@@ -33,6 +38,8 @@ NUMBER = {
                      r"quinze|dezesseis|dezessete|dezoito|dezenove|vinte|trinta|quarenta|cinquenta|sessenta|setenta|"
                      r"oitenta|noventa|cem|cento|duzentos|trezentos|quatrocentos|quinhentos|seiscentos|setecentos|"
                      r"oitocentos|novecentos|mil|milhão|milhões|e)$"),
+    # los números griegos se enseñan como palabras (semanas 5 y 7)
+    "el": re.compile(r"^$"),
 }
 # Spanish → target spelling rules for cognates (applied to the Spanish word).
 COG = {
@@ -40,12 +47,13 @@ COG = {
            ("ico", "isch"), ("ica", "ik"), ("c", "k"), ("o", ""), ("a", ""), ("e", "")],
     "pt": [("ción", "ção"), ("ciones", "ções"), ("dad", "dade"), ("aje", "agem"), ("ble", "vel"), ("ñ", "nh"),
            ("ll", "lh"), ("ue", "o"), ("ie", "e"), ("z", "s"), ("ia", "ía")],
+    "el": [],        # otro alfabeto: ningún cognado se escribe solo
 }
 
 
 def plain(w):
     w = unicodedata.normalize("NFD", w.lower().replace("’", "'"))
-    return "".join(c for c in w if unicodedata.category(c) != "Mn").replace("ß", "ss")
+    return "".join(c for c in w if unicodedata.category(c) != "Mn").replace("ß", "ss").replace("ς", "σ")
 
 
 def stem(w, lang):
@@ -101,7 +109,7 @@ def _lev(a, b):
 def cognate(w, spanish, lang):
     """The target word is a Spanish word on screen, spelled the target way."""
     p = plain(w)
-    if len(p) < 4:
+    if len(p) < 4 or not COG[lang]:
         return False
     # German -ieren verbs: kritisiert ← criticaron, diskutiert ← discute
     if lang == "de" and "ier" in p and len(p) >= 6:
@@ -143,7 +151,12 @@ def word_week(t, lex, visible, spanish, hints=()):
             return 1
     if cognate(t, spanish, lang):
         return 1
+    if lang == "el" and not GREEK.search(t):
+        return 1
     best = first.get(s, first.get(p, 99))
+    # Greek past: the augment (έ-γραψα, έ-κανα → the stem of κάνω)
+    if best == 99 and lang == "el" and p[:1] == "ε" and len(p) >= 5:
+        best = min(first.get(stem(p[1:], lang), 99), first.get(p[1:], 99))
     # German participles: ge-zeig-t, ab-ge-lauf-en → the verb's stem
     if best == 99 and lang == "de":
         m = re.match(r"^([a-z]*?)ge([a-z]{3,})$", p)
@@ -156,6 +169,11 @@ def word_week(t, lex, visible, spanish, hints=()):
             if k in first and len(p) - n <= 6:
                 best = min(best, first[k])
                 break
+    if best == 99 and lang == "el" and len(p) >= 5:
+        # another form of a taught word: the same first letters (πόλη → πόλεις, μιλάω → μιλήσω)
+        for k, wk in first.items():
+            if len(k) >= 4 and k[:max(4, len(k) - 2)] == p[:max(4, len(k) - 2)]:
+                best = min(best, wk)
     # German compounds: two taught words (Taxi + Fahrer, Haus + Tür, with -s-)
     if best == 99 and lang == "de":
         for i in range(3, len(p) - 2):
@@ -180,7 +198,7 @@ def need_week(item, lex):
         return 1, []
     stem_txt = str(item.get("stem") or "")
     # an ending to fill (Kind___): not a word
-    if re.search(r"[A-Za-zÀ-ÿß]_{2,}|_{2,}[A-Za-zÀ-ÿß]", stem_txt):
+    if re.search(r"[A-Za-zÀ-ÿß\u0370-\u03ff]_{2,}|_{2,}[A-Za-zÀ-ÿß\u0370-\u03ff]", stem_txt):
         return 1, []
     shown = " ".join(strings([item.get("prompt"), stem_txt, item.get("options")]))
     visible = set()

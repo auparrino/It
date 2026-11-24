@@ -34,7 +34,7 @@
   var KINDS = [["formula", "💬 Para comunicar"], ["regla", "📐 Formas y reglas"], ["palabra", "🔑 Palabras clave"]];
   var GAP = "___";
   // the letters of the languages of the course (with the accented ones and ß)
-  var L = "A-Za-zÀ-ÖØ-öø-ɏ";
+  var L = "A-Za-zÀ-ÖØ-öø-ɏ\u0370-\u03ff";
   var WORD = new RegExp("^[" + L + "][" + L + "' ]*$");
 
   function esc(s) {

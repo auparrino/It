@@ -33,7 +33,7 @@ ok(/Estacion\.roundDone\(state, round\.arg, round\.log, course\)/.test(APP), "al
 ok(/Estacion\.balanceHtml\(state, round\.arg, course\)/.test(APP), "el resultado muestra el balance");
 ok(/estacion: "Estación"/.test(APP), "la ronda tiene nombre (para retomarla)");
 
-var ENDS = [3, 6, 9, 12, 16, 19, 22, 25, 29, 32, 35, 38, 42, 45, 48, 51];
+var ALL_ENDS = [3, 6, 9, 12, 16, 19, 22, 25, 29, 32, 35, 38, 42, 45, 48, 51];
 var WRITTEN = { cloze: 1, translate: 1, conjugate: 1, plural: 1, numbers: 1, qa: 1, typed: 1, write: 1, fixerr: 1, garden: 1, combina: 1 };
 
 pack.ALL.forEach(function (code) {
@@ -44,11 +44,14 @@ pack.ALL.forEach(function (code) {
   if (!S) return;
   var course = pack.data(code, "course.json");
   var map = Dr.itemsById(course);
+  // a course that is starting (Greek: its first season) has the stations of its weeks
+  var NW = course.seasons[course.seasons.length - 1].weeks[1];
+  var ENDS = ALL_ENDS.filter(function (e) { return e < NW; });
   T.eq(S.ends(course), ENDS, L + "las tandas");
   ok([13, 26, 39, 52].every(function (b) { return S.ends(course).indexOf(b) < 0; }), L + "ninguna tanda cierra en un jefe");
   T.eq(S.forWeek(course, 4), { end: 3, weeks: [1, 2, 3] }, L + "la semana 4 repasa la 1-3");
   ok(S.forWeek(course, 5) === null && S.forWeek(course, 3) === null && S.forWeek(course, 14) === null, L + "las otras semanas no tienen estación");
-  ok(S.forWeek(course, 13).end === 12 && S.forWeek(course, 17).end === 16 && S.forWeek(course, 52).end === 51, L + "la 13, la 17 y la 52");
+  ok(S.forWeek(course, 13).end === 12 && (NW < 52 || (S.forWeek(course, 17).end === 16 && S.forWeek(course, 52).end === 51)), L + "la 13, la 17 y la 52");
 
   // the mission: optional, in the week after
   var st = E.fromRaw({ xp: 0, cards: {} });

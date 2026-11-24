@@ -48,7 +48,7 @@
   function translation(p) {
     // «o leite → os leites = masculino» is a table row with a comment, not a
     // sentence with its translation: no arrows, no lists, no suffix notes.
-    if (/[→;=]|\s\/\s/.test(p[0]) || /[:«»→;=]|\s\/\s|(^|\s)-[a-zà-ÿ]/i.test(p[1])) return false;
+    if (/[→;=]|\s\/\s/.test(p[0]) || /[:«»→;=]|\s\/\s|(^|\s)-[a-zà-ÿ\u0370-\u03ff]/i.test(p[1])) return false;
     // «3. Artículo con el posesivo»: a numbered note or grammar talk, not a translation
     // «También es correcto sin eu.», «Lo mismo, más formal.», «Estoy en
     // camino (formal).»: a comment on the sentence, not what it says
@@ -77,7 +77,7 @@
      person or auxiliary can be good language too.
      isWord: the glossary as a dictionary of the language's words (a
      capital that the dictionary knows is not a name). */
-  var TOKEN = TR.tokenRe || /^([«"(¿¡]*)([A-Za-zÀ-ÿ']+(?:-[A-Za-zÀ-ÿ']+)*)([.,;:!?»")…]*)$/;
+  var TOKEN = TR.tokenRe || /^([«"(¿¡]*)([A-Za-zÀ-ÿ\u0370-\u03ff']+(?:-[A-Za-zÀ-ÿ\u0370-\u03ff']+)*)([.,;:!?»")…]*)$/;
   function traps(sentence, rnd, week, isWord, safe) {
     week = week || 52;
     var toks = sentence.split(" ");
@@ -209,7 +209,7 @@
     var pick = mine[Math.floor(rnd() * mine.length)];
     // The most similar sentences are the useful distractors: same words,
     // another form (capiamo / capisco), not something obviously unrelated.
-    var words = function (x) { return x.toLowerCase().replace(/[^a-zà-ÿ' -]/g, "").split(/\s+/); };
+    var words = function (x) { return x.toLowerCase().replace(/[^a-zà-ÿ\u0370-\u03ff' -]/g, "").split(/\s+/); };
     var mw = words(pick[0]);
     var sim = function (x) {
       var w = words(x), n = 0;
@@ -237,8 +237,8 @@
     // to sit between two asterisks.
     var clean = function (f) {
       f = f.trim();
-      return f.length >= 3 && /^[a-zà-ÿ' -]+$/i.test(f) && f.indexOf("/") < 0 && !/^\s|\s$/.test(f) &&
-        f.split(/[\s-]+/).every(function (w) { return isWord(w.replace(/^[a-zà-ÿ]+'/, "")) || isWord(w); }) ? f : null;
+      return f.length >= 3 && /^[a-zà-ÿ\u0370-\u03ff' -]+$/i.test(f) && f.indexOf("/") < 0 && !/^\s|\s$/.test(f) &&
+        f.split(/[\s-]+/).every(function (w) { return isWord(w.replace(/^[a-zà-ÿ\u0370-\u03ff]+'/, "")) || isWord(w); }) ? f : null;
     };
     // Only the forms of the text shown as the stem (the rule and its
     // paragraphs): a form from the warning leaves the stem without a gap.
@@ -266,8 +266,8 @@
     var stem = strip(src.replace("*" + pick + "*", "___"));
     // A hole glued to letters or a stray asterisk: the markup was uneven.
     // The answer still in the stem gives itself away.
-    if (/[a-zà-ÿ]___|___[a-zà-ÿ]/i.test(stem) || stem.indexOf("*") >= 0 || stem.indexOf("___") < 0 ||
-        (" " + stem.toLowerCase().replace(/[^a-zà-ÿ' ]/g, " ") + " ").indexOf(" " + pick.toLowerCase() + " ") >= 0) return null;
+    if (/[a-zà-ÿ\u0370-\u03ff]___|___[a-zà-ÿ\u0370-\u03ff]/i.test(stem) || stem.indexOf("*") >= 0 || stem.indexOf("___") < 0 ||
+        (" " + stem.toLowerCase().replace(/[^a-zà-ÿ\u0370-\u03ff' ]/g, " ") + " ").indexOf(" " + pick.toLowerCase() + " ") >= 0) return null;
     if (stem.length > 160) stem = stem.slice(0, 157) + "…";
     return { kind: "rule", prompt: "Completá la regla", stem: stem, answer: pick,
              options: shuffle([pick].concat(others), rnd) };
@@ -289,8 +289,8 @@
     return lev(a, b) <= Math.max(2, Math.floor(Math.max(a.length, b.length) / 2));
   }
   function overlap(a, b) {
-    var wa = a.toLowerCase().split(/[^a-zà-ÿ']+/).filter(function (w) { return w.length > 2; });
-    var wb = b.toLowerCase().split(/[^a-zà-ÿ']+/);
+    var wa = a.toLowerCase().split(/[^a-zà-ÿ\u0370-\u03ff']+/).filter(function (w) { return w.length > 2; });
+    var wb = b.toLowerCase().split(/[^a-zà-ÿ\u0370-\u03ff']+/);
     return wa.filter(function (w) { return wb.indexOf(w) >= 0; }).length;
   }
 
@@ -340,8 +340,8 @@
   // How much a row label shows up in a cell (ca, co, cu ↔ casa, cosa, cubo;
   // lo ↔ lo zio; -o ↔ libro): the example would give the row away.
   function echoes(label, cell) {
-    var cw = cell.toLowerCase().split(/[^a-zà-ÿ']+/).filter(Boolean), n = 0;
-    label.toLowerCase().split(/[^a-zà-ÿ'\-]+/).forEach(function (t) {
+    var cw = cell.toLowerCase().split(/[^a-zà-ÿ\u0370-\u03ff']+/).filter(Boolean), n = 0;
+    label.toLowerCase().split(/[^a-zà-ÿ\u0370-\u03ff'\-]+/).forEach(function (t) {
       if (t.charAt(0) === "-" && t.length > 1) { if (cw.some(function (w) { return w.slice(-(t.length - 1)) === t.slice(1); })) n++; }
       else if (t.slice(-1) === "-" && t.length > 1) { if (cw.some(function (w) { return w.indexOf(t.slice(0, -1)) === 0; })) n++; }
       else if (t.length >= 2 && cw.some(function (w) { return w.indexOf(t) === 0; })) n++;
@@ -437,7 +437,7 @@
     var add = function (x) {
       strip(x).split(/\s*(?:\/|,|;|→|\+|=)\s*/).forEach(function (f) {
         f = f.replace(/[.!?¿¡«»()]/g, "").trim();
-        if (f && f.length >= 2 && f.split(/\s+/).length <= 3 && /[a-zà-ÿ]/i.test(f)) out.push(f.toLowerCase());
+        if (f && f.length >= 2 && f.split(/\s+/).length <= 3 && /[a-zà-ÿ\u0370-\u03ff]/i.test(f)) out.push(f.toLowerCase());
       });
     };
     [b.r, b.warn, b.tip].concat(b.p || []).forEach(function (t) {

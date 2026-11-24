@@ -8,7 +8,7 @@
  * idioma y carga los scripts en ORDER, alternando paquete y núcleo en el
  * orden en que se necesitan.
  *
- * El idioma sale de: ?lang=it|pt en la URL, lo último elegido
+ * El idioma sale de: ?lang=it|pt|de|el en la URL, lo último elegido
  * (localStorage «c1.lang»), o —para quien ya estudiaba— el guardado de La
  * Via C1 o de Rumo C1.  Si no hay nada, se muestra el selector.
  *
@@ -39,6 +39,18 @@
                     "letture_settimana.js", "tramo_data.js", "letture_data.js", "mapas_data.js", "diagnosi.js",
                     "freq_data.js", "ascolto_data.js", "dictogloss_data.js", "esame_data.js",
                     "voci_cv_data.js", "devolucion_data.js", "porque_data.js", "escritura_plus_data.js",
+                    "variaciones_data.js", "escritos_data.js", "desglose_data.js", "biblioteca_data.js", "radio_data.js", "mediacion_data.js",
+                    "fuera_data.js", "grilla_data.js"],
+          data: ["course.json"] },
+    // El griego moderno: la primera temporada (13 semanas, del alfabeto a A2).
+    el: { name: "Ελληνικά", flag: "🇬🇷", brand: "Δρόμος C1", storage: "dromosc1",
+          blurb: "Griego moderno desde el alfabeto, con el blanco de cal y el azul de las islas del Egeo.",
+          themeColor: { light: "#a9d8ee", dark: "#0c2238" }, bg: "#fbfcfd",
+          fonts: ["fonts/gfs-didot-greek.woff2", "fonts/gfs-didot-latin.woff2", "fonts/noto-greek-400.woff2", "fonts/noto-greek-700.woff2", "fonts/noto-greek-400-italic.woff2"],
+          missing: ["conjugator.js", "frasi_data.js", "trabajo_data.js", "formule_data.js", "lab_data.js",
+                    "letture_settimana.js", "tramo_data.js", "letture_data.js", "mapas_data.js", "diagnosi.js",
+                    "freq_data.js", "ascolto_data.js", "dictogloss_data.js", "esame_data.js",
+                    "voci_cv_data.js", "duelli_data.js", "devolucion_data.js", "porque_data.js", "escritura_plus_data.js",
                     "variaciones_data.js", "escritos_data.js", "desglose_data.js", "biblioteca_data.js", "radio_data.js", "mediacion_data.js",
                     "fuera_data.js", "grilla_data.js"],
           data: ["course.json"] }
@@ -135,7 +147,7 @@
   function dress(code) {
     var L = LANGS[code], doc = document;
     doc.documentElement.setAttribute("data-lang", code);
-    doc.title = L.brand + " — " + (code === "de" ? L.name : L.name.toLowerCase());
+    doc.title = L.brand + " — " + (code === "de" ? L.name : L.name.toLowerCase());   // Deutsch: sustantivo, con mayúscula
     Array.prototype.forEach.call(doc.querySelectorAll('meta[name="theme-color"]'), function (m) {
       m.content = /dark/.test(m.media || "") ? L.themeColor.dark : L.themeColor.light;
     });
@@ -184,8 +196,9 @@
   /* El selector: una tarjeta por idioma, cada una con su mundo (el cielo
      de una plaza italiana y su placa de travertino; el mar de Ipanema, las
      ondas del calçadão y la placa azul de Río; el cielo de Baviera con sus
-     Rauten, los Alpes y el cartel de madera de un Wirtshaus). */
-  var PLATE = { it: ["la", "Via C1"], pt: ["rua", "Rumo C1"], de: ["der", "Weg C1"] };
+     Rauten, los Alpes y el cartel de madera de un Wirtshaus; el Egeo, las
+     casas de cal y la placa azul de una calle de las Cícladas). */
+  var PLATE = { it: ["la", "Via C1"], pt: ["rua", "Rumo C1"], de: ["der", "Weg C1"], el: ["ο", "Δρόμος C1"] };
   function picker() {
     var app = document.getElementById("app");
     document.documentElement.setAttribute("data-lang", "pick");

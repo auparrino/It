@@ -30,6 +30,11 @@ pack.ALL.forEach(function (code) {
   var ctx = { course: course, state: st(52) };
   var ids = Tr.lists(ctx).map(function (l) { return l.id; });
   if (code === "de") eq(ids, ["genero", "falsos"], "de: solo las listas con datos");
+  // Greek: its first season; a list appears when its weeks bring the data (none yet: nothing to show)
+  else if (code === "el") {
+    ok(ids.every(function (id) { return ["genero", "acento", "falsos", "prep", "cuela"].indexOf(id) >= 0; }), "el: listas conocidas: " + ids);
+    if (!ids.length) { ok(!Tr.available(ctx), "el: sin listas, la sección no aparece"); return; }
+  }
   else eq(ids, ["genero", "acento", "falsos", "prep", "cuela"], code + ": las cinco listas");
   ok(Tr.available(ctx), code + ": la sección aparece");
 
@@ -37,7 +42,7 @@ pack.ALL.forEach(function (code) {
     var s1 = Tr.summary(l, st(1)), s52 = Tr.summary(l, st(52));
     ok(s52.seen.length === l.entries.length, code + " " + l.id + ": en la semana 52 se ve todo (" + s52.seen.length + "/" + l.entries.length + ")");
     ok(s1.seen.length < s52.seen.length && s1.ahead > 0, code + " " + l.id + ": en la semana 1 se ve menos (" + s1.seen.length + ")");
-    ok(l.entries.length >= (code === "de" ? 5 : 10), code + " " + l.id + ": tiene entradas (" + l.entries.length + ")");
+    ok(l.entries.length >= (code === "de" ? 5 : code === "el" ? 1 : 10), code + " " + l.id + ": tiene entradas (" + l.entries.length + ")");
     var keys = {};
     l.entries.forEach(function (e) {
       ok(!keys[e.key], code + " " + l.id + ": sin repetidas " + e.key);
@@ -65,6 +70,7 @@ pack.ALL.forEach(function (code) {
   // dominated: two right in a row; the round leaves them last
   var l0 = Tr.lists(ctx)[0], cards = {};
   var all = Tr.summary(l0, st(52)).seen;
+  if (all.length < 4) return;        // a list that is just starting (Greek): nothing to hold back yet
   var held = all.slice(0, Math.max(0, all.length - 3));
   held.forEach(function (e) { cards[e.ids[0]] = { reps: 2, ok: 2, s: 5, d: 5, state: "rev", due: Date.now() + 9e8 }; });
   var s = Tr.summary(l0, st(52, cards));

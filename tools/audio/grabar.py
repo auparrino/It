@@ -2,11 +2,11 @@
 """Los audios grabados con Piper (TTS neuronal, corre local): la radio, el
 tramo, los diálogos del examen, las escenas de trabajo y los ejercicios de
 escuchar y de dictado del curso, para que no dependan de la voz del teléfono.
-En alemán (TODO_EL_CURSO), además, todo lo que la app lee del curso: las
+En alemán y en griego (TODO_EL_CURSO), además, todo lo que la app lee del curso: las
 respuestas, los ejemplos de la lección y las palabras (tools/audio/textos.js).
 
     python3 -m venv /tmp/piper && /tmp/piper/bin/pip install piper-tts
-    /tmp/piper/bin/python tools/audio/grabar.py [it pt de] [--solo-listar]
+    /tmp/piper/bin/python tools/audio/grabar.py [it pt de el] [--solo-listar]
 
 Las voces se bajan solas a PIPER_VOICES (por defecto ~/.cache/piper-voices)
 desde huggingface.co/rhasspy/piper-voices.  Necesita ffmpeg.
@@ -54,10 +54,14 @@ VOICES = {
     "de": {"": ("de_DE-thorsten-medium", 1.0),
            "m1": ("de_DE-thorsten-medium", 1.0), "m2": ("de_DE-thorsten-medium", 0.92), "m3": ("de_DE-thorsten-medium", 1.08),
            "f1": ("de_DE-kerstin-low", 1.0), "f2": ("de_DE-kerstin-low", 1.1), "f3": ("de_DE-kerstin-low", 0.94)},
+    # Piper tiene una sola voz griega (de mujer): los hombres, la misma más grave.
+    "el": {"": ("el_GR-rapunzelina-low", 1.0),
+           "f1": ("el_GR-rapunzelina-low", 1.0), "f2": ("el_GR-rapunzelina-low", 1.08), "f3": ("el_GR-rapunzelina-low", 0.95),
+           "m1": ("el_GR-rapunzelina-low", 0.84), "m2": ("el_GR-rapunzelina-low", 0.8), "m3": ("el_GR-rapunzelina-low", 0.88)},
 }
 # Los idiomas en los que se graba todo lo que la app lee del curso, no solo
 # la escucha: los que el teléfono no suele tener instalados.
-TODO_EL_CURSO = ("de",)
+TODO_EL_CURSO = ("de", "el")
 
 CREDITS = {
     "it_IT-paola-medium": "Paola (Piper, datos CC0)",
@@ -68,6 +72,7 @@ CREDITS = {
     "pt_BR-jeff-medium": "Jeff (Piper, CC0)",
     "de_DE-thorsten-medium": "Thorsten (Piper, Thorsten-Voice, CC0)",
     "de_DE-kerstin-low": "Kerstin (Piper, CC0)",
+    "el_GR-rapunzelina-low": "Rapunzelina (Piper, datos CC0)",
 }
 
 

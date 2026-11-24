@@ -42,7 +42,7 @@
   var LG = root.LANG || {};
   var DATA = function () { return root.PORQUE_DATA || {}; };
   // Words of the language; the apostrophe splits (gliel'ho → gliel, ho).
-  var WORD = new RegExp("[a-zà-ÿ" + (LG.hyphenWords ? "-" : "") + "]+", "g");
+  var WORD = new RegExp("[a-zà-ÿ\u0370-\u03ff" + (LG.hyphenWords ? "-" : "") + "]+", "g");
 
   function deaccent(s) {
     return String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -63,7 +63,7 @@
   // violões finds the block of the plurals in -ão.
   function endings(s) {
     var out = [];
-    String(s || "").toLowerCase().replace(/(^|[\s\/,(→])-([a-zà-ÿ]{1,5})-?(?![a-zà-ÿ])/g, function (m, a, e) { out.push("~" + e); return m; });
+    String(s || "").toLowerCase().replace(/(^|[\s\/,(→])-([a-zà-ÿ\u0370-\u03ff]{1,5})-?(?![a-zà-ÿ\u0370-\u03ff])/g, function (m, a, e) { out.push("~" + e); return m; });
     return out;
   }
   function tails(w) {
@@ -392,7 +392,7 @@
     // guardar / cuidar): «what was wrong» would be «it is Spanish», always.
     var U = root.Diagnosi && root.Diagnosi.util, known = U && (U.isItalian || U.isPortuguese);
     if (known && words(it.answer).some(function (w) { return w.length >= 3 && !known(w); })) return null;
-    var norm = function (s) { return deaccent(s).replace(/[^a-zà-ÿ0-9 ]/g, "").trim(); };
+    var norm = function (s) { return deaccent(s).replace(/[^a-zà-ÿ\u0370-\u03ff0-9 ]/g, "").trim(); };
     var cands = [];
     it.options.forEach(function (o) {
       if (norm(o) === norm(it.answer)) return;

@@ -108,3 +108,5 @@ jobs:
         run: node tools/lib/smoke_teclado.js
       - name: El alemán en Chromium (tools/lib/smoke_aleman.js)
         run: node tools/lib/smoke_aleman.js
+      - name: El griego en Chromium (tools/lib/smoke_griego.js)
+        run: node tools/lib/smoke_griego.js

@@ -41,7 +41,7 @@
   var ITEMS_BY_WEEK = null;
   var COLL = null;            // the combinations the notes of the course teach (collIndex)
 
-  var L = "a-zà-öø-ÿ";
+  var L = "a-zà-öø-ÿ\u0370-\u03ff";
   var TOKEN_RE = new RegExp("[" + L + "]+(?:-[" + L + "]+)*'?", "gi");
 
   var SRC = {
@@ -98,7 +98,7 @@
   function add(list, seen, t, es, w, src, label, ref) {
     t = strip(t).replace(/\s+/g, " ");
     if (!t || /_{2,}| \/ /.test(t)) return;
-    var key = lower(t).replace(/[^a-zà-öø-ÿ' ]/g, "").replace(/\s+/g, " ").trim();
+    var key = lower(t).replace(/[^a-zà-öø-ÿ\u0370-\u03ff' ]/g, "").replace(/\s+/g, " ").trim();
     if (!key || seen[key]) return;
     var tk = tokenize(t);
     if (tk.seq.length < 3 || tk.seq.length > 30) return;
@@ -133,7 +133,7 @@
     ((C && C.weeks) || []).forEach(function (w) {
       ((w.lesson && w.lesson.blocks) || []).forEach(function (b, i) {
         (b.ex || []).forEach(function (p) {
-          if (/\*[^*\s]+\*[a-zà-ÿ]|[a-zà-ÿ]\*[^*\s]+\*/i.test(p[0])) return;   // «*j*azz»: spelling, not usage
+          if (/\*[^*\s]+\*[a-zà-ÿ\u0370-\u03ff]|[a-zà-ÿ\u0370-\u03ff]\*[^*\s]+\*/i.test(p[0])) return;   // «*j*azz»: spelling, not usage
           add(list, seen, p[0], p[1], w.week, "leccion", b.h, blockId(w.week, i));
         });
       });
@@ -172,7 +172,7 @@
   function bareTerm(t) {
     var ws = lower(t).trim().split(/\s+/), arts = articles();
     if (ws.length > 1 && arts[ws[0].replace(/'$/, "")]) ws = ws.slice(1);
-    if (ws.length === 1 && /^[a-zà-öø-ÿ]+'[a-zà-öø-ÿ]/.test(ws[0])) ws = [ws[0].split("'")[1]];   // l'amico → amico
+    if (ws.length === 1 && /^[a-zà-öø-ÿ\u0370-\u03ff]+'[a-zà-öø-ÿ\u0370-\u03ff]/.test(ws[0])) ws = [ws[0].split("'")[1]];   // l'amico → amico
     return ws.join(" ");
   }
 
@@ -303,9 +303,9 @@
       var re = /\*([^*]+)\*/g, m, s = String(text || "");
       while ((m = re.exec(s))) {
         var before = s.charAt(m.index - 1), after = s.charAt(m.index + m[0].length);
-        if (/[a-zà-öø-ÿ]/i.test(before) || /[a-zà-öø-ÿ]/i.test(after)) continue;   // part of a word
+        if (/[a-zà-öø-ÿ\u0370-\u03ff]/i.test(before) || /[a-zà-öø-ÿ\u0370-\u03ff]/i.test(after)) continue;   // part of a word
         m[1].split(/\s*(?:,|\/|;|…|\.\.\.)\s*/).forEach(function (f) {
-          f = lower(f).replace(/[^a-zà-öø-ÿ' -]/g, " ").replace(/\s+/g, " ").trim();
+          f = lower(f).replace(/[^a-zà-öø-ÿ\u0370-\u03ff' -]/g, " ").replace(/\s+/g, " ").trim();
           if (!f || /^-|-$/.test(f) || f.split(" ").length > 4 || f.length < 1) return;
           if (!fromEx && f.split(" ").length === 1 && f.length < 3) return;
           if (out.indexOf(f) < 0) out.push(f);
@@ -456,8 +456,8 @@
     var ex = x.length - 1, ey = y.length - 1;
     while (ex > i && ey > i && x[ex] === y[ey]) { ex--; ey--; }
     j = { good: x.slice(i, ex + 1).join(" "), bad: y.slice(i, ey + 1).join(" ") };
-    j.good = j.good.replace(/^[^a-zà-öø-ÿ']+|[^a-zà-öø-ÿ']+$/gi, "");
-    j.bad = j.bad.replace(/^[^a-zà-öø-ÿ']+|[^a-zà-öø-ÿ']+$/gi, "");
+    j.good = j.good.replace(/^[^a-zà-öø-ÿ\u0370-\u03ff']+|[^a-zà-öø-ÿ\u0370-\u03ff']+$/gi, "");
+    j.bad = j.bad.replace(/^[^a-zà-öø-ÿ\u0370-\u03ff']+|[^a-zà-öø-ÿ\u0370-\u03ff']+$/gi, "");
     return j;
   }
 
@@ -536,7 +536,7 @@
       String(it.note).split(/(?:[.;])\s+/).forEach(function (s) {
         var m = /^(.{2,60}?)\s*→\s*(.+)$/.exec(s.trim());
         if (!m) return;
-        var left = strip(m[1]).replace(/^.*?:\s*/, "").trim(), right = strip(m[2]).split(/[:(;]|, (?=[a-zà-ÿ]+ )/)[0].replace(/[.«»"]+$/g, "").trim();
+        var left = strip(m[1]).replace(/^.*?:\s*/, "").trim(), right = strip(m[2]).split(/[:(;]|, (?=[a-zà-ÿ\u0370-\u03ff]+ )/)[0].replace(/[.«»"]+$/g, "").trim();
         var ws = (right.toLowerCase().match(TOKEN_RE) || []);
         // a combination: at least two words of the language that are not articles
         if (ws.filter(function (w) { return !A[w.replace(/'$/, "")]; }).length < 2 || ws.length > 6 || !left) return;

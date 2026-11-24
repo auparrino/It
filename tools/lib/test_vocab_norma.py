@@ -16,9 +16,13 @@ sys.path.insert(0, HERE)
 import vocab_norma  # noqa: E402
 
 bad, checks = [], 0
-for lang in ("de", "pt"):
+for lang in ("de", "pt", "el"):
     course = json.load(open(os.path.join(ROOT, "docs", "lang", lang, "data", "course.json"), encoding="utf-8"))
     lex = vocab_norma.lexicon(course["weeks"], lang)
+    # los nombres de persona y de lugar que el curso da por sabidos (griego: curso.NOMBRES)
+    for name in course.get("names", []):
+        lex["first"].setdefault(vocab_norma.plain(name), 1)
+        lex["first"].setdefault(vocab_norma.stem(name, lang), 1)
     items = {i["id"]: i for i in course["items"]}
     for w in course["weeks"]:
         n = int(w["week"])

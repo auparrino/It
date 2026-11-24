@@ -1,14 +1,15 @@
-# La Via C1 · Rumo C1 · Weg C1 — idiomas hasta C1 en un año
+# La Via C1 · Rumo C1 · Weg C1 · Δρόμος C1 — idiomas hasta C1 en un año
 
-Una sola app para hispanohablantes rioplatenses con dos cursos completos y uno que arranca:
+Una sola app para hispanohablantes rioplatenses con dos cursos completos y dos que arrancan:
 
 | | Idioma | Estética | Detalle |
 |---|---|---|---|
 | 🇮🇹 **La Via C1** | Italiano, de cero a C1 (CILS / CELI / PLIDA) | La Costiera Amalfitana: mayólicas, limones, Playfair Display | [README-italiano.md](README-italiano.md) |
 | 🇧🇷 **Rumo C1** | Portugués de Brasil, de cero a C1 (Celpe-Bras) | Carioca: el calçadão, el mar de Ipanema, el Pão de Açúcar | [README-portugues.md](README-portugues.md) |
 | 🇩🇪 **Weg C1** | Alemán desde cero hasta C1 en 52 semanas (los niveles del Goethe-Zertifikat, A1 a C1) | Berlín: el rojo, el negro y el oro, el azul del Spree | [README-aleman.md](README-aleman.md) |
+| 🇬🇷 **Δρόμος C1** | Griego moderno desde el alfabeto: la primera temporada, 13 semanas de A1 a A2 (el resto hasta C1, planeado) | Las islas del Egeo: el blanco de cal, el azul de las cúpulas, la greca, GFS Didot | [README-griego.md](README-griego.md) |
 
-Los tres comparten el mismo motor y la misma didáctica (el alemán, por ahora, con lo esencial): 52 semanas en cuatro
+Los cuatro comparten el mismo motor y la misma didáctica (el alemán y el griego, por ahora, con lo esencial): 52 semanas en cuatro
 estaciones con jefes, lecciones en pasos cortos con chequeos, repaso
 espaciado con FSRS, diagnóstico de los errores típicos del hispanohablante
 con pistas antes que respuestas, frases de conversación, lecturas graduadas,
@@ -24,7 +25,8 @@ sigue donde estaba).
 
 En el celular, las respuestas en la lengua del curso se escriben con un
 **teclado propio** que aparece en pantalla, con la distribución del idioma
-(QWERTY con *à è ì ò ù*, con *ã ç õ*, o con *ä ö ü ß*) y sin el
+(QWERTY con *à è ì ò ù*, con *ã ç õ*, o con *ä ö ü ß*; en griego, el
+teclado griego entero, también en la computadora) y sin el
 autocorrector en castellano. Una página web no puede poner el teclado del
 teléfono en otro idioma (Chrome en Android no se lo pide al teclado; Safari
 tampoco), así que este es el camino. Con ⌨️ volvés al teclado del teléfono
@@ -45,7 +47,7 @@ se paga por uso, y con Haiku son centavos. Si Anthropic contesta que la clave
 Es una app web instalable (PWA) que funciona sin internet y guarda todo en
 el teléfono. Publicá `docs/` con GitHub Pages (*Settings → Pages → Deploy
 from a branch*, carpeta `/docs`), abrí la URL una vez con internet y agregala
-a la pantalla de inicio. `?lang=it`, `?lang=pt` o `?lang=de` en la URL abre
+a la pantalla de inicio. `?lang=it`, `?lang=pt`, `?lang=de` o `?lang=el` en la URL abre
 directo un idioma.
 
 ## Qué es cada palabra

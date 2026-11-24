@@ -89,7 +89,7 @@
     return ans;
   }
   function words(s) {
-    return norm(s).split(/[^a-z0-9\u00c0-\u024f']+/).filter(function (t) { return t.length > 1; });
+    return norm(s).split(/[^a-z0-9\u00c0-\u024f\u0370-\u03ff']+/).filter(function (t) { return t.length > 1; });
   }
   // Two sentences with mostly the same words (Jaccard over the words).
   function same(a, b) {

@@ -1,0 +1,648 @@
+/* Δρόμος C1 — el tema de las islas griegas (docs/lang/el/theme.css).
+
+   Se carga después de css/app.css (la estructura común).  Las Cícladas a
+   mediodía: arriba el cielo limpio del Egeo, abajo el blanco de cal de las
+   casas (modo claro) o la noche sobre la caldera de Santorini, azul marino
+   con luces cálidas (modo oscuro).  Lo que se toca lleva los colores de
+   allá: el cobalto de las cúpulas y los postigos, el turquesa del agua
+   baja, el magenta de la buganvilla, el amarillo del sol y el verde del
+   olivo.  El ornamento es la greca (el meandro): un filete fino en la
+   cabecera, en las tarjetas del juego y en los banners; al pie de los
+   banners, las olas; el jefe de cada semana es una cúpula azul.  La marca
+   es una placa de calle griega: esmalte azul, letras blancas y un filete
+   blanco.  Títulos en GFS Didot (la Didot griega clásica, un solo peso);
+   el resto en Atkinson Hyperlegible, con Noto Sans para las letras
+   griegas. */
+
+:root {
+  --coral: #c2352b;             /* los geranios en las latas, las barcas pintadas */
+  --coral-escuro: #93231b;
+  --coral-claro: #e2645a;
+  --boton: #1456a8; --boton-hover: #0e4285; --boton-tinta: #fff;   /* el cobalto de las cúpulas */
+  --mata: #556f1c;              /* el olivo */
+  --mata-claro: #869c3a;
+  --mata-escuro: #3d5110;
+  --sol: #f4b81f;               /* el sol de mediodía */
+  --sol-escuro: #855b00;
+  --mar: #1560a8;               /* el cobalto de las cúpulas y los postigos */
+  --mar-escuro: #0d4582;
+  --mar-claro: #4b97dc;
+  --turquesa: #0f8fa0;          /* el agua baja de las calas */
+  --bugan: #b81d6e;             /* la buganvilla */
+  --bugan-claro: #dd4c97;
+  --ceu: #a9d8ee;               /* el cielo del Egeo */
+  --ceu-claro: #e6f4fa;
+  --areia: #fbfcfd;             /* el blanco de cal: el fondo */
+  --papel: #ffffff;             /* las tarjetas */
+  --pedra: #eef3f7;             /* la sombra azulada de un muro encalado */
+  --tinta: #10243a;
+  --cinza: #536172;
+  --cinza-claro: #d9e3ec;       /* los filetes */
+  --placa: #134f9c;             /* el esmalte de la placa de calle */
+  --sobre: #ffffff;             /* la tinta encima de un color lleno */
+  --sombra: 0 1px 2px rgba(16,48,90,.05), 0 8px 24px rgba(16,48,90,.09);
+  --raio: 14px;
+  --serif: "GFS Didot", "Georgia", "Times New Roman", serif;
+  --sans: "Atkinson", "Noto Greek", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* La greca: una línea de base y un gancho que se enrosca.  A todo color
+     (el filete de la cabecera), en blanco (banners, botones grandes, la
+     cúpula llena) y en tinta azul apenas visible (tarjetas especiales). */
+  --meandros: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10'%3E%3Crect width='14' height='10' fill='%23fff'/%3E%3Cpath d='M0 9h14M2 9V1h10v6H6V4h3' fill='none' stroke='%231560a8' stroke-width='1.5'/%3E%3C/svg%3E");
+  --meandros-claros: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10'%3E%3Cpath d='M0 9h14M2 9V1h10v6H6V4h3' fill='none' stroke='%23fff' stroke-opacity='.5' stroke-width='1.5'/%3E%3C/svg%3E");
+  --meandros-tinta: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10'%3E%3Cpath d='M0 9h14M2 9V1h10v6H6V4h3' fill='none' stroke='%231560a8' stroke-opacity='.28' stroke-width='1.5'/%3E%3C/svg%3E");
+  /* las olas: una atrás y otra adelante */
+  --olas: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24'%3E%3Cpath d='M0 24V11q15-9 30 0t30 0 30 0 30 0v13z' fill='%23fff' fill-opacity='.5'/%3E%3Cpath d='M0 24v-7q15 8 30 0t30 0 30 0 30 0v7z' fill='%23fff' fill-opacity='.9'/%3E%3C/svg%3E");
+  /* una rama de buganvilla: tres flores de tres brácteas */
+  --rama: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 56'%3E%3Cdefs%3E%3Cg id='f' fill='%23fff'%3E%3Cpath id='b' d='M0 0C-6-5-6-13 0-17C6-13 6-5 0 0z'/%3E%3Cuse href='%23b' transform='rotate(120)'/%3E%3Cuse href='%23b' transform='rotate(240)'/%3E%3C/g%3E%3C/defs%3E%3Cpath d='M4 52C22 44 46 30 68 6' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3Cuse href='%23f' transform='translate(22 34) rotate(15)'/%3E%3Cuse href='%23f' transform='translate(44 26) rotate(-30) scale(.85)'/%3E%3Cuse href='%23f' transform='translate(54 12) rotate(40) scale(.7)'/%3E%3C/svg%3E");
+  /* el progreso: del cobalto al turquesa, como el agua que se aclara hacia la orilla */
+  --egeo: linear-gradient(90deg, var(--mar), var(--turquesa));
+  /* lo que el núcleo llama así: el filete y los dibujos de fondo */
+  --calcadao: var(--meandros) repeat-x 0 0 / 11.2px 8px;
+  --ondas-claras: var(--meandros-claros);
+  --ondas-tinta: var(--meandros-tinta);
+  color-scheme: light;
+}
+
+/* oscuro: la noche en la caldera, azul marino profundo, con la luz cálida de las ventanas */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --coral: #ff7f70; --coral-escuro: #e5574b; --coral-claro: #ffa598;
+    --boton: #74b6f0; --boton-hover: #9ccdf6; --boton-tinta: #06182a;
+    --mata: #a8c05c; --mata-claro: #c2d683; --mata-escuro: #8aa540;
+    --sol: #ffcc4d; --sol-escuro: #e0aa1c;
+    --mar: #74b6f0; --mar-escuro: #4f9ad8; --mar-claro: #9ccdf6;
+    --turquesa: #4fd0d8; --bugan: #f47fba; --bugan-claro: #f9a8d0;
+    --ceu: #0c2238; --ceu-claro: #0a1c30;
+    --areia: #081726; --papel: #0f2338; --pedra: #18304a;
+    --tinta: #eef3f8; --cinza: #a7b5c4; --cinza-claro: #223a55;
+    --placa: #1a5cab; --sobre: #06182a;
+    --meandros: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10'%3E%3Crect width='14' height='10' fill='%230c2238'/%3E%3Cpath d='M0 9h14M2 9V1h10v6H6V4h3' fill='none' stroke='%2374b6f0' stroke-width='1.5'/%3E%3C/svg%3E");
+    --meandros-tinta: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10'%3E%3Cpath d='M0 9h14M2 9V1h10v6H6V4h3' fill='none' stroke='%2374b6f0' stroke-opacity='.3' stroke-width='1.5'/%3E%3C/svg%3E");
+    --sombra: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+}
+html[data-theme="dark"] {
+    --coral: #ff7f70; --coral-escuro: #e5574b; --coral-claro: #ffa598;
+    --boton: #74b6f0; --boton-hover: #9ccdf6; --boton-tinta: #06182a;
+    --mata: #a8c05c; --mata-claro: #c2d683; --mata-escuro: #8aa540;
+    --sol: #ffcc4d; --sol-escuro: #e0aa1c;
+    --mar: #74b6f0; --mar-escuro: #4f9ad8; --mar-claro: #9ccdf6;
+    --turquesa: #4fd0d8; --bugan: #f47fba; --bugan-claro: #f9a8d0;
+    --ceu: #0c2238; --ceu-claro: #0a1c30;
+    --areia: #081726; --papel: #0f2338; --pedra: #18304a;
+    --tinta: #eef3f8; --cinza: #a7b5c4; --cinza-claro: #223a55;
+    --placa: #1a5cab; --sobre: #06182a;
+    --meandros: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10'%3E%3Crect width='14' height='10' fill='%230c2238'/%3E%3Cpath d='M0 9h14M2 9V1h10v6H6V4h3' fill='none' stroke='%2374b6f0' stroke-width='1.5'/%3E%3C/svg%3E");
+    --meandros-tinta: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10'%3E%3Cpath d='M0 9h14M2 9V1h10v6H6V4h3' fill='none' stroke='%2374b6f0' stroke-opacity='.3' stroke-width='1.5'/%3E%3C/svg%3E");
+    --sombra: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+
+/* GFS Didot tiene un solo peso: el rango 400-900 evita la negrita sintética. */
+@font-face { font-family: "GFS Didot"; font-style: normal; font-weight: 400 900; font-display: swap;
+  src: url(fonts/gfs-didot-greek.woff2) format("woff2"); unicode-range: U+0370-03FF; }
+@font-face { font-family: "GFS Didot"; font-style: normal; font-weight: 400 900; font-display: swap;
+  src: url(fonts/gfs-didot-latin.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212; }
+/* Noto Sans, solo las letras griegas: Atkinson no las trae. */
+@font-face { font-family: "Noto Greek"; font-style: normal; font-weight: 300 550; font-display: swap;
+  src: url(fonts/noto-greek-400.woff2) format("woff2"); unicode-range: U+0370-03FF, U+1F00-1FFF; }
+@font-face { font-family: "Noto Greek"; font-style: normal; font-weight: 551 1000; font-display: swap;
+  src: url(fonts/noto-greek-700.woff2) format("woff2"); unicode-range: U+0370-03FF, U+1F00-1FFF; }
+@font-face { font-family: "Noto Greek"; font-style: italic; font-weight: 300 550; font-display: swap;
+  src: url(fonts/noto-greek-400-italic.woff2) format("woff2"); unicode-range: U+0370-03FF, U+1F00-1FFF; }
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: .005em;
+  line-height: 1.55;
+  color: var(--tinta);
+  /* el cielo del Egeo con el sol arriba a la derecha, y abajo el blanco de cal */
+  background:
+    radial-gradient(150px 150px at 86% 96px, rgba(255,226,130,.6), rgba(255,226,130,0) 70%) fixed,
+    linear-gradient(180deg, var(--ceu) 0, var(--ceu-claro) 220px, var(--areia) 440px) fixed, var(--areia);
+  -webkit-text-size-adjust: 100%;
+  min-height: 100vh;
+}
+/* de noche: el cielo de la caldera y, donde estaba el sol, el resplandor de la luna */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) body { background:
+    radial-gradient(130px 130px at 86% 96px, rgba(190,215,245,.12), rgba(190,215,245,0) 70%) fixed,
+    linear-gradient(180deg, var(--ceu) 0, var(--ceu-claro) 220px, var(--areia) 440px) fixed, var(--areia); }
+}
+html[data-theme="dark"] body { background:
+    radial-gradient(130px 130px at 86% 96px, rgba(190,215,245,.12), rgba(190,215,245,0) 70%) fixed,
+    linear-gradient(180deg, var(--ceu) 0, var(--ceu-claro) 220px, var(--areia) 440px) fixed, var(--areia); }
+
+/* ---------- cabecera: papel translúcido, con el filete de greca */
+header.top {
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--papel) 84%, transparent);
+  -webkit-backdrop-filter: saturate(1.3) blur(14px); backdrop-filter: saturate(1.3) blur(14px);
+  padding: calc(8px + env(safe-area-inset-top)) 0 0; border-bottom: 1px solid color-mix(in srgb, var(--cinza-claro) 60%, transparent);
+}
+header.top::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 8px;
+  background: var(--calcadao);
+}
+
+/* la placa de calle: esmalte azul, letras blancas y un filete blanco
+   corrido, con las esquinas apenas redondeadas */
+.placa { display: inline-flex; flex-direction: column; align-items: center;
+  background: var(--placa); color: #fff; border-radius: 5px; padding: 6px 14px 5px;
+  text-align: center;
+  box-shadow: inset 0 0 0 2px var(--placa), inset 0 0 0 3.25px rgba(255,255,255,.92), 0 2px 6px rgba(10,40,90,.22); }
+.placa .p-sup { font-family: var(--sans); font-size: .56rem; font-weight: 700; letter-spacing: .2em;
+  text-transform: uppercase; color: rgba(255,255,255,.85); line-height: 1.4; }
+.placa .p-rua { font-family: var(--serif); font-weight: 400; font-size: 1.3rem; letter-spacing: .02em;
+  line-height: 1.1; }
+.brand.placa { margin: 2px 0; }
+.placa.big { display: flex; width: 100%; box-sizing: border-box; margin: 18px 0 10px; padding: 20px 18px 16px; border-radius: 8px;
+  box-shadow: inset 0 0 0 4px var(--placa), inset 0 0 0 6px rgba(255,255,255,.92), var(--sombra); }
+.placa.big .p-sup { font-size: .68rem; letter-spacing: .28em; }
+.placa.big .p-rua { font-size: 1.9rem; letter-spacing: .02em; line-height: 1.15; margin-top: 2px; }
+@media (max-width: 520px) { .placa.big .p-rua { font-size: 1.6rem; } }
+.stat span { font-size: .6875rem; color: var(--cinza); text-transform: uppercase; letter-spacing: .1em; font-weight: 700; }
+.stat.hot b { color: var(--coral); }
+/* el anillo de la meta: del cobalto al sol */
+.ring { --p: 0; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; flex: none;
+  background: conic-gradient(var(--mar) 0, var(--sol) calc(var(--p) * 1%), var(--cinza-claro) 0); }
+.ring b { width: 32px; height: 32px; border-radius: 50%; background: var(--papel);
+  display: grid; place-items: center; font-size: .72rem; font-weight: 800; }
+.mode { border: 1px solid var(--cinza-claro); background: var(--papel); color: inherit;
+  border-radius: 50%; width: 38px; height: 38px; font-size: 1rem; padding: 0; }
+.xpbar i { display: block; height: 100%; background: var(--egeo); transition: width .6s cubic-bezier(.2,.8,.2,1); }
+
+/* ------------------------------------------------------------------ tarjetas */
+
+.card {
+  background: var(--papel); border-radius: var(--raio); border: 1px solid var(--cinza-claro);
+  box-shadow: var(--sombra); padding: 20px; margin: 16px 0;
+}
+
+/* ------------------------------------------------------------------- texto */
+
+h1 { font-family: var(--serif); font-size: 2.2rem; font-weight: 400; letter-spacing: 0; line-height: 1.08; margin: 24px 0 6px; }
+h1.hello { font-size: 2.4rem; }
+h3 { font-size: .78rem; margin: 18px 0 8px; text-transform: uppercase; letter-spacing: .12em;
+     color: var(--cinza); font-weight: 700; }
+p.lead { color: var(--cinza); margin: 0 0 18px; font-size: 1.04rem; }
+p.fare { margin: -8px 0 16px; font-size: .95rem; }
+.muted { color: var(--cinza); font-size: .85rem; }
+.note { font-size: .88rem; color: var(--cinza); margin-top: 6px; }
+/* el griego dentro del texto: derecho y en negrita (el alfabeto ya lo
+   distingue), en el cobalto de los postigos */
+.lesson i.it, ul.exs .it, .note i.it, .call i.it, .diag i.it, .feedback p i.it {
+  font-style: normal; font-weight: 700; color: var(--mar-escuro); }
+@media (prefers-color-scheme: dark) { html:not([data-theme="light"]) :is(.lesson i.it, .note i.it, .call i.it) { color: var(--mar-claro); } }
+html[data-theme="dark"] :is(.lesson i.it, .note i.it, .call i.it) { color: var(--mar-claro); }
+p.version { text-align: center; margin: 18px 0 8px; opacity: .8; }
+
+/* ----------------------------------------------------------------- botones */
+
+.btn {
+  border: none; border-radius: 12px; padding: 13px 20px; font-weight: 700; letter-spacing: .01em;
+  background: var(--boton); color: var(--boton-tinta);
+  transition: transform .08s, background .15s, filter .15s;
+}
+@media (hover: hover) { .btn:hover:not(:disabled) { background: var(--boton-hover); } }
+.btn:active:not(:disabled) { transform: scale(.98); background: var(--boton-hover); }
+.btn.ghost { background: var(--papel); color: var(--tinta); border: 1.5px solid var(--cinza-claro); }
+@media (hover: hover) { .btn.ghost:hover:not(:disabled) { background: var(--areia); } }
+.btn.ghost:active:not(:disabled) { background: var(--areia); }
+.btn.gold { background: var(--sol); color: #3a2600; }
+@media (hover: hover) { .btn.gold:hover:not(:disabled) { background: var(--sol-escuro); color: #fff; } }
+.btn.gold:active:not(:disabled) { background: var(--sol-escuro); color: #fff; }
+.tab { border: none; background: transparent; color: var(--cinza);
+       padding: 8px 14px; border-radius: 10px; font-weight: 700; }
+.tab.on { background: var(--papel); color: var(--tinta); border: 1px solid var(--cinza-claro); }
+.goalbar { height: 8px; background: var(--cinza-claro); border-radius: 99px; overflow: hidden; margin-top: 10px; }
+.goalbar i { display: block; height: 100%; border-radius: 99px; background: var(--egeo); transition: width .5s ease; }
+.bigbtn { border: none; border-radius: 14px; padding: 16px 16px 14px; text-align: left; color: #fff;
+  display: flex; flex-direction: column; gap: 2px; min-height: 118px; position: relative;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 6px 16px color-mix(in srgb, var(--tono, #000) 28%, transparent);
+  overflow: hidden; isolation: isolate;
+  transition: transform .08s, filter .15s; }
+.bigbtn b { font-size: 1.2rem; font-weight: 800; margin-top: auto; letter-spacing: -.005em; }
+/* el διάλειμμα: la buganvilla sobre el muro; el repaso, la greca al pie */
+.bigbtn.pausa { --tono: var(--bugan); grid-column: span 2; min-height: 112px;
+  background: linear-gradient(160deg, #e0559c 0, #b81d6e 55%, #8c1453); }
+.bigbtn.pausa::after { content: ""; position: absolute; right: 12px; top: 8px; width: 84px; height: 66px;
+  background: var(--rama) no-repeat center / contain; opacity: .3; z-index: -1; }
+.bigbtn.giorno { --tono: #d99510; background: radial-gradient(90px 90px at 100% 0, #fff3b8, rgba(255,243,184,0) 70%), linear-gradient(160deg, #ffe07a, #f4b81f 60%, #e09c12); color: #3a2600; }
+.bigbtn.ripasso { --tono: #1560a8; grid-column: span 2; min-height: 84px;
+  background: var(--meandros-claros) repeat-x 0 100% / 16.8px 12px, linear-gradient(160deg, #3f8fd8, #1560a8 60%, #0d4582); }
+.bigbtn.parole { --tono: #556f1c; background: linear-gradient(160deg, #869c3a, #556f1c 60%, #3d5110); }
+.bigbtn.lampo { --tono: #0b7886; background: linear-gradient(160deg, #1fb3bf, #0b7886 60%, #075a66); }
+.bigbtn.scena { --tono: #c2352b; background: linear-gradient(160deg, #ee7a6c, #d44a3e 50%, #b12d24); }
+.weekcard > b { font-size: 1.25rem; font-weight: 800; }
+.weekcard .prog, .scene .prog { height: 5px; background: var(--cinza-claro); border-radius: 99px; overflow: hidden; margin-top: 6px; }
+.weekcard .prog i, .scene .prog i { display: block; height: 100%; background: var(--mata-claro); }
+.weekcard.first { border-left: 4px solid var(--mar); }
+/* la tarjeta del camino: una greca fina al pie */
+.weekcard.hero { background: var(--meandros-tinta) repeat-x 0 100% / 14px 10px, var(--papel); padding-bottom: 24px; }
+.weekcard.first > b { color: var(--mar-escuro); }
+.weekcard.clin, .lab.clin { border-color: var(--coral); }
+
+.fdg { border-left: 5px solid var(--sol); }
+.fdg .fit, .fit { font-size: 1.35rem; font-weight: 700; color: var(--mata); margin: 4px 0 2px; letter-spacing: -.005em; }
+.fit.big { font-size: 1.8rem; line-height: 1.25; }
+.fes { color: var(--cinza); }
+.heat i { aspect-ratio: 1; border-radius: 5px; background: var(--cinza-claro); }
+.heat i.h1 { background: color-mix(in srgb, var(--sol) 45%, transparent); }
+.heat i.h2 { background: color-mix(in srgb, var(--mar-claro) 70%, transparent); }
+.heat i.h3 { background: var(--mata); }
+.heat i:last-child { outline: 2px solid var(--sol); outline-offset: 1px; }
+
+.strands { display: flex; height: 10px; border-radius: 5px; overflow: hidden; margin: 10px 0 8px; background: var(--cinza-claro); }
+.strands i { display: block; height: 100%; }
+.strands .s-input { background: var(--mar); } .strands .s-output { background: var(--coral); }
+.strands .s-forma { background: var(--mata); } .strands .s-fluidez { background: var(--sol); }
+
+.install { border: 1.5px dashed var(--mata); }
+.pathsum b { font-size: 1.25rem; font-weight: 800; white-space: nowrap; color: var(--mar); }
+.season p { margin: 0 0 12px; font-size: .9rem; }
+.banner { position: relative; border-radius: var(--raio); padding: 16px 18px; color: #fff; margin-top: 8px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 6px 16px rgba(16,48,90,.14); }
+.banner h2 { margin: 2px 0; font-family: var(--serif); font-weight: 400; font-size: 1.85rem; letter-spacing: .005em; line-height: 1.1; }
+.banner p { margin: 0; font-size: .88rem; opacity: .92; color: inherit; }
+/* las cuatro temporadas, de la mañana a la tarde: el olivar, el Egeo de
+   mediodía, el sol de la siesta y el atardecer de Oia; con una greca
+   blanca arriba y las olas al pie */
+.season .banner { overflow: hidden; isolation: isolate; padding: 24px 18px 32px; }
+.season .banner::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 10px; opacity: .7; z-index: -1;
+  background: var(--meandros-claros) repeat-x 0 0 / 14px 10px; pointer-events: none; }
+.season .banner::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 22px; opacity: .3; z-index: -1;
+  background: var(--olas) repeat-x 0 100% / 110px 22px; pointer-events: none; }
+.season .banner.s1 { background: linear-gradient(160deg, #869c3a, #556f1c 60%, #3d5110); }
+.season .banner.s2 { background: linear-gradient(160deg, #19a3b0, #1560a8 55%, #0d4582); }
+.season .banner.s3 { background: linear-gradient(160deg, #ffe07a, #f4b81f 55%, #e09c12); color: #3a2600; }
+.season .banner.s3::after { opacity: .5; }
+.season .banner.s4 { background: linear-gradient(165deg, #f6a65a, #d6457e 55%, #6a2f7c); }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .season .banner.s1 { background: linear-gradient(160deg, #5f7623, #3d5110 60%, #2a390a); }
+  html:not([data-theme="light"]) .season .banner.s2 { background: linear-gradient(160deg, #127d8c, #124f8f 55%, #0b3566); }
+}
+html[data-theme="dark"] .season .banner.s1 { background: linear-gradient(160deg, #5f7623, #3d5110 60%, #2a390a); }
+html[data-theme="dark"] .season .banner.s2 { background: linear-gradient(160deg, #127d8c, #124f8f 55%, #0b3566); }
+.node .dot { width: 68px; height: 68px; border-radius: 50%; font-size: 1.4rem; font-weight: 800;
+  color: var(--mata); background: var(--papel); border: 2px solid var(--mata); transition: transform .08s; }
+.node.full .dot { background: var(--sol); border-color: var(--sol); color: #3a2600; }
+.node.current .dot { background: var(--mar); border-color: var(--mar); color: var(--sobre);
+  animation: nodepulse 1.8s ease-in-out infinite; }
+@keyframes nodepulse { 50% { box-shadow: 0 0 0 9px color-mix(in srgb, var(--mar) 22%, transparent); } }
+/* el jefe: una cúpula azul sobre su tambor blanco */
+.node.boss .dot { width: 82px; height: 78px; font-size: 1.8rem; border-radius: 50% 50% 10px 10px / 68% 68% 10px 10px;
+  border-color: var(--mar); color: var(--mar-escuro); background: var(--papel); padding-top: 8px; }
+.node.boss.current .dot, .node.boss.full .dot { background: var(--meandros-claros) repeat-x 0 100% / 11.2px 8px, var(--mar); color: var(--sobre); border-color: var(--mar); }
+.node.boss.full .dot { box-shadow: 0 0 0 3px var(--sol); }
+.node.locked .dot { background: transparent; border: 2px dashed var(--cinza-claro); color: var(--cinza); font-size: 1.1rem; }
+.node .bubble { position: absolute; top: -30px; background: var(--mar-escuro); color: var(--sobre); font-weight: 800; font-size: .7rem;
+  letter-spacing: .08em; padding: 4px 12px; border-radius: 8px; animation: bob 1.4s ease-in-out infinite; z-index: 2; }
+.node .bubble::after { content: ""; position: absolute; left: 50%; bottom: -6px; margin-left: -6px; border: 6px solid transparent;
+  border-top-color: var(--mar-escuro); border-bottom: 0; }
+.node .nt { font-size: .76rem; font-weight: 700; line-height: 1.25; margin-top: 8px; color: var(--tinta); }
+.node .nm { display: block; font-size: .7rem; color: var(--cinza); font-weight: 600; }
+.node.locked .nt { color: var(--cinza); }
+.stars i { font-style: normal; color: var(--cinza-claro); font-size: .95rem; }
+.stars i.on { color: var(--sol); }
+.week { background: var(--papel); border: 1px solid var(--cinza-claro); border-radius: 12px; padding: 12px 14px;
+  text-align: left; display: flex; flex-direction: column; gap: 4px; position: relative; color: inherit; }
+.week .n { font-size: .68rem; color: var(--cinza); letter-spacing: .08em; text-transform: uppercase; }
+.week .meta { font-size: .72rem; color: var(--cinza); }
+.week.done { border-color: var(--mata); }
+.week.done::after { content: "✓"; position: absolute; top: 10px; right: 12px; color: var(--mata); font-weight: 800; }
+.week.bossweek { border-color: var(--sol); }
+.week .prog { height: 4px; background: var(--cinza-claro); border-radius: 99px; overflow: hidden; margin-top: 6px; }
+.week .prog i { display: block; height: 100%; background: var(--mata-claro); }
+.mission { display: grid; grid-template-columns: 44px 1fr auto; gap: 12px; align-items: center; text-align: left;
+  border: 1px solid var(--cinza-claro); background: var(--papel); color: inherit; border-radius: 12px; padding: 12px 14px;
+  transition: transform .08s; }
+.mission .mi { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-size: 1.3rem;
+  background: var(--areia); }
+.mission.done .mi { background: var(--mata); color: var(--sobre); }
+.mission b { display: block; font-size: 1.05rem; font-weight: 800; }
+.mission small { display: block; color: var(--cinza); font-weight: 600; font-size: .78rem; line-height: 1.3; }
+.mission .go { font-size: 1.4rem; color: var(--mar); font-weight: 800; }
+.mission.boss { border-color: var(--mar); }
+.scene, .lab, .ep { background: var(--papel); border: 1px solid var(--cinza-claro); border-radius: 12px;
+  padding: 13px 14px; text-align: left; color: inherit; display: flex; flex-direction: column; gap: 3px; position: relative;
+  transition: transform .08s; }
+.scene b, .lab b, .ep b { font-weight: 800; font-size: 1.05rem; }
+.scene .meta, .lab .meta { font-size: .72rem; color: var(--cinza); margin-top: 4px; }
+.scene.done, .ep.done { border-color: var(--mata); }
+.scene.done::after { content: "✓"; position: absolute; top: 12px; right: 14px; color: var(--mata); font-weight: 800; }
+.lab { display: grid; grid-template-columns: auto 1fr; column-gap: 12px; align-items: center; }
+.ep { flex-direction: row; align-items: center; gap: 12px; }
+.ep b { display: block; }
+.ep .score { margin-left: auto; font-weight: 700; color: var(--mata); font-family: var(--mono); }
+.badge { border: 1px solid var(--cinza-claro); border-radius: 12px; padding: 12px; text-align: center; opacity: .4; }
+.badge.won { opacity: 1; border-color: var(--sol); }
+.badge b { display: block; font-size: .85rem; margin-top: 4px; }
+.badge span { font-size: .72rem; color: var(--cinza); }
+.rank .rk { font-size: 1.9rem; font-weight: 800; color: var(--mar); }
+.set { display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 10px 0; border-bottom: 1px solid var(--cinza-claro); flex-wrap: wrap; }
+.set small { display: block; color: var(--cinza); font-size: .75rem; font-weight: 400; }
+.set select, .set input[type=time] { padding: 8px 10px; border-radius: 9px; color: inherit;
+  border: 1px solid var(--cinza-claro); background: var(--papel); }
+.set input[type=checkbox] { width: 24px; height: 24px; accent-color: var(--mata); }
+table.res td { padding: 6px 4px; border-bottom: 1px solid var(--cinza-claro); }
+.eb i { display: block; height: 8px; border-radius: 99px; background: var(--coral-claro); opacity: .75; }
+.eb b { font-family: var(--mono); font-size: .8rem; }
+.eb small { color: var(--mata); font-weight: 600; }
+.refs { font-size: .82rem; color: var(--cinza); }
+.tag { display: inline-block; font-size: .7rem; background: var(--cinza-claro); padding: 2px 8px;
+       border-radius: 99px; margin: 0 4px 4px 0; }
+.chal { border-left: 3px solid var(--cinza-claro); padding-left: 14px; margin: 14px 0; }
+
+/* -------------------------------------------------------------------- nav */
+
+.nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+  display: flex; justify-content: space-around;
+  background: color-mix(in srgb, var(--papel) 92%, transparent);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border-top: 1px solid var(--cinza-claro);
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom)); }
+.nav button { flex: 1; border: none; background: none; color: var(--cinza);
+  font-size: .68rem; font-weight: 700; letter-spacing: .02em; display: flex; flex-direction: column;
+  align-items: center; gap: 2px; padding: 6px 0 4px; position: relative; }
+.nav button.on { color: var(--mar); }
+.nav button.on::after { content: ""; position: absolute; bottom: 0; width: 22px; height: 3px; border-radius: 3px;
+  background: var(--mar); }
+.hud .muted { font-style: italic; font-weight: 700; font-size: 1rem;
+  color: var(--mar-escuro); white-space: nowrap; }
+@media (prefers-color-scheme: dark) { html:not([data-theme="light"]) .hud .muted { color: var(--mar); } }
+html[data-theme="dark"] .hud .muted { color: var(--mar); }
+.hud .dai { font-style: italic; font-weight: 700; font-size: .95rem;
+  color: var(--coral); white-space: nowrap; animation: rise .4s ease backwards; }
+.hearts .over { font-size: .72rem; font-weight: 900; color: var(--coral); vertical-align: middle; }
+.combo { font-weight: 800; color: var(--coral); white-space: nowrap; }
+/* el camino de la ronda: el agua que avanza */
+.progressline { flex: 1 1 140px; height: 8px; background: color-mix(in srgb, var(--papel) 55%, transparent); border-radius: 99px;
+  overflow: hidden; min-width: 0; }
+.progressline i { display: block; height: 100%; background: var(--egeo); border-radius: 99px;
+  transition: width .5s cubic-bezier(.2,.8,.2,1); }
+#quit, #lesquit { padding: 6px 12px; border: none; background: transparent; font-size: 1.1rem; color: var(--cinza); }
+body.ingame #app > .card::before { content: ""; position: absolute; left: 12px; right: 12px; top: 1px; height: 8px;
+  background: var(--meandros-tinta) repeat-x 50% 0 / 11.2px 8px; }
+.prompt { color: var(--cinza); font-size: .9rem; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.stem .gap { color: var(--mar); border-bottom: 3px solid var(--mar); padding: 0 18px; }
+.stem .gap.n { display: inline-grid; place-items: center; min-width: 30px; height: 26px; padding: 0 8px; margin: 0 2px;
+  border: none; border-radius: 8px; background: color-mix(in srgb, var(--sol) 22%, transparent); color: var(--sol-escuro);
+  font-family: var(--sans); font-size: .85rem; font-weight: 800; vertical-align: middle; }
+@media (prefers-color-scheme: dark) { html:not([data-theme="light"]) .stem .gap.n { color: var(--sol); } }
+html[data-theme="dark"] .stem .gap.n { color: var(--sol); }
+.stem .w.gl:active { background: color-mix(in srgb, var(--mata) 15%, transparent); }
+.stem .w.gl.new { text-decoration: underline dotted; text-underline-offset: 4px; text-decoration-color: var(--mata); }
+.opt { position: relative; text-align: left; padding: 14px 16px 14px 54px; border-radius: 12px; font-weight: 700; font-size: 1.05rem;
+  border: 1.5px solid var(--cinza-claro); background: var(--papel); color: inherit;
+  transition: transform .06s, background .15s, border-color .15s; }
+.opt::before { counter-increment: opt; content: counter(opt); position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: .9rem;
+  font-weight: 800; color: var(--cinza); border: 1.5px solid var(--cinza-claro); }
+@media (hover: hover) { .opt:hover:not(:disabled) { border-color: var(--mar); } }
+.opt:active:not(:disabled) { transform: scale(.99); border-color: var(--mar); }
+.opt.right { border-color: var(--mata); background: color-mix(in srgb, var(--mata) 14%, var(--papel)); color: var(--mata-escuro);
+  animation: bump .35s cubic-bezier(.3,1.6,.5,1); }
+.opt.right::before { content: "✓"; color: var(--sobre); background: var(--mata); border-color: var(--mata); }
+.opt.wrong { border-color: var(--coral); background: color-mix(in srgb, var(--coral) 12%, var(--papel)); color: var(--coral-escuro);
+  animation: shake .32s ease; }
+.opt.wrong::before { content: "✕"; color: var(--sobre); background: var(--coral); border-color: var(--coral); }
+@media (prefers-color-scheme: dark) { html:not([data-theme="light"]) .opt.right { color: var(--mata-claro); } html:not([data-theme="light"]) .opt.wrong { color: var(--coral-claro); } }
+html[data-theme="dark"] .opt.right { color: var(--mata-claro); } html[data-theme="dark"] .opt.wrong { color: var(--coral-claro); }
+.typed input, .typed textarea {
+  flex: 1; min-width: 0; padding: 14px 16px; border-radius: 12px; background: var(--papel);
+  border: 1.5px solid var(--cinza-claro); color: inherit; font: inherit; font-size: 1.08rem; font-weight: 700; }
+.typed textarea { flex: 1 1 100%; resize: none; overflow: hidden; line-height: 1.4; min-height: 54px; }
+.typed input:focus, .typed textarea:focus { border-color: var(--mar);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--mar) 15%, transparent); }
+.accents button { border: 1.5px solid var(--cinza-claro); background: var(--papel); color: inherit;
+  border-radius: 10px; padding: 7px 12px; font-weight: 700; }
+.accents button:active { background: var(--areia); }
+
+.tiles-answer { min-height: 64px; border-bottom: 1.5px dashed var(--cinza-claro);
+  display: flex; flex-wrap: wrap; gap: 7px; padding: 6px 0 10px; align-items: center; }
+.tile { border: 1.5px solid var(--cinza-claro); background: var(--papel); color: inherit;
+  border-radius: 10px; padding: 10px 15px; font-weight: 700; font-size: 1.05rem;
+  transition: transform .06s, opacity .2s, border-color .15s; }
+.tile:active:not(:disabled) { transform: scale(.97); border-color: var(--mar); }
+.tile.on { border-color: var(--mar); }
+
+.bigplay { width: 92px; height: 92px; border-radius: 50%; border: none; font-size: 2.3rem;
+  background: var(--boton); color: var(--boton-tinta); margin: 6px 0 8px; transition: transform .08s; }
+.peek { margin: 8px 0; font-weight: 600; color: var(--mata); }
+.words .hit { color: var(--mata); }
+.words .miss { color: var(--coral); text-decoration: underline dotted; }
+
+.intro .badge-new, .lescard .badge-new { display: inline-block; font-size: .7rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .12em; color: var(--mata); background: color-mix(in srgb, var(--mata) 10%, transparent);
+  padding: 3px 10px; border-radius: 4px; margin-bottom: 8px; }
+.lescard.quiz .badge-new { color: var(--coral); background: color-mix(in srgb, var(--coral) 10%, transparent); }
+
+/* el veredicto: una hoja que sube desde abajo, con el «Σωστά!» en Didot */
+.feedback { margin-top: 16px; padding: 14px 16px; border-radius: 12px;
+            border-left: 4px solid var(--cinza); background: var(--areia); animation: slide .22s ease; }
+.feedback.giusto { border-color: var(--mata); }
+.feedback.quasi { border-color: var(--sol); }
+.feedback.sbagliato { border-color: var(--coral); }
+.feedback .verdict { font-family: var(--serif); font-size: 1.75rem; font-weight: 400;
+  letter-spacing: .005em; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.xpgain { font-size: .85rem; font-weight: 800; font-family: var(--sans); background: var(--sol); color: #3a2600;
+  padding: 2px 10px; border-radius: 99px; animation: pop .4s cubic-bezier(.3,1.6,.5,1) .15s both; }
+
+body.ingame .feedback:not(.prompt) {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; margin: 0;
+  border: none; border-top: 4px solid transparent; border-radius: 18px 18px 0 0; max-height: 72vh; overflow-y: auto;
+  padding: 20px 20px calc(18px + env(safe-area-inset-bottom));
+  box-shadow: 0 -8px 30px rgba(10,40,80,.16);
+  animation: sheet .32s cubic-bezier(.2,.9,.25,1.05);
+}
+@media (min-width: 700px) { body.ingame .feedback:not(.prompt) { left: 50%; width: 660px; margin-left: -330px; } }
+/* correcto: el verde del olivo; casi: el amarillo del sol; incorrecto: el rojo de los geranios */
+body.ingame .feedback.giusto { background: #e9f1d6; color: #2d3d0a; border-top-color: var(--mata); }
+body.ingame .feedback.quasi { background: #fdf0c8; color: #563d00; border-top-color: var(--sol); }
+body.ingame .feedback.sbagliato { background: #fbe1df; color: #7c1b1b; border-top-color: var(--coral); }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) body.ingame .feedback.giusto { background: #26361a; color: #e6f3c8; } html:not([data-theme="light"]) body.ingame .feedback.quasi { background: #3a2f10; color: #ffefc2; } html:not([data-theme="light"]) body.ingame .feedback.sbagliato { background: #44201a; color: #ffdccf; }
+}
+html[data-theme="dark"] body.ingame .feedback.giusto { background: #26361a; color: #e6f3c8; } html[data-theme="dark"] body.ingame .feedback.quasi { background: #3a2f10; color: #ffefc2; } html[data-theme="dark"] body.ingame .feedback.sbagliato { background: #44201a; color: #ffdccf; }
+body.ingame .feedback.giusto #next, body.ingame .feedback.giusto #lesnext2 { background: var(--mata); }
+body.ingame .feedback.quasi #next { background: var(--sol); color: #3a2600; }
+body.ingame .feedback.sbagliato #next, body.ingame .feedback.sbagliato #lesnext2 { background: var(--coral); }
+.feedback.prompt { display: block; color: inherit; font-size: inherit; font-weight: inherit; margin-bottom: 0;
+  border-left-width: 4px; border-color: var(--sol); border-radius: 12px;
+  background: color-mix(in srgb, var(--sol) 12%, var(--papel)); }
+
+/* +xp que vuela hacia el anillo */
+.xpfloat { position: fixed; z-index: 80; pointer-events: none; font-weight: 900; color: var(--sol-escuro);
+  font-size: 1.3rem; text-shadow: 0 2px 0 rgba(255,255,255,.7); animation: xpfly .9s cubic-bezier(.2,.8,.3,1) forwards; }
+@media (prefers-color-scheme: dark) { html:not([data-theme="light"]) .xpfloat { color: var(--sol); text-shadow: 0 2px 0 rgba(0,0,0,.6); } }
+html[data-theme="dark"] .xpfloat { color: var(--sol); text-shadow: 0 2px 0 rgba(0,0,0,.6); }
+.diag .tag { display: inline-block; font-size: .7rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+  background: color-mix(in srgb, var(--coral) 12%, transparent); color: var(--coral-escuro);
+  padding: 2px 8px; border-radius: 4px; margin-bottom: 6px; }
+@media (prefers-color-scheme: dark) { html:not([data-theme="light"]) .diag .tag { color: var(--coral-claro); } }
+html[data-theme="dark"] .diag .tag { color: var(--coral-claro); }
+.feedback.giusto .diag .tag, .feedback.quasi .diag .tag { background: color-mix(in srgb, var(--mata) 14%, transparent); color: var(--mata); }
+.diag p { margin: 6px 0 0; font-size: .92rem; }
+.diff .k { display: inline-block; min-width: 34px; font-family: inherit; font-size: .7rem; color: var(--cinza); text-transform: uppercase; }
+.diff b.bad { color: var(--coral-claro); text-decoration: line-through; font-weight: 700; }
+.diff b.fix { color: var(--mata); font-weight: 800; }
+.selfrepair { color: var(--mata); font-weight: 650; }
+.fixerr .w.missed { background: color-mix(in srgb, var(--sol) 35%, transparent); }
+.scorebig b { font-family: var(--serif); font-size: 3.8rem; line-height: 1; font-weight: 400; letter-spacing: 0; color: var(--mar); }
+.scorebig span { color: var(--cinza); font-weight: 700; background: var(--areia); padding: 4px 12px; border-radius: 99px; }
+.lesdone .bigstar { font-size: 5rem; line-height: 1; color: var(--sol); animation: starpop .7s cubic-bezier(.3,1.6,.5,1); }
+.lampobar i { background: linear-gradient(90deg, var(--mar), var(--sol)); transition: width .1s linear; }
+
+/* ------------------------------------------------------------------- teoría */
+
+.lesson { background: var(--papel); border-radius: var(--raio); border: 1px solid var(--cinza-claro);
+          box-shadow: var(--sombra); padding: 20px 18px; margin-top: 14px; line-height: 1.62; }
+.lesson .intro { font-size: 1.05rem; line-height: 1.6; color: var(--tinta);
+                 border-left: 3px solid var(--mata); padding-left: 14px; margin: 0 0 4px; }
+.lesson .blk { padding-top: 20px; margin-top: 20px; border-top: 1px solid var(--cinza-claro); }
+.lesson h2 { font-weight: 800; font-size: 1.35rem; margin: 0 0 10px; letter-spacing: -.01em; }
+.lesson p { margin: 0 0 10px; }
+.lesson p.rule { font-size: 1.06rem; line-height: 1.5; color: var(--tinta);
+  background: color-mix(in srgb, var(--mata) 7%, var(--papel)); border-left: 4px solid var(--mata);
+  border-radius: 0 8px 8px 0; padding: 10px 12px; margin: 0 0 12px; }
+.lesson details.more { margin-top: 12px; border-top: 1px dashed var(--cinza-claro); padding-top: 8px; }
+.lesson details.more summary { cursor: pointer; font-weight: 700; font-size: .9rem; color: var(--mata); list-style: none; padding: 6px 0; }
+.lescard .blk { border-top: none; margin-top: 0; padding-top: 0; }
+.lescard .intro { font-size: 1.05rem; line-height: 1.6; }
+table.gram th { text-align: left; font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; color: var(--cinza);
+  font-weight: 700; padding: 6px 10px 6px 0; border-bottom: 2px solid var(--cinza-claro); white-space: nowrap; }
+table.gram td { padding: 7px 10px 7px 0; vertical-align: top; border-bottom: 1px solid var(--cinza-claro); }
+ul.exs li { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; padding: 9px 0; border-bottom: 1px dashed var(--cinza-claro); }
+ul.exs .it { font-weight: 700; color: var(--mata); }
+ul.exs .es { grid-column: 1; color: var(--cinza); font-size: .87rem; }
+ul.vocab li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; padding: 6px 0; border-bottom: 1px dashed var(--cinza-claro); }
+ul.vocab li small { flex-basis: 100%; color: var(--cinza); padding-left: 34px; }
+.call b { display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 5px; }
+.call p { margin: 0; }
+.call.warn { background: color-mix(in srgb, var(--coral) 8%, var(--papel)); border-left: 3px solid var(--coral); }
+.call.warn b { color: var(--coral); }
+.call.tip { background: color-mix(in srgb, var(--sol) 12%, var(--papel)); border-left: 3px solid var(--sol); }
+.call.tip b { color: var(--sol-escuro); }
+@media (prefers-color-scheme: dark) { html:not([data-theme="light"]) .call.tip b { color: var(--sol); } }
+html[data-theme="dark"] .call.tip b { color: var(--sol); }
+.text p { margin: 0 0 12px; }
+.text .gl { border-bottom: 2px dotted var(--mata); cursor: pointer; }
+.text.hunt .w.on { background: color-mix(in srgb, var(--sol) 35%, transparent); }
+.text.hunt .w.hit { background: color-mix(in srgb, var(--mata) 25%, transparent); }
+.text.hunt .w.missed { text-decoration: underline 3px var(--sol); }
+.text.hunt .w.bad { background: color-mix(in srgb, var(--coral) 20%, transparent); text-decoration: line-through; }
+#qtext { margin: 8px 0 12px; padding: 10px 12px; border-radius: 10px; background: var(--areia); }
+.glossbox { position: fixed; left: 50%; transform: translate(-50%, -12px); opacity: 0;
+  top: calc(84px + env(safe-area-inset-top)); z-index: 65; pointer-events: none;
+  background: var(--tinta); color: var(--areia); padding: 10px 16px; border-radius: 12px;
+  font-weight: 600; max-width: 92vw; transition: all .18s ease; }
+ul.reqs li { padding: 3px 0; color: var(--cinza); }
+ul.reqs li.ok { color: var(--mata); font-weight: 700; }
+textarea.scrivi { width: 100%; box-sizing: border-box; min-height: 160px; resize: none; overflow: hidden;
+  font: inherit; font-size: 1.05rem; line-height: 1.5; padding: 14px; border-radius: 12px;
+  border: 1.5px solid var(--cinza-claro); background: var(--papel); color: var(--tinta); }
+textarea.scrivi:focus { border-color: var(--mar); }
+.scrivi-marked mark.bad { background: color-mix(in srgb, var(--coral) 22%, transparent); text-decoration: underline wavy var(--coral); }
+.scrivi-marked mark.soft { background: color-mix(in srgb, var(--sol) 20%, transparent); }
+ol.findings li { padding: 6px 0; border-top: 1px solid var(--cinza-claro); }
+ol.findings li.soft { color: var(--cinza); }
+p.model { font-size: 1.02rem; line-height: 1.6; }
+details.aibox input, .card input#aikey, .card input#gemkey, .card input#gisttoken { display: block; width: 100%; box-sizing: border-box; min-width: 0;
+  padding: 10px 12px; border-radius: 12px; border: 1.5px solid var(--cinza-claro); background: var(--papel); color: var(--tinta); font: inherit; }
+.aiout { border-top: 1px solid var(--cinza-claro); margin-top: 10px; padding-top: 8px; }
+
+/* ------------------------------------------------------------------- varios */
+
+.toast { position: fixed; left: 50%; bottom: calc(84px + env(safe-area-inset-bottom)); transform: translateX(-50%);
+  background: var(--tinta); color: var(--areia); padding: 11px 18px; border-radius: 12px; font-weight: 700;
+  box-shadow: var(--sombra); z-index: 60; max-width: 90vw; text-align: center; animation: rise .3s cubic-bezier(.2,.8,.2,1); }
+.confetti span.bit { border-radius: 2px; box-shadow: 0 0 0 .5px rgba(0,0,0,.08); }
+.confetti span.bit.round { border-radius: 50%; }
+@keyframes fall { 0% { transform: translateY(0) rotate(0); } 50% { transform: translateY(55vh) translateX(18px) rotate(280deg); }
+  100% { transform: translateY(110vh) translateX(-10px) rotate(560deg); opacity: .75; } }
+
+/* ------------------------------------------------------------------ mobile */
+
+@media (max-width: 520px) {
+  header.top .bar { padding: 8px 12px; gap: 6px; }
+  .stats { gap: 7px; }
+  .stat { min-width: 32px; }
+  .stat span { font-size: .6875rem; letter-spacing: .02em; }
+  .mode { width: 34px; height: 34px; font-size: .95rem; }
+  .ring { width: 36px; height: 36px; } .ring b { width: 28px; height: 28px; font-size: .68rem; }
+  .placa { padding: 6px 11px 5px; } .placa .p-rua { font-size: 1.15rem; } .placa .p-sup { font-size: .52rem; }
+  h1 { font-size: 2rem; margin-top: 16px; }
+  h1.hello { font-size: 2.2rem; }
+  .card { padding: 16px; }
+  .stem { font-size: 1.38rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #app > *, .pulse, .combo.pop, .feedback, .confetti span, .opt.right, .opt.wrong, .xpfloat, .stat.hot b i,
+  .toast, .xpgain, .tiles-answer .tile, .node.current .dot, .node .bubble, .lesdone .bigstar, .ring.bump, .hud .dai {
+    animation: none !important; }
+}
+
+/* --- cansancio --- */
+.note.fatigue { background: var(--pedra); margin: 0 0 10px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.stem.big { font-size: 1.9rem; text-align: center; }
+.seg .tab.on { background: var(--mar); color: var(--sobre); border-color: var(--mar); }
+.text .w.now { background: color-mix(in srgb, var(--sol) 45%, transparent); border-radius: 4px; }
+.text.enh .w.form { background: color-mix(in srgb, var(--mar) 22%, transparent); border-radius: 4px; padding: 0 2px; font-weight: 700; }
+body.kar-partial .text .w:not(.gl):not(.now) { color: transparent; border-bottom: 2px solid var(--cinza-claro); }
+.note.flood { border-left: 3px solid var(--mar); }
+.bubble.ia { align-self: flex-start; background: var(--pedra); border-bottom-left-radius: 4px; }
+.bubble.me { align-self: flex-end; background: color-mix(in srgb, var(--mar) 18%, transparent); border-bottom-right-radius: 4px; }
+.chips .tab.on { background: var(--mar); color: var(--sobre); border-color: var(--mar); }
+.weekcard.ritorno { border-left: 4px solid var(--sol); }
+.dgnotes textarea { width: 100%; margin-top: 4px; }
+.dgnotesview { white-space: pre-wrap; padding: 8px 10px; border-radius: 8px;
+  background: color-mix(in srgb, var(--sol) 12%, transparent); }
+mark.dgok { background: color-mix(in srgb, var(--mata) 26%, transparent); color: inherit; border-radius: 3px; }
+mark.dgmiss { background: color-mix(in srgb, var(--coral) 24%, transparent); color: inherit; border-radius: 3px; }
+mark.dgcasi { background: color-mix(in srgb, var(--sol, #f5c518) 38%, transparent); color: inherit; border-radius: 3px; }
+
+/* Glosas de opción múltiple en las lecturas */
+.text .w.mcg { background: color-mix(in srgb, var(--sol) 30%, transparent); border-radius: 4px; padding: 0 2px;
+  border-bottom: 2px dotted var(--sol-escuro); cursor: pointer; }
+.mcbox { position: fixed; left: 50%; bottom: 84px; z-index: 60; width: min(92vw, 420px);
+  transform: translate(-50%, 16px); opacity: 0; pointer-events: none; transition: opacity .18s, transform .18s;
+  background: var(--papel); border: 1px solid var(--cinza-claro); border-radius: 14px; padding: 12px 14px 10px; box-shadow: var(--sombra); }
+
+/* Lección en pasos: Mirá → regla → tabla en tarjetas → trampa */
+.stepbadge { display: inline-block; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--mata-escuro); background: color-mix(in srgb, var(--mata) 12%, transparent); border-radius: 999px; padding: 3px 10px; margin-bottom: 10px; }
+.step-trap .stepbadge { color: var(--coral-escuro); background: color-mix(in srgb, var(--coral) 12%, transparent); }
+mark.hl { background: color-mix(in srgb, var(--sol) 38%, transparent); color: inherit; border-radius: 4px; padding: 0 2px; }
+ul.exs.look .it { font-size: 1.08rem; color: var(--tinta); font-weight: 600; }
+.rowcard { border: 1px solid var(--cinza-claro); border-radius: 14px; padding: 12px 16px;
+  background: var(--papel); box-shadow: var(--sombra); }
+.rowcard .rc-h { font-weight: 800; font-size: 1.1rem; margin-bottom: 4px; color: var(--mar-escuro); }
+.rowcard .rc-line { display: flex; align-items: baseline; gap: 10px; padding: 5px 0; border-top: 1px dashed var(--cinza-claro); }
+.rowcard .rc-k { display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--cinza); }
+
+/* ---- mapas de preposiciones (docs/js/mapas.js): los colores del dibujo ---- */
+:root { --mapa-tr: var(--coral); --mapa-lm: var(--mar); --mapa-soft: var(--ceu-claro);
+        --mapa-ink: var(--tinta); --mapa-bg: var(--papel); --mapa-line: var(--cinza-claro); }
+
+/* --- Biblioteca: los colores del lector (docs/css/app.css usa --bx-*) --- */
+:root { --bx-ok: var(--mata-escuro); --bx-mid: var(--sol-escuro); --bx-hard: var(--coral-escuro); --bx-sub: var(--coral); --bx-line: var(--cinza-claro); }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) { --bx-ok: var(--mata-claro); --bx-mid: var(--sol); --bx-hard: var(--coral-claro); --bx-sub: var(--sol); }
+}
+html[data-theme="dark"] { --bx-ok: var(--mata-claro); --bx-mid: var(--sol); --bx-hard: var(--coral-claro); --bx-sub: var(--sol); }
+
+/* De noche los colores llenos son claros: lo que el núcleo escribe en
+   blanco encima de ellos pasa a la tinta oscura. */
+.seg button.on, .chips .chip.on, .kbk.kbenter { color: var(--sobre); }
+
+/* El acento de la estructura (el teclado, los enlaces, el primer arranque): el cobalto, no el rojo. */
+body { --k-acc: var(--mar); }

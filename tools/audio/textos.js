@@ -75,11 +75,23 @@ function spoken(it) {
   return s;
 }
 
+// sayOnly de app.js: en una lengua con otro alfabeto se dice solo lo escrito en él
+function sayOnly(text) {
+  if (!LG.ownLetters || !(LG.rules || {}).sound) return text;
+  var own = new RegExp("[" + LG.ownLetters + "]");
+  var t = String(text == null ? "" : text).replace(/\([^)]*\)/g, function (m) { return own.test(m) ? m : " "; })
+    .replace(/«[^»]*»/g, function (m) { return own.test(m) ? m : " "; });
+  if (!own.test(t)) return "";
+  t = t.replace(/^[^\u0370-\u03ff\u1f00-\u1fff]*[a-zà-ÿ][^\u0370-\u03ff\u1f00-\u1fff]*(?=[\u0370-\u03ff\u1f00-\u1fff])/i, "")
+       .replace(/([\u0370-\u03ff\u1f00-\u1fff][.,;:!·…]*)[^\u0370-\u03ff\u1f00-\u1fff]*[a-zà-ÿ][^\u0370-\u03ff\u1f00-\u1fff]*$/i, "$1");
+  return t.replace(/\s+/g, " ").trim();
+}
+
 var out = [], seen = {};
 function add(t) {
-  t = String(t == null ? "" : t).replace(/_+/g, " ").replace(/\s+/g, " ").trim();
+  t = sayOnly(String(t == null ? "" : t).replace(/_+/g, " ")).replace(/\s+/g, " ").trim();
   // «vasa», «ich (yo)»: pistas de pronunciación o glosas, no frases del idioma
-  if (!t || seen[t] || !/[A-Za-zÀ-ÿß0-9]/.test(t) || /[«»()]/.test(t) || spanishText(t)) return;
+  if (!t || seen[t] || !new RegExp("[" + (LG.letters || "A-Za-zÀ-ÿß") + "0-9]", "i").test(t) || /[«»()]/.test(t) || spanishText(t)) return;
   seen[t] = 1;
   out.push(t);
 }
@@ -96,7 +108,9 @@ function add(t) {
     var t = b.table, col = -1;
     if (t) {
       (t.head || []).forEach(function (h, k) { if (col < 0 && /ejemplo/i.test(strip(h))) col = k; });
-      if (col >= 0) (t.rows || []).forEach(function (r) { if (r[col]) add(strip(r[col])); });
+      // «νερό «neró», agua»: with the reading aid, only what comes before the hint (app.js sayable)
+      var cell = function (c) { c = strip(c); return (LG.rules || {}).sound && c.indexOf("«") > 0 ? c.slice(0, c.indexOf("«")).replace(/[\s,;:·]+$/, "") : c; };
+      if (col >= 0) (t.rows || []).forEach(function (r) { if (r[col]) add(cell(r[col])); });
     }
   });
 });

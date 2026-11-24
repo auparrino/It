@@ -33,7 +33,8 @@ ok(/MODULE_OBJ = \[[^\]]*"strat"/.test(ENG), "state.strat entre los campos de m√
 var SHOWN = {
   it: ["escucha", "oido", "lectura", "escritura", "palabras", "frases", "practica", "dominala", "leccion", "capire", "parla", "falsos"],
   pt: ["escucha", "oido", "lectura", "escritura", "palabras", "frases", "practica", "dominala", "leccion", "capire", "parla", "falsos"],
-  de: ["palabras", "practica", "dominala", "leccion", "capire"]
+  de: ["palabras", "practica", "dominala", "leccion", "capire"],
+  el: ["palabras", "practica", "dominala", "leccion"]
 };
 
 pack.ALL.forEach(function (code) {

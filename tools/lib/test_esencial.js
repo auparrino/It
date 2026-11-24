@@ -83,7 +83,7 @@ pack.ALL.forEach(function (code) {
     var one = E.check(c, c.lines.map(function (l, k) { return k === 0 ? "zzz" : l.answer; }));
     ok(one.ok === n - 1 && one.right[0] === false, S + "un hueco mal cuenta uno menos");
   });
-  ok(cards >= 50, L + "una tarjeta en (casi) cada semana: " + cards);
+  ok(cards >= Math.min(50, course.weeks.length - 2), L + "una tarjeta en (casi) cada semana: " + cards);
   ok(withBlock / Math.max(1, gapped) >= 0.8, L + "las fórmulas y reglas llevan a su teoría: " + withBlock + " de " + gapped);
 
   /* el guardado */

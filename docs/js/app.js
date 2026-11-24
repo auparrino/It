@@ -20,7 +20,10 @@
   var SKEY = function (k) { return (LG.storage || "c1") + "." + k; };
   // A word of the language: letters, the apostrophe, and the hyphen where
   // the language writes it inside words (chama-se).
-  var WCH = "a-zà-ÿ'" + (LG.hyphenWords ? "-" : "");
+  // (LANG.letters: another alphabet, as Greek; the default is Latin.  ALPHA:
+  // what only a package with another alphabet has: letters, ownLetters)
+  var ALPHA = LG;
+  var WCH = (ALPHA.letters || "a-zà-ÿ") + "'" + (LG.hyphenWords ? "-" : "");
   var DATA = function (f) { return (LG.base || "") + "data/" + f; };
   // The data files the package has (a language that is just starting may
   // have only its course: Boot.LANGS[code].data).
@@ -227,9 +230,26 @@
   // onboundary, onend, onstart, keep (do not cancel what is playing) }.
   // A text with its recording (tools/audio/grabar.py) plays the file; the
   // rest, the phone's voice.  The answer is truthy when something will sound.
+  /* A language with another alphabet (LANG.ownLetters and LANG.rules.sound:
+     Greek): what is said is only what is written in it.  The gloss in
+     brackets, the hint of how it sounds («neró») and a Spanish answer after
+     the sentence are for the eye: «νερό (agua)» says «νερό». */
+  function sayOnly(text) {
+    if (!ALPHA.ownLetters || !(LG.rules || {}).sound) return text;
+    var own = new RegExp("[" + ALPHA.ownLetters + "]");
+    var t = String(text == null ? "" : text).replace(/\([^)]*\)/g, function (m) { return own.test(m) ? m : " "; })
+      .replace(/«[^»]*»/g, function (m) { return own.test(m) ? m : " "; });
+    if (!own.test(t)) return "";
+    // a Latin tail or head around the sentence (the answer of «¿qué significa?»)
+    t = t.replace(/^[^\u0370-\u03ff\u1f00-\u1fff]*[a-zà-ÿ\u0370-\u03ff][^\u0370-\u03ff\u1f00-\u1fff]*(?=[\u0370-\u03ff\u1f00-\u1fff])/i, "")
+         .replace(/([\u0370-\u03ff\u1f00-\u1fff][.,;:!·…]*)[^\u0370-\u03ff\u1f00-\u1fff]*[a-zà-ÿ\u0370-\u03ff][^\u0370-\u03ff\u1f00-\u1fff]*$/i, "$1");
+    return t.replace(/\s+/g, " ").trim();
+  }
   function speak(text, force, rate, opts) {
     if (state.silent && !force) return null;
     opts = opts || {};
+    text = sayOnly(text);
+    if (!text) { if (opts.onend) opts.onend({}); return null; }
     var file = recorded(text, opts.slot);
     if (!file && !window.speechSynthesis) return null;
     if (!opts.keep) { pqStop(); if (window.speechSynthesis) window.speechSynthesis.cancel(); if (realAudio) try { realAudio.pause(); } catch (e) { /* */ } }
@@ -410,7 +430,7 @@
       });
     }
     var es = 0, tg = 0;
-    (text.toLowerCase().match(SP.word || /[a-zà-ÿ]+/g) || []).forEach(function (w) {
+    (text.toLowerCase().match(SP.word || /[a-zà-ÿ\u0370-\u03ff]+/g) || []).forEach(function (w) {
       if (BOTH[w]) return;
       var isTg = TARGET_WORDS[w] || (glossario && glossario[w]), isEs = ES_WORDS[w] || (esGloss && esGloss[w]);
       if (ES_WORDS[w] || (isEs && !isTg)) es++;
@@ -1199,7 +1219,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.31";
+  var APP_VERSION = "v3.32";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -1627,7 +1647,7 @@
     raw = String(raw || "");
     if (!glossable(it)) return esc(raw);
     var week = Math.min(state.unlocked || 1, 52);
-    return raw.split(/([A-Za-zÀ-ÿ]+)/).map(function (t, k) {
+    return raw.split(/([A-Za-zÀ-ÿ\u0370-\u03ff]+)/).map(function (t, k) {
       if (k % 2 === 0) return esc(t);
       var g = glossario[t.toLowerCase()];
       if (!g) return esc(t);
@@ -1643,7 +1663,7 @@
     raw = String(raw || "");
     if (!glossario) return esc(raw);
     var week = Math.min(state.unlocked || 1, 52);
-    return raw.split(/([A-Za-zÀ-ÿ]+)/).map(function (t, k) {
+    return raw.split(/([A-Za-zÀ-ÿ\u0370-\u03ff]+)/).map(function (t, k) {
       if (k % 2 === 0) return esc(t);
       var g = glossario[t.toLowerCase()];
       if (!g) return esc(t);
@@ -1757,6 +1777,36 @@
      sentence of a question once answered.  Never the options of a question
      nor a question still open: only what is already read or answered. */
   function genderRules() { return (LG.rules || {}).gender || null; }
+
+  /* The reading aid of a language with another alphabet (Greek:
+     LANG.rules.sound, in its rules.js): how a word sounds, in the letters
+     of Spanish, under the week's words, on the card of a new word and on
+     the correction.  Only the first weeks (sound.until), while the alphabet
+     is new; the learner turns it off (or on again, later) in the profile. */
+  function soundRules() { return (LG.rules || {}).sound || null; }
+  function soundOn() {
+    var S = soundRules();
+    if (!S || !S.of) return false;
+    if (state.soundAid === true) return true;
+    if (state.soundAid === false) return false;
+    return (state.unlocked || 1) <= (S.until || 4);
+  }
+  function soundOf(text) {
+    if (!soundOn()) return "";
+    try {
+      var t = String(text || "").replace(/_{3,}/g, "…"), out = soundRules().of(t);
+      return out && out !== t ? out : "";
+    } catch (e) { return ""; }
+  }
+  function soundHtml(text, tag) {
+    var o = soundOf(text);
+    return o ? "<" + (tag || "span") + ' class="suena" title="cómo suena">«' + esc(o) + "»</" + (tag || "span") + ">" : "";
+  }
+  // What is read aloud of a table cell: «νερό «neró», agua» → «νερό».
+  function sayable(text) {
+    text = String(text || "");
+    return soundRules() && text.indexOf("«") > 0 ? text.slice(0, text.indexOf("«")).replace(/[\s,;:·]+$/, "") : text;
+  }
   function genderPaint(root, sel) {
     var G = genderRules();
     if (!G || !root) return;
@@ -1876,7 +1926,7 @@
         return "<tr>" + r.map(function (c, k) {
           var say = "";
           if (k === exCol && c) {
-            sayIndex["t" + i + "-" + ri] = Lezione.strip(c);
+            sayIndex["t" + i + "-" + ri] = sayable(Lezione.strip(c));
             say = ' <button class="say" data-say="t' + i + "-" + ri + '" aria-label="escuchar">🔊</button>';
           }
           return "<td" + (k === 0 ? ' class="k"' : "") + ">" + mk(c) + say + "</td>";
@@ -1914,7 +1964,7 @@
   function markForms(text, fs) {
     var t = String(text), low = t.toLowerCase(), marks = [];
     // «-ato»: an ending the rule teaches, marked on every word that has it
-    var ends = (fs || []).filter(function (f) { return /^-[a-zà-ÿ]+$/.test(f); }).map(function (f) { return f.slice(1); });
+    var ends = (fs || []).filter(function (f) { return /^-[a-zà-ÿ\u0370-\u03ff]+$/.test(f); }).map(function (f) { return f.slice(1); });
     // the words of the table's forms (ho, sono / tenho, sou…), grammar words aside
     var words = [];
     (fs || []).forEach(function (f) { if (/\s/.test(f)) f.split(/\s+/).forEach(function (w) { if (w.length >= 2 && !HL_STOP[w] && words.indexOf(w) < 0) words.push(w); }); });
@@ -2042,7 +2092,7 @@
       var ri = from + k;
       var lines = r.slice(1).map(function (c, j) {
         var label = strip(head[j + 1] || ""), isEx = /ejemplo/i.test(label);
-        if (isEx && c) sayIndex["t" + i + "-" + ri] = Lezione.strip(c);
+        if (isEx && c) sayIndex["t" + i + "-" + ri] = sayable(Lezione.strip(c));
         return '<div class="rc-line">' + (label ? '<span class="rc-k">' + mk(head[j + 1]) + "</span>" : "") +
           '<span class="rc-v' + (isEx ? " it" : "") + '">' + mk(c) + "</span>" +
           (isEx && c ? ' <button class="say" data-say="t' + i + "-" + ri + '" aria-label="escuchar">🔊</button>' : "") + "</div>";
@@ -2613,7 +2663,7 @@
         var c = state.cards["v:" + v[0]], ok = !!(c && c.prod);
         return '<div class="mission word' + (ok ? " done" : "") + '">' +
           '<button class="mi say" data-say="' + esc(v[0]) + '" aria-label="Escuchar ' + esc(v[0]) + '">' + (ok ? "★" : "🔊") + "</button>" +
-          '<span><b lang="' + LG.tts + '">' + esc(v[0]) + "</b><small>" + esc(v[1]) +
+          '<span><b lang="' + LG.tts + '">' + esc(v[0]) + "</b>" + soundHtml(v[0]) + "<small>" + esc(v[1]) +
             (v[2] ? ' · <i lang="' + LG.tts + '">' + esc(v[2]) + "</i>" : "") + "</small></span>" +
           (window.Referencia ? Referencia.button(v[0]) : "") + "</div>";
       }).join("") + "</div>" +
@@ -3052,6 +3102,7 @@
       return hud() + '<div class="card intro">' +
         '<div class="badge-new">📚 Palabra nueva</div>' +
         '<div class="fit big">' + esc(wv[0]) + "</div>" +
+        soundHtml(wv[0], "div") +
         '<div class="fes">' + esc(wv[1]) + "</div>" +
         (wv[3] ? '<div class="call tip"><b>Cómo se usa</b><p>' + mk(wv[3]) + "</p></div>" : "") +
         (wv[2] ? '<div class="note">' + esc(wv[2]) + "</div>" : "") +
@@ -3255,6 +3306,10 @@
     // typo tolerance of the typed answers made «il matrimonia» or «Nos
     // pomos a mesa» a «¡Casi!» with xp, though the trap was the point.
     if (verdict === Engine.VERDICT.CLOSE && it.options) verdict = Engine.VERDICT.WRONG;
+    // Another button is another answer, even when the correction would read
+    // it as the same word (Greek: «φίλοσ» for «φίλος», the trap of the item).
+    if (verdict === Engine.VERDICT.RIGHT && it.options && it.options.indexOf(given) >= 0 && given !== it.answer &&
+        (it.accept || []).indexOf(given) < 0 && it.options.indexOf(it.answer) >= 0) verdict = Engine.VERDICT.WRONG;
     if (verdict === Engine.VERDICT.RIGHT || !window.Diagnosi) { settle(verdict, given, chosenHtml(it, given, verdict)); return; }
     var cd = it.choiceDiag || { before: "", after: "" };
     var d = Diagnosi.explainChoice(cd.before + given + cd.after, cd.before + it.answer + cd.after,
@@ -4116,6 +4171,7 @@
         (gained ? ' <span class="xpgain">+' + gained + " xp</span>" : "") + "</div>" +
       (it.type === "hunt" ? "" : '<div class="sol">' + (it.frase || it.src === "lettura" || it.dir === "it-es" || it.type === "scopri" ? esc(sol) : glossifyAny(sol)) + "</div>") +
       (it.frase && it.type !== "listen" ? '<div class="note">' + esc(it.frase.es) + "</div>" : "") +
+      (it.type === "hunt" ? "" : soundHtml(sol, "div")) +
       (q < 2 ? genderNotice(claimGiven, sol) : "") +
       rp.top +
       (extra || "") +
@@ -4323,7 +4379,7 @@
       var forms = (Formule.of(f).filter(function (x) { return x[0] === wk; })[0] || [0, ""])[1];
       var html = esc(f.it);
       String(forms).split(/,\s*/).filter(Boolean).forEach(function (x) {
-        var re = new RegExp("(^|[^A-Za-zÀ-ÿ'])(" + x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")(?![A-Za-zÀ-ÿ])", "i");
+        var re = new RegExp("(^|[^A-Za-zÀ-ÿ\u0370-\u03ff'])(" + x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")(?![A-Za-zÀ-ÿ\u0370-\u03ff])", "i");
         html = html.replace(re, "$1<b>$2</b>");
       });
       var seen = !!state.cards[f.id];
@@ -5046,11 +5102,13 @@
           [["", "Como el teléfono"], ["light", "Claro ☀️"], ["dark", "Oscuro 🌙"]].map(function (t) {
             return '<option value="' + t[0] + '"' + ((state.theme || "") === t[0] ? " selected" : "") + ">" + t[1] + "</option>";
           }).join("") + "</select></label>" +
-        (window.Teclado && Teclado.touch() ? '<label class="set"><span>Teclado para responder<small>el de la app tiene las letras de ' + esc(UI.langEs || "la lengua") +
+        (window.Teclado && Teclado.wanted() ? '<label class="set"><span>Teclado para responder<small>el de la app tiene las letras de ' + esc(UI.langEs || "la lengua") +
           ' y no autocorrige en castellano; el del teléfono no se puede poner en otro idioma desde una web</small></span><select id="kbmode">' +
           [["app", "El de la app"], ["phone", "El del teléfono"]].map(function (t) {
             return '<option value="' + t[0] + '"' + (Teclado.mode() === t[0] ? " selected" : "") + ">" + t[1] + "</option>";
           }).join("") + "</select></label>" : "") +
+        (soundRules() ? '<label class="set"><span>Ayuda de lectura<small>debajo de las palabras y de las respuestas, cómo suenan, con las letras del castellano: «kaliméra». Viene prendida las primeras ' +
+          (soundRules().until || 4) + ' semanas</small></span><input type="checkbox" id="soundaid"' + (soundOn() ? " checked" : "") + "></label>" : "") +
         '<label class="set"><span>Teclado sin sugerencias<small>el teclado no te propone palabras (más difícil), pero tampoco detecta el idioma solo ni deja elegirlo desde su barra</small></span>' +
           '<input type="checkbox" id="kbquiet"' + (state.kbQuiet ? " checked" : "") + "></label>" +
         (window.Estrategia ? '<label class="set"><span>Estrategia de la semana 💡<small>una táctica corta antes de la misión donde sirve, una vez por semana, con 👍/👎 para el cierre</small></span>' +
@@ -6401,7 +6459,7 @@
   function secs(ms) { return (Math.round((+ms || 0) / 100) / 10).toFixed(1).replace(".", ","); }
   // A capital at the start of every sentence.
   function sentenceCase(text) {
-    return String(text || "").replace(/(^|[.!?]\s+|\n\s*)([a-zà-ÿ])/g, function (m, a, b) { return a + b.toUpperCase(); });
+    return String(text || "").replace(/(^|[.!?]\s+|\n\s*)([a-zà-ÿ\u0370-\u03ff])/g, function (m, a, b) { return a + b.toUpperCase(); });
   }
 
   var parla = null;   // { week, scen, history, done, recasts, notes, obj, turns, busy }
@@ -6710,12 +6768,12 @@
     if (!window.Freq || !Freq.loaded()) return out;
     var sents = ep.text.split(/(?<=[.!?])\s+/);
     (ep.hunt.targets || []).slice(0, 3).forEach(function (t, k) {
-      var sent = sents.filter(function (x) { return new RegExp("(^|[^a-zà-ÿ])" + t + "(?![a-zà-ÿ])", "i").test(x); })[0];
+      var sent = sents.filter(function (x) { return new RegExp("(^|[^a-zà-ÿ\u0370-\u03ff])" + t + "(?![a-zà-ÿ\u0370-\u03ff])", "i").test(x); })[0];
       if (!sent) return;
       var opts = [t].concat(Freq.sameBand(t, 3));
       if (opts.length < 3) return;
       out.push({ id: "storia:" + ep.id + ":" + k, src: "lettura", ep: ep.id, type: "choice", prompt: "Completá con la palabra del cuento",
-                 stem: sent.replace(new RegExp("(^|[^a-zà-ÿ])" + t + "(?![a-zà-ÿ])", "i"), "$1___"), options: Drills.shuffle(opts), answer: t, accept: [t] });
+                 stem: sent.replace(new RegExp("(^|[^a-zà-ÿ\u0370-\u03ff])" + t + "(?![a-zà-ÿ\u0370-\u03ff])", "i"), "$1___"), options: Drills.shuffle(opts), answer: t, accept: [t] });
     });
     return out;
   }
@@ -8109,6 +8167,8 @@
     if (kbm) kbm.onchange = function () { Teclado.setMode(kbm.value); toast(kbm.value === "app" ? "Respondés con el teclado de la app." : "Respondés con el teclado del teléfono."); };
     var pvo = $("#phonevoice");
     if (pvo) pvo.onchange = function () { state.phoneVoice = pvo.checked; persist(); speak(UI.hi || "Ciao", true); };
+    var sa = $("#soundaid");
+    if (sa) sa.onchange = function () { state.soundAid = !!sa.checked; persist(); toast(sa.checked ? "Ayuda de lectura prendida." : "Ayuda de lectura apagada."); };
     var kbq = $("#kbquiet");
     if (kbq) kbq.onchange = function () { state.kbQuiet = kbq.checked; persist(); langBoxes(); };
     var sts = $("#stratset");
