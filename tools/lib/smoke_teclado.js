@@ -60,7 +60,12 @@ function chromiumPath() {
   for (const code of langs) {
     const page = await open(code, true);
     const special = await page.evaluate(() => (window.LANG.ui.keys || []).filter(c => c.length === 1 && /[^a-z'\-]/.test(c))[0]);
-    const word = "ab" + (special || "");
+    // the letters of the layout, by their place: a b e r t x on QWERTY, α β ε ρ τ χ on the Greek one
+    const K = await page.evaluate(() => {
+      const r = window.LANG.ui.kbRows || ["qwertyuiop", "asdfghjkl", "zxcvbnm"];
+      return { a: r[1][0], b: r[2][4], e: r[0][2], r: r[0][3], t: r[0][4], x: r[2][1], always: !!window.LANG.ui.kbAlways };
+    });
+    const word = K.a + K.b + (special || "");
     await ask(page, word, "kb-" + code + "-1");
     const im = await page.getAttribute("#ans", "inputmode");
     if (im !== "none") errors.push(code + ": la caja no lleva inputmode=none (" + im + ")");
@@ -69,10 +74,10 @@ function chromiumPath() {
     if (special && keys.indexOf(special) < 0) errors.push(code + ": falta la tecla «" + special + "» (" + keys.join("") + ")");
     if (shots) await page.screenshot({ path: path.join(shots, code + "-teclado.png") });
     // typing: a, ⇧ B → «aB», ⌫, b, the special letter, and ↵ sends it
-    await tap(page, "a"); await tap(page, "shift"); await tap(page, "B");
+    await tap(page, K.a); await tap(page, "shift"); await tap(page, K.b.toUpperCase());
     let v = await page.inputValue("#ans");
-    if (v !== "aB") errors.push(code + ": ⇧ no puso la mayúscula: «" + v + "»");
-    await tap(page, "back"); await tap(page, "b");
+    if (v !== K.a + K.b.toUpperCase()) errors.push(code + ": ⇧ no puso la mayúscula: «" + v + "»");
+    await tap(page, "back"); await tap(page, K.b);
     if (special) await tap(page, special);
     v = await page.inputValue("#ans");
     if (v !== word) errors.push(code + ": las teclas escribieron «" + v + "», no «" + word + "»");
@@ -83,7 +88,7 @@ function chromiumPath() {
     const at = (k) => page.$eval('#kbapp [data-k="' + k + '"]', b => { const r = b.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2, r: r.right, top: r.top }; });
     const touch = (type, pts) => cdp.send("Input.dispatchTouchEvent", { type, touchPoints: pts });
     const before = await page.inputValue("#ans");
-    const ka = await at("e"), kb = await at("r"), kc = await at("t");
+    const ka = await at(K.e), kb = await at(K.r), kc = await at(K.t);
     // (touchStart lists every finger down; touchEnd, the ones that lift)
     const A = { x: ka.x, y: ka.y, id: 1 }, B = { x: kb.x, y: kb.y, id: 2 }, C = { x: kc.x, y: kc.y, id: 3 };
     await touch("touchStart", [A]);
@@ -97,7 +102,7 @@ function chromiumPath() {
     await touch("touchEnd", [G]);
     await page.waitForTimeout(150);
     const fast = (await page.inputValue("#ans")).slice(before.length);
-    if (!/^ert.$/.test(fast)) errors.push(code + ": escribiendo rápido con dos dedos quedó «" + fast + "», no «ert» y una letra más");
+    if (fast.length !== 4 || fast.slice(0, 3) !== K.e + K.r + K.t) errors.push(code + ": escribiendo rápido con dos dedos quedó «" + fast + "», no «ert» y una letra más");
     for (let i = 0; i < fast.length; i++) await tap(page, "back");
     await tap(page, "123"); await tap(page, "1"); await tap(page, "back"); await tap(page, "abc");
     await tap(page, "enter");
@@ -106,14 +111,14 @@ function chromiumPath() {
     if (!fb) errors.push(code + ": ↵ no mandó la respuesta (o no se corrigió como buena)");
     note(code + " · teclado de la app: " + keys.filter(k => k.length === 1).join("") + " · escribió «" + v + "» y ↵ la mandó");
     // ⌨️: to the phone's keyboard, and back from the accents row
-    await ask(page, "x", "kb-" + code + "-2");
+    await ask(page, K.x, "kb-" + code + "-2");
     await tap(page, "phone");
     await page.waitForTimeout(300);
     const after = await page.evaluate(() => ({ im: document.querySelector("#ans").getAttribute("inputmode"), mode: window.Teclado.mode(),
       panel: !document.getElementById("kbapp").hidden, back: !!document.querySelector(".accents [data-kbapp]") }));
     if (after.im === "none" || after.mode !== "phone" || after.panel) errors.push(code + ": ⌨️ no pasó al teclado del teléfono: " + JSON.stringify(after));
     if (!after.back) errors.push(code + ": falta el ⌨️ para volver en la fila de acentos");
-    await ask(page, "x", "kb-" + code + "-3");
+    await ask(page, K.x, "kb-" + code + "-3");
     if ((await page.getAttribute("#ans", "inputmode")) === "none" || await panelOn(page)) errors.push(code + ": la elección del teclado del teléfono no quedó");
     await page.click(".accents [data-kbapp]");
     await page.waitForTimeout(400);
@@ -129,9 +134,9 @@ function chromiumPath() {
     });
     await page.focus("#kblong");
     await page.waitForTimeout(250);
-    await tap(page, "a"); await tap(page, "enter"); await tap(page, "b");
+    await tap(page, K.a); await tap(page, "enter"); await tap(page, K.b);
     const long = await page.inputValue("#kblong");
-    if (long !== "a\nb") errors.push(code + ": ↵ en un texto largo no hizo un renglón nuevo: " + JSON.stringify(long));
+    if (long !== K.a + "\n" + K.b) errors.push(code + ": ↵ en un texto largo no hizo un renglón nuevo: " + JSON.stringify(long));
     // ▾ hides the keyboard and changes nothing: the next box opens it again
     await tap(page, "hide");
     await page.waitForTimeout(250);
@@ -165,10 +170,12 @@ function chromiumPath() {
     }
     await page.context().close();
 
-    // a computer: nothing changes
+    // a computer: nothing changes; unless the language has another alphabet
+    // (kbAlways: Greek), where the keyboard on screen shows with a mouse too
     const pc = await open(code, false);
-    await ask(pc, "x", "kb-" + code + "-pc");
-    if ((await pc.getAttribute("#ans", "inputmode")) === "none" || await panelOn(pc)) errors.push(code + ": en la computadora apareció el teclado de la app");
+    await ask(pc, K.x, "kb-" + code + "-pc");
+    if (K.always) { if (!(await panelOn(pc))) errors.push(code + ": en la computadora no apareció el teclado de la app (kbAlways)"); }
+    else if ((await pc.getAttribute("#ans", "inputmode")) === "none" || await panelOn(pc)) errors.push(code + ": en la computadora apareció el teclado de la app");
     await pc.context().close();
   }
   console.log(errors.length ? "\nERRORES:\n" + errors.join("\n") : "\nsin errores · teclado de la app en " + langs.join(", "));
