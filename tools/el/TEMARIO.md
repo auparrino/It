@@ -2,7 +2,9 @@
 
 Griego moderno estándar (dimotikí, sistema monotónico) para hispanohablantes
 rioplatenses.  Cuatro temporadas de 13 semanas; **por ahora está escrita la
-primera** (del alfabeto a A2).  Cada semana está en `semanas/sNN.py` (un
+primera** (del alfabeto a A2); las otras tres están planeadas semana por
+semana más abajo, y el orden en que se escriben, en `auditorias/PLAN-griego.md`.
+Cada semana está en `semanas/sNN.py` (un
 `WEEK`); revisá con `python3 tools/el/check_semana.py` y compilá con
 `python3 tools/el/build_course.py`.
 
@@ -74,13 +76,70 @@ pueden usar siempre.)
 12. το ταξίδι, οι διακοπές, το καλοκαίρι, ο χειμώνας, η άνοιξη, το φθινόπωρο, ο μήνας, ο καιρός, η ζέστη, το κρύο, βρέχει, ταξιδεύω, κολυμπάω, μεθαύριο, η βαλίτσα, το διαβατήριο, φεύγω, γυρίζω, έτοιμος. En la lección: θα; los doce meses; κάνει ζέστη / κρύο, έχει ήλιο; του χρόνου, την άλλη εβδομάδα.
 13. χθες, προχθές, πέρσι, η βόλτα, το πάρτι, το Σαββατοκύριακο, το μουσείο, το εστιατόριο, η εκδρομή, ακούω, αρχίζω, τελειώνω, χάνω, βρίσκω, φτάνω, ήδη, ακόμα, ξαφνικά, τέλεια. En la lección: el aoristo regular e irregular; ήμουν, ήσουν, ήταν…; είχα; πριν από δύο μέρες; την περασμένη εβδομάδα.
 
-## Lo que viene (planeado, sin escribir)
+## Temporadas 2 a 4 (planeadas, sin escribir)
 
-| Temporada | Semanas | Nivel | Qué se va a ver |
-|---|---|---|---|
-| **Το πέλαγος** («mar abierto») | 14-26 | A2 → B1 | El genitivo, los pronombres débiles (μου το δίνει), el imperativo, el imperfecto y su contraste con el aoristo, comparativo y superlativo, las oraciones de relativo con *που*, *ότι / πως / αν*, los verbos en -ώ (tipo B2), la pasiva en presente |
-| **Τα νησιά** («las islas») | 27-39 | B1 → B2 | El aoristo pasivo, el perfecto (έχω γράψει), los condicionales, el participio en -μένος, el gerundio en -οντας, los adjetivos y sustantivos irregulares (-ης/-ες, -ύς, -ση/-σεις), el discurso indirecto, la formación de palabras |
-| **Η κορυφή** («la cumbre») | 40-52 | B2 → C1 | El registro culto y los restos de la katharévousa, las expresiones fijas, las partículas (μα, δα, άραγε), argumentar, la lengua de la prensa y de la administración, Chipre y las variedades, el examen final al estilo del Πιστοποιητικό Ελληνομάθειας |
+Semana por semana, con el mismo criterio que la primera: **un tema
+gramatical fuerte por semana, nunca dos**, y cada uno apoyado en lo que ya
+se vio (el genitivo antes que los pronombres de objeto indirecto, el
+imperfecto antes que el contraste con el aoristo, el aoristo pasivo antes
+que el participio). La última semana de cada temporada repasa y cierra con
+el jefe. Las palabras exactas de cada semana se fijan al escribirla (paso
+del `auditorias/PLAN-griego.md`) y se agregan a la lista de «Las palabras de
+cada semana»; acá va el campo de léxico.
+
+### Temporada 2 — Το πέλαγος, «mar abierto» (A2 → B1)
+
+| Sem. | Título | Nivel | Gramática | Para qué / léxico |
+|---|---|---|---|---|
+| 14 | Τον ξέρεις; | A2 | Pronombres débiles de objeto directo (με, σε, τον, την, το, μας, σας, τους, τις, τα), antes del verbo, con *δεν*, *να* y *θα*; *εμένα / εσένα* para resaltar (solo reconocer) | Buscar, encontrar, perder cosas; conocer gente; el celular y los mensajes |
+| 15 | Το σπίτι της Μαρίας | A2 | El genitivo singular y plural de los sustantivos regulares y del artículo (του, της, των); la posesión; las fechas (*στις 25 Μαρτίου*), los ordinales 1.º-10.º; *πάνω σε, κάτω από, μέσα σε, πίσω από, μπροστά σε* | La casa por dentro, alquilar y mudarse, la fecha y los cumpleaños |
+| 16 | Μου το έδωσε | A2 | El objeto indirecto: genitivo débil (*μου δίνει*) y *σε* + acusativo (*δίνω στη Μαρία*); los dos pronombres juntos (*μου το, σου τα, του το*); números hasta 1000 y los años | Regalos, fiestas, el santo (*η γιορτή*), prestar y devolver |
+| 17 | Έλα! Πάρε! | A2 | El imperativo: presente (*γράφε*) y aoristo (*γράψε*), *εσύ* y *εσείς*; los irregulares (*έλα, πάρε, φέρε, πες, δες, φάε, πιες, κάτσε*); el pronombre detrás (*δώσ' το, πες μου*); la prohibición con *μην* + subjuntivo | Recetas y cocina, instrucciones, consejos |
+| 18 | Τι σου πονάει; | A2 | Los verbos en -ώ (tipo B2: *μπορώ, οδηγώ, ζω, θεωρώ, τηλεφωνώ*) en presente y aoristo; *πονάει* con genitivo (*με πονάει το κεφάλι*); *πρέπει να* y *καλύτερα να* para aconsejar | El cuerpo, la salud, el médico, la farmacia |
+| 19 | Όταν ήμουν παιδί | B1 | El imperfecto: tipo A (*έγραφα*, con el mismo acento corrido del aoristo) y tipo B (*μιλούσα*); *είχα, ήμουν* ya vistos; lo que se hacía seguido; *όταν* | La infancia, la escuela, los recuerdos, el barrio de antes |
+| 20 | Έγραφα ή έγραψα; | B1 | Imperfecto contra aoristo: lo que duraba y lo que pasó (*διάβαζα όταν χτύπησε το τηλέφωνο*); *ενώ, καθώς, ξαφνικά, για δύο ώρες / όλη μέρα*; el imperfecto de los -μαι (*ερχόμουν, θυμόμουν*) | Contar una anécdota, un viaje que salió mal, un accidente |
+| 21 | Θα γράφω ή θα γράψω; | B1 | El aspecto en el futuro y en *να*: lo que se repite o dura (*θα γράφω κάθε μέρα*) y lo que se hace una vez (*θα σου γράψω αύριο*); el mismo contraste en el imperativo (*γράφε / γράψε*) | Propósitos, estudiar, el gimnasio, organizar la semana |
+| 22 | Πιο μεγάλο, το καλύτερο | B1 | Comparativo (*πιο* + adjetivo, -τερος) con *από* + acusativo; superlativo (*ο πιο, ο …-τερος*); irregulares (*καλύτερος, χειρότερος, μεγαλύτερος*); *τόσο … όσο*; adverbios en -α (*καλά, γρήγορα*); *πολύς, πολλή, πολύ* | Comparar ciudades, departamentos, precios y productos; el clima |
+| 23 | Ο φίλος που σου είπα | B1 | Las relativas con *που* (sujeto y objeto, con pronombre de retorno: *ο φίλος που τον ξέρεις*); *ό,τι, όποιος, όπου, όταν*; *ο οποίος* (solo reconocer) | Describir personas: el carácter, el aspecto; buscar a alguien |
+| 24 | Νομίζω ότι… | B1 | Las completivas: *ότι / πως* (lo que se sabe o se dice), *να* (lo que se quiere), *αν* (la pregunta indirecta), *μήπως*; *επειδή, γιατί, γι' αυτό*; *ελπίζω, πιστεύω, φοβάμαι ότι / να / μήπως* | Opinar, estar de acuerdo, las noticias, la tecnología |
+| 25 | Σηκώθηκα αργά | B1 | El aoristo de los verbos en -μαι (*σηκώθηκα, ντύθηκα, κοιμήθηκα, θυμήθηκα, κάθισα, έγινα, χάρηκα*) y su tema con *να / θα* (*να σηκωθώ, θα θυμηθείς*); la pasiva en presente de los carteles (*πωλείται, ενοικιάζεται*: reconocer) | La rutina contada, trámites, anuncios, el servicio técnico |
+| 26 | Κάποιος, κανένας, όλοι | B1 | Indefinidos: *κάποιος, κανένας, κάτι, τίποτα, κάπου, πουθενά, όλος, άλλος, ο ίδιος, καθένας*; la doble negación (*δεν ήρθε κανείς*). Repaso de la temporada y **jefe** | Repaso: una semana en Grecia contada de punta a punta |
+
+### Temporada 3 — Τα νησιά, «las islas» (B1 → B2)
+
+| Sem. | Título | Nivel | Gramática | Para qué / léxico |
+|---|---|---|---|---|
+| 27 | Έχεις πάει ποτέ; | B1 | El perfecto (*έχω* + forma en -ει: *έχω γράψει*) y cuándo se usa (mucho menos que el «he hecho» de España: con *ποτέ, ήδη, ακόμα δεν, μέχρι τώρα*); contraste con el aoristo | Experiencias, viajes, el currículum |
+| 28 | Είχα ήδη φύγει | B1 | El pluscuamperfecto (*είχα γράψει*) y el futuro perfecto (*θα έχω τελειώσει*); *αφού, μόλις, πριν (να), μέχρι να*; la secuencia de hechos | Plazos, el trabajo, organizar un viaje |
+| 29 | Χτίστηκε το 1834 | B2 | El aoristo pasivo regular (-θηκα, -τηκα, -στηκα, -φτηκα) e irregulares frecuentes (*βρέθηκα, στάλθηκε, δόθηκε*); la pasiva con *από*; el futuro y el *να* pasivos (*θα σταλεί*) | Historia, monumentos, una ciudad por dentro, noticias simples |
+| 30 | Κλειστό, χαλασμένο | B2 | El participio en -μένος (*γραμμένος, κλεισμένος, χαλασμένος*) como adjetivo y con *είμαι / έχω*; el gerundio en -οντας / -ώντας (*περπατώντας*) | Averías, reclamos, la casa que se arregla; describir el estado de las cosas |
+| 31 | Αν βρέξει… | B2 | Los condicionales: real (*αν* + presente / aoristo de subjuntivo, *θα*), potencial (*αν* + imperfecto, *θα* + imperfecto: *αν είχα χρόνο, θα ερχόμουν*) e irreal del pasado (*αν είχα ξέρει, θα είχα έρθει*) | Decisiones, dinero, planes que dependen de otros |
+| 32 | Θα ήθελα να σας ρωτήσω | B2 | *θα* + imperfecto para la cortesía, el deseo y la suposición (*θα ήταν εκεί*); *μακάρι να*, *ας* (*ας πάμε, ας το αφήσουμε*); el registro formal con *εσείς* | El mail formal, pedir algo con cortesía, quejarse sin pelear |
+| 33 | Μου είπε ότι θα έρθει | B2 | El discurso indirecto: personas, tiempos y lugares que cambian; preguntas indirectas (*με ρώτησε αν / πού*); órdenes y pedidos con *να* (*μου είπε να περιμένω*) | Pasar mensajes, contar una conversación, el teléfono |
+| 34 | Το πρόβλημα του κράτους | B2 | Los sustantivos que se declinan distinto: neutros en -μα (*του προβλήματος*), en -ος (*του μέρους*), femeninos en -η / -εις (*η λύση, οι λύσεις*), masculinos en -ής / -έας (*ο συγγραφέας*); adjetivos en -ής / -ές (*ακριβής*) y -ύς (*βαθύς*) | Sociedad y Estado, la salud pública, temas abstractos |
+| 35 | Παρόλο που… | B2 | Conectores de concesión, condición y finalidad: *αν και, παρόλο που, ενώ, εκτός αν, εφόσον, με την προϋπόθεση ότι, για να, ώστε (να), όσο … τόσο* | El medio ambiente, el turismo en las islas, dar argumentos a favor y en contra |
+| 36 | Ξανα-, συν-, -τητα | B2 | Formación de palabras: prefijos (*ξανα-, ξε-, συν-, προ-, υπερ-, αντι-*), sufijos (*-τής / -τρια, -ση, -μός, -τητα, -ικός, -σιμος*), diminutivos (*-άκι, -ούλα, -ίτσα*), compuestos (*μακρυμάλλης*) | El trabajo y las profesiones, internet; deducir palabras nuevas |
+| 37 | Τη Μαρία την ξέρω | B2 | El orden marcado: el objeto adelante con su pronombre (*το βιβλίο το διάβασα*); *ο εαυτός μου*; *ο ένας τον άλλο*; los pronombres fuertes (*εμένα μου αρέσει*) | Emociones, relaciones, discutir y reconciliarse |
+| 38 | Χρόνια πολλά! | B2 | *να* para desear y exclamar (*να 'σαι καλά, να ζήσετε*); los verbos en -ούμαι / -ιέμαι (*θεωρούμαι, εξαρτάται, στενοχωριέμαι*); la elisión de la lengua hablada (*να 'ρθεις, μου 'πε*) | Las fiestas y costumbres (Pascua, el santo, el *πανηγύρι*), las fórmulas de cada ocasión |
+| 39 | Ο απολογισμός | B2 | Repaso de la temporada y **jefe**; práctica con el formato B1-B2 del certificado (comprensión de un texto, un mail, un audio) | Repaso: organizar un viaje por las islas, con imprevistos |
+
+### Temporada 4 — Η κορυφή, «la cumbre» (B2 → C1)
+
+| Sem. | Título | Nivel | Gramática | Para qué / léxico |
+|---|---|---|---|---|
+| 40 | Εν πάση περιπτώσει | B2 | Lo que queda de la *katharévousa*: expresiones fijas (*εν τω μεταξύ, εν πάση περιπτώσει, κατά τη γνώμη μου, εκ των υστέρων, εν λόγω*), el genitivo culto (*της πόλεως, της λέξεως*), las preposiciones cultas (*κατά, διά, υπέρ, προς* + genitivo) | Leer textos formales, entender carteles y documentos |
+| 41 | Ο ενδιαφερόμενος | C1 | *ο οποίος / του οποίου* para producir; los participios cultos: activo (*ο υπάρχων, τα ισχύοντα*) y pasivo en -όμενος / -ούμενος (*ο ενδιαφερόμενος*) | La administración, los formularios, la ley explicada |
+| 42 | Αφενός… αφετέρου | C1 | Argumentar: *επιπλέον, ωστόσο, εντούτοις, συνεπώς, κατά συνέπεια, αφενός … αφετέρου, όχι μόνο … αλλά και*; la modalidad (*ενδέχεται, είναι πιθανό να, φαίνεται ότι*) | Ensayo de opinión, debate, educación y trabajo |
+| 43 | Σύμφωνα με πληροφορίες | C1 | La lengua de la prensa: titulares, nominalización (*η αύξηση των τιμών*), la pasiva impersonal (*λέγεται ότι, φέρεται να, αναμένεται*), las citas | Leer y resumir noticias, economía y política |
+| 44 | Αξιότιμε κύριε | C1 | El registro administrativo y profesional: fórmulas de carta y mail, *αίτηση, βεβαίωση, υπεύθυνη δήλωση*, verbos cultos (*παρακαλείσθε, απαιτείται, παρέχεται*) | Trámites, el trabajo formal, reclamos por escrito |
+| 45 | Τα έκανα θάλασσα | C1 | Fraseología: expresiones idiomáticas de todos los días (*τα κάνω θάλασσα, βάζω τα δυνατά μου, κόβω κίνηση, μου τη δίνει*), los verbos con *τα / τη* fijo, refranes | Hablar como se habla; reconocer el registro de cada expresión |
+| 46 | Μα, δα, άραγε | C1 | Partículas del discurso y modales: *μα, δα, άραγε, μήπως, κιόλας, πια, λοιπόν, βέβαια, που λες, ρε*; la entonación de la pregunta y de la ironía | La conversación espontánea, el humor, la actitud |
+| 47 | Ακόμα κι αν… | C1 | Hipótesis y concesión avanzadas (*ακόμα κι αν, έστω κι αν, όπως και να 'χει, οποιοσδήποτε, ό,τι κι αν*); la modalidad sobre el pasado (*θα πρέπει να έφυγε, μπορεί να το είχε ξεχάσει*) | Especular, suponer, matizar una opinión |
+| 48 | Ιθάκη | C1 | La lengua literaria: leer a Καβάφης, Σολωμός, Παπαδιαμάντης, Βιζυηνός (todos de dominio público); el politónico para reconocerlo en ediciones viejas | Literatura y cultura; leer un cuento entero con ayuda |
+| 49 | Ίντα κάμνεις; | C1 | Las variedades: el griego de Chipre (*έν, ίντα, τζ*), el de Creta, el del norte; el registro juvenil y el *Greeklish* | Entender a quien no habla el griego de Atenas |
+| 50 | Με δυο λόγια | C1 | Resumir y mediar: la *περίληψη*, pasar a griego lo que dice un texto en castellano, estilo nominal contra verbal; presentar en público | Exposición oral, informe, reunión de trabajo |
+| 51 | Η έκθεση | C1 | La escritura C1: ensayo, carta al director, reseña; cohesión y párrafo (*καταρχάς, εν κατακλείδι*); ortografía avanzada (-ει / -ι en los verbos, -ώ / -ο, dobles consonantes, -ειο / -ιο) | Escribir textos largos, corregirse |
+| 52 | Το τελικό διαγώνισμα | C1 | Repaso de todo y **examen final** al estilo del *Πιστοποιητικό Ελληνομάθειας* nivel Γ1: comprensión escrita, producción escrita, comprensión oral, expresión oral | El examen |
 
 ## Cómo se escribe una semana (para quien aporta)
 

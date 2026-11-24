@@ -6,8 +6,9 @@ guarda su propio progreso, racha, meta y repaso (`dromosc1.save.v1`): cambiar
 de idioma no toca los otros. *Δρόμος* («drómos») es «camino».
 
 **Por ahora está la primera temporada: 13 semanas, del alfabeto al nivel
-A2.** El camino completo hasta C1 está planeado (cuatro temporadas de 13) en
-`tools/el/TEMARIO.md`.
+A2.** El camino completo hasta C1 está planeado semana por semana (cuatro
+temporadas de 13) en `tools/el/TEMARIO.md`, y el orden en que se escribe,
+en `auditorias/PLAN-griego.md` («Seguí con el plan del griego»).
 
 | Temporada | Semanas | Nivel | Qué se ve |
 |---|---|---|---|
